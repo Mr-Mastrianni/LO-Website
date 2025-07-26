@@ -25,6 +25,7 @@ import Login from '@/pages/Login';
 import Profile from '@/pages/Profile';
 import ProtectedRoute from '@/components/ProtectedRoute';
 
+// Trigger deployment
 function App() {
   return (
     <SupabaseAuthProvider>
