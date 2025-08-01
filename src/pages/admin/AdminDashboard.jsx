@@ -17,6 +17,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import UserManagement from './UserManagement';
 import ContentManagement from './ContentManagement';
+import CommunityManagement from './CommunityManagement';
+import AnalyticsDashboard from './AnalyticsDashboard';
+import SettingsPanel from './SettingsPanel';
 
 const AdminDashboard = () => {
   const { profile } = useAuth();
@@ -159,11 +162,12 @@ const AdminDashboard = () => {
 
           {/* Admin Tabs */}
           <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
-            <TabsList className="grid w-full grid-cols-5">
+            <TabsList className="grid w-full grid-cols-6">
               <TabsTrigger value="overview">Overview</TabsTrigger>
               <TabsTrigger value="users">Users</TabsTrigger>
               <TabsTrigger value="content">Content</TabsTrigger>
               <TabsTrigger value="community">Community</TabsTrigger>
+              <TabsTrigger value="analytics">Analytics</TabsTrigger>
               <TabsTrigger value="settings">Settings</TabsTrigger>
             </TabsList>
 
@@ -174,7 +178,7 @@ const AdminDashboard = () => {
                   <CardDescription>Common administrative tasks</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     <button
                       onClick={() => setActiveTab('users')}
                       className="p-4 border rounded-lg hover:bg-gray-50 text-left transition-colors"
@@ -190,6 +194,14 @@ const AdminDashboard = () => {
                       <FileText className="h-6 w-6 text-green-600 mb-2" />
                       <h3 className="font-medium">Content Management</h3>
                       <p className="text-sm text-gray-600">Edit testimonials and resources</p>
+                    </button>
+                    <button
+                      onClick={() => setActiveTab('community')}
+                      className="p-4 border rounded-lg hover:bg-gray-50 text-left transition-colors"
+                    >
+                      <Shield className="h-6 w-6 text-orange-600 mb-2" />
+                      <h3 className="font-medium">Community Tools</h3>
+                      <p className="text-sm text-gray-600">Moderate and manage community</p>
                     </button>
                     <button
                       onClick={() => setActiveTab('analytics')}
@@ -213,27 +225,15 @@ const AdminDashboard = () => {
             </TabsContent>
 
             <TabsContent value="community">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Community Management</CardTitle>
-                  <CardDescription>Moderate discussions and manage community features</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600">Community management interface will be implemented here.</p>
-                </CardContent>
-              </Card>
+              <CommunityManagement />
+            </TabsContent>
+
+            <TabsContent value="analytics">
+              <AnalyticsDashboard />
             </TabsContent>
 
             <TabsContent value="settings">
-              <Card>
-                <CardHeader>
-                  <CardTitle>System Settings</CardTitle>
-                  <CardDescription>Configure site settings and preferences</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600">Settings interface will be implemented here.</p>
-                </CardContent>
-              </Card>
+              <SettingsPanel />
             </TabsContent>
           </Tabs>
         </div>
