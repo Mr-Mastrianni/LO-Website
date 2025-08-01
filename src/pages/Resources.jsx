@@ -1,12 +1,17 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { BookOpen } from 'lucide-react';
+import { BookOpen, Lock } from 'lucide-react';
 import { publicResources, restrictedResources, resourceCategories } from '@/data/resourcesData';
 import ResourceCard from '@/components/resources/ResourceCard';
 import FeaturedResource from '@/components/resources/FeaturedResource';
+import { useAuth } from '@/contexts/SupabaseAuthContext';
+import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
 
 const Resources = () => {
+  const { user } = useAuth();
+
   return (
     <>
       <Helmet>
@@ -147,11 +152,29 @@ const Resources = () => {
               Specialized resources for healthcare professionals and researchers.
             </p>
           </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {restrictedResources.map((resource, index) => (
-              <ResourceCard key={resource.id} resource={resource} index={index} isRestricted={true} />
-            ))}
-          </div>
+          {user ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {restrictedResources.map((resource, index) => (
+                <ResourceCard key={resource.id} resource={resource} index={index} isRestricted={true} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center bg-gray-100 p-10 rounded-lg">
+              <Lock className="w-12 h-12 mx-auto text-primary mb-4" />
+              <h3 className="text-2xl font-bold text-primary mb-4">Access Restricted</h3>
+              <p className="text-gray-700 mb-6">
+                These resources are available to registered members only. Please log in or create an account to access them.
+              </p>
+              <div className="flex justify-center gap-4">
+                <Button asChild>
+                  <Link to="/login">Log In</Link>
+                </Button>
+                <Button asChild variant="outline">
+                  <Link to="/signup">Sign Up</Link>
+                </Button>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 

@@ -6,7 +6,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { communityStats } from '@/data/communityData';
 import DiscussionsTab from '@/components/community/DiscussionsTab';
 import GroupsTab from '@/components/community/GroupsTab';
-import PlaceholderTab from '@/components/community/PlaceholderTab';
+import MediaTab from '@/components/community/MediaTab';
+import FilesTab from '@/components/community/FilesTab';
 import AboutTab from '@/components/community/AboutTab';
 
 const Community = () => {
@@ -89,8 +90,8 @@ const Community = () => {
 
               <TabsContent value="discussions"><DiscussionsTab /></TabsContent>
               <TabsContent value="groups"><GroupsTab /></TabsContent>
-              <TabsContent value="media"><PlaceholderTab title="Community Media" description="Photos, videos, and media shared by our community members." /></TabsContent>
-              <TabsContent value="files"><PlaceholderTab title="Shared Files" description="Resources and documents shared by community members." showButton={true} /></TabsContent>
+              <TabsContent value="media"><MediaTab /></TabsContent>
+              <TabsContent value="files"><FilesTab /></TabsContent>
               <TabsContent value="about"><AboutTab /></TabsContent>
             </Tabs>
           </motion.div>

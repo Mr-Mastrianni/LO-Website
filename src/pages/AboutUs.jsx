@@ -8,31 +8,31 @@ const AboutUs = () => {
       name: "Mike Vanderslice",
       role: "Chief Operating Officer",
       imageDescription: "Portrait of Mike Vanderslice, Chief Operating Officer",
-      imageUrl: "https://storage.googleapis.com/hostinger-horizons-assets-prod/852aedb6-5a53-4567-88c5-7e3cc5ed6cb7/7685767eb2eb232e1961149fa3ab567b.png"
+      imageUrl: "/images/team/mike-vanderslice.png"
     },
     {
       name: "Y'Marii CLMastrianni",
       role: "Chief Financial Officer",
       imageDescription: "Portrait of Y'Marii CLMastrianni, Chief Financial Officer",
-      imageUrl: "https://storage.googleapis.com/hostinger-horizons-assets-prod/852aedb6-5a53-4567-88c5-7e3cc5ed6cb7/54d821741d8f33c4440e3c8b0913c5b0.png"
+      imageUrl: "/images/team/ymarii-clmastrianni.png"
     },
     {
       name: "Saseshmu Ra Herut",
       role: "AI Tech/Product Manager",
       imageDescription: "Portrait of Saseshmu Ra Herut, AI Tech/Product Manager",
-      imageUrl: "https://storage.googleapis.com/hostinger-horizons-assets-prod/852aedb6-5a53-4567-88c5-7e3cc5ed6cb7/c108035d1a99ab4a57f5103b787ff93a.png"
+      imageUrl: "/images/team/saseshmu-ra-herut.png"
     },
     {
       name: "Sara Ornelas",
       role: "Product Designer",
       imageDescription: "Portrait of Sara Ornelas, Product Designer",
-      imageUrl: "https://storage.googleapis.com/hostinger-horizons-assets-prod/852aedb6-5a53-4567-88c5-7e3cc5ed6cb7/aac31f36eef0a8856337f150ad2f80f3.png"
+      imageUrl: "/images/team/sara-ornelas.png"
     },
     {
       name: "Aristide Norman",
       role: "Gen AI Communications and Engineering Architect",
       imageDescription: "Portrait of Aristide Norman, Gen AI Communications and Engineering Architect",
-      imageUrl: "https://storage.googleapis.com/hostinger-horizons-assets-prod/852aedb6-5a53-4567-88c5-7e3cc5ed6cb7/867a7a3764f3630e9d0e1a7df64dafb4.png"
+      imageUrl: "/images/team/aristide-norman.png"
     }
   ];
 
@@ -75,7 +75,7 @@ const AboutUs = () => {
               <img 
                 className="w-full rounded-lg shadow-2xl"
                 alt="Two diverse hands holding each other in front of a large brass bell, symbolizing support, community, and hope."
-               src="https://storage.googleapis.com/hostinger-horizons-assets-prod/852aedb6-5a53-4567-88c5-7e3cc5ed6cb7/6a2d7ef0e3c5314c187b0ef5e36a21e1.png" />
+               src="/images/about-us-hero.png" />
             </motion.div>
           </div>
         </section>
@@ -94,7 +94,7 @@ const AboutUs = () => {
               <div className="inline-block">
                 <img
                   className="w-64 h-64 md:w-80 md:h-80 rounded-lg object-cover shadow-2xl"
-                  src="https://storage.googleapis.com/hostinger-horizons-assets-prod/852aedb6-5a53-4567-88c5-7e3cc5ed6cb7/2ef94ab738f7674472ea44c193d6b89a.png"
+                  src="/images/dr-gatson-about.png"
                   alt="Dr. Na Tosha N. Gatson, MD, PhD, FAAN"
                 />
                 <div className="mt-6">

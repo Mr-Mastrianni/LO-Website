@@ -20,7 +20,7 @@ const MembersDirectory = () => {
         setLoading(true);
         const { data, error } = await supabase
           .from('profiles')
-          .select('id, full_name, role, other_role_description')
+          .select('id, full_name, role, bio')
           .order('created_at', { ascending: false });
 
         if (error) {

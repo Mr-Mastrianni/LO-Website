@@ -105,7 +105,7 @@ const Home = () => {
                   <img   
                     className="w-72 h-72 rounded-full object-cover shadow-lg" 
                     alt="Dr. Na Tosha Gatson, MD, PhD, FAAN - Founder and CEO of Living Oncology"
-                   src="https://storage.googleapis.com/hostinger-horizons-assets-prod/852aedb6-5a53-4567-88c5-7e3cc5ed6cb7/4ffd3399a8a056778c8328f55c4eae31.png" />
+                   src="/images/dr-gatson.png" />
                 </div>
               </div>
             </div>

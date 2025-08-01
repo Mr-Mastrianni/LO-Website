@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { useAuth } from '@/contexts/AuthContext';
+import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { toast } from '@/components/ui/use-toast';
 
 const steps = [
@@ -28,7 +28,7 @@ const SignUp = () => {
     goal: '',
   });
   const [isLoading, setIsLoading] = useState(false);
-  const { signup } = useAuth();
+  const { signUp } = useAuth();
   const navigate = useNavigate();
 
   const handleNext = () => {
@@ -67,13 +67,23 @@ const SignUp = () => {
     }
     setIsLoading(true);
     
-    setTimeout(() => {
-      const user = signup(formData);
-      if (user) {
-        navigate('/profile');
+    const { error } = await signUp(formData.email, formData.password, {
+      data: { 
+        full_name: formData.name,
+        role: formData.role,
+        goal: formData.goal,
       }
-      setIsLoading(false);
-    }, 1000);
+    });
+
+    setIsLoading(false);
+
+    if (!error) {
+      toast({
+        title: 'Account created!',
+        description: "We've sent you a verification email. Please check your inbox.",
+      });
+      navigate('/login');
+    }
   };
 
   const progress = (step / steps.length) * 100;

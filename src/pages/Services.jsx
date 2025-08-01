@@ -3,16 +3,8 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { Stethoscope, Users, BookOpen, Heart, CheckCircle, ArrowRight } from 'lucide-react';
-import { toast } from '@/components/ui/use-toast';
 
 const Services = () => {
-  const handleRequestConsultation = () => {
-    toast({
-      title: "🚧 Consultation Booking Coming Soon!",
-      description: "This feature isn't implemented yet—but don't worry! You can request it in your next prompt! 🚀"
-    });
-  };
-
   const consultationBenefits = [
     "Personalized review of your medical records and treatment history",
     "Clear explanation of your diagnosis in understandable terms",
@@ -69,13 +61,13 @@ const Services = () => {
             <p className="text-xl md:text-2xl text-gray-700 max-w-4xl mx-auto leading-relaxed mb-8">
               Expert guidance and support tailored to your unique cancer journey
             </p>
-            <button 
-              onClick={handleRequestConsultation}
+            <Link 
+              to="/request-consultation"
               className="btn-primary inline-flex items-center text-lg px-8 py-4"
             >
               Request Consultation
               <ArrowRight className="ml-2 w-5 h-5" />
-            </button>
+            </Link>
           </motion.div>
         </div>
       </section>
@@ -116,7 +108,7 @@ const Services = () => {
                 <img  
                   className="w-full max-w-md rounded-xl shadow-xl" 
                   alt="Dr. Gatson consulting with a patient in a comfortable medical office setting"
-                 src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f" />
+                 src="/images/consultation.jpg" />
                 <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-primary rounded-full flex items-center justify-center shadow-lg">
                   <Stethoscope className="w-12 h-12 text-white" />
                 </div>
@@ -270,13 +262,13 @@ const Services = () => {
               Don't navigate your cancer journey alone. Get the expert guidance and support you need to make informed decisions about your care.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button 
-                onClick={handleRequestConsultation}
+              <Link
+                to="/request-consultation"
                 className="bg-white text-green-700 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg inline-flex items-center justify-center"
               >
                 <Stethoscope className="mr-2 w-4 h-4" />
                 Request Consultation
-              </button>
+              </Link>
               <Link to="/contact" className="btn-primary inline-flex items-center justify-center">
                 <Heart className="mr-2 w-4 h-4" />
                 Learn More

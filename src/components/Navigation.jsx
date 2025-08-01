@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, User, LogOut, UserCircle } from 'lucide-react';
+import { Menu, X, User, LogOut, UserCircle, Shield } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
 import {
@@ -21,6 +21,7 @@ const Navigation = () => {
   const user = auth?.user;
   const signOut = auth?.signOut;
   const profile = auth?.profile;
+  const isAdmin = auth?.isAdmin;
 
   const navItems = [
     { name: 'Home', path: '/' },
@@ -88,6 +89,14 @@ const Navigation = () => {
                       <span>Profile</span>
                     </Link>
                   </DropdownMenuItem>
+                  {isAdmin && (
+                    <DropdownMenuItem asChild>
+                      <Link to="/admin" className="cursor-pointer">
+                        <Shield className="mr-2 h-4 w-4" />
+                        <span>Admin Dashboard</span>
+                      </Link>
+                    </DropdownMenuItem>
+                  )}
                   <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
                     <LogOut className="mr-2 h-4 w-4" />
                     <span>Log out</span>
