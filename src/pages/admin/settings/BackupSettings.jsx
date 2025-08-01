@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useToast } from '@/components/ui/use-toast';
-import { Backup, Download, Upload, Calendar, Clock } from 'lucide-react';
+import { HardDrive, Download, Upload, Calendar, Clock } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
@@ -74,7 +74,7 @@ const BackupSettings = () => {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Backup className="h-5 w-5" />
+            <HardDrive className="h-5 w-5" />
             Backup Configuration
           </CardTitle>
           <CardDescription>Configure automatic backup settings</CardDescription>
@@ -168,7 +168,7 @@ const BackupSettings = () => {
               <p className="text-sm text-gray-600">Generate a complete backup of your current data</p>
             </div>
             <Button onClick={handleCreateBackup}>
-              <Backup className="h-4 w-4 mr-2" />
+              <HardDrive className="h-4 w-4 mr-2" />
               Create Backup
             </Button>
           </div>
@@ -263,7 +263,7 @@ const BackupSettings = () => {
       {/* Save Button */}
       <div className="flex justify-end">
         <Button onClick={handleSaveSettings} className="flex items-center gap-2">
-          <Backup className="h-4 w-4" />
+          <HardDrive className="h-4 w-4" />
           Save Backup Settings
         </Button>
       </div>

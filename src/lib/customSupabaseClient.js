@@ -1,13 +1,13 @@
 import { createClient } from '@supabase/supabase-js';
 
 // Get Supabase configuration from environment variables
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://whaeitueennbgdnhwmwo.supabase.co';
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndoYWVpdHVlZW5uYmdkbmh3bXdvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQwNzY1OTUsImV4cCI6MjA2OTY1MjU5NX0.eYGDUIsE399_BZyUt8Mj0Yx1s0BSUaI_IIj4otbaYmg';
 
-// Validate that environment variables are set
+// Validate that configuration is available
 if (!supabaseUrl || !supabaseAnonKey) {
   throw new Error(
-    'Missing Supabase environment variables. Please check your .env.local file and ensure NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY are set.'
+    'Missing Supabase configuration. Please check your environment variables or fallback values.'
   );
 }
 

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { ArrowRight, Heart, BookOpen, Users, Lightbulb, Brain, Shield } from 'lucide-react';
+import HeroLogo from '@/components/ui/HeroLogo';
 
 const Home = () => {
   const impactItems = [
@@ -34,18 +35,28 @@ const Home = () => {
         <div className="absolute inset-0 bg-white/80"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <motion.h1 
+            {/* Animated Hero Logo */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.2, delay: 0.2 }}
+              className="mb-8"
+            >
+              <HeroLogo className="w-full max-w-lg mx-auto" />
+            </motion.div>
+
+            <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
               className="text-4xl md:text-6xl font-bold text-primary mb-6"
             >
               LIVING is larger than Life.
             </motion.h1>
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 1.0 }}
               className="text-xl md:text-2xl text-gray-700 mb-8 max-w-4xl mx-auto leading-relaxed"
             >
               A charitable neuro-oncology literacy organization bridging the gap between patients, physicians, and the science of medicine.
@@ -53,7 +64,7 @@ const Home = () => {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
               <Link to="/about-us" className="btn-secondary inline-flex items-center">

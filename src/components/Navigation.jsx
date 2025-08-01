@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, User, LogOut, UserCircle, Shield } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
+import Logo from '@/components/ui/Logo';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -46,11 +47,14 @@ const Navigation = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0">
-            <Link to="/" className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-lg">LO</span>
-              </div>
-              <span className="text-xl font-bold text-foreground">Living Oncology</span>
+            <Link to="/" className="flex items-center">
+              <Logo
+                showText={true}
+                variant="default"
+                className="h-12"
+                animated={true}
+                size="medium"
+              />
             </Link>
           </div>
 
