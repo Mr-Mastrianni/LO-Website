@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import logoImage from '../../images/LIVING-ONCOLOGY.png';
 
 const HeroLogo = ({
   className = "w-full max-w-md mx-auto"
@@ -7,14 +8,16 @@ const HeroLogo = ({
 
   useEffect(() => {
     if (logoRef.current) {
-      import('animejs').then(anime => {
-        anime.default({
+      import('animejs').then(({ animate }) => {
+        animate({
           targets: logoRef.current,
           scale: [0.8, 1],
           opacity: [0, 1],
           duration: 1500,
-          easing: 'easeOutElastic(1, .8)',
+          ease: 'outElastic(1, .8)',
         });
+      }).catch(error => {
+        console.warn('Failed to load anime.js:', error);
       });
     }
   }, []);
@@ -23,7 +26,7 @@ const HeroLogo = ({
     <div className={className}>
       <img
         ref={logoRef}
-        src="/images/LIVING-ONCOLOGY.png"
+        src={logoImage}
         alt="Living Oncology Logo"
         className="w-full h-auto"
       />

@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import logoImage from '../../images/LIVING-ONCOLOGY.png';
 
 const Logo = ({
   className = "h-12 w-auto",
@@ -10,27 +11,31 @@ const Logo = ({
   const logoRef = useRef(null);
 
   const handleMouseEnter = () => {
-    if (logoRef.current) {
-      import('animejs').then(anime => {
-        anime.default({
+    if (logoRef.current && animated) {
+      import('animejs').then(({ animate }) => {
+        animate({
           targets: logoRef.current,
           scale: [1, 1.05],
           duration: 300,
-          easing: 'easeOutQuad',
+          ease: 'outQuad',
         });
+      }).catch(error => {
+        console.warn('Failed to load anime.js:', error);
       });
     }
   };
 
   const handleMouseLeave = () => {
-    if (logoRef.current) {
-      import('animejs').then(anime => {
-        anime.default({
+    if (logoRef.current && animated) {
+      import('animejs').then(({ animate }) => {
+        animate({
           targets: logoRef.current,
           scale: [1.05, 1],
           duration: 200,
-          easing: 'easeOutQuad',
+          ease: 'outQuad',
         });
+      }).catch(error => {
+        console.warn('Failed to load anime.js:', error);
       });
     }
   };
@@ -57,7 +62,7 @@ const Logo = ({
     >
       <img
         ref={logoRef}
-        src="/images/LIVING-ONCOLOGY.png"
+        src={logoImage}
         alt="Living Oncology Logo"
         className={`flex-shrink-0 ${currentSizeClass}`}
       />

@@ -50,6 +50,7 @@ function App() {
         <main id="main-content" className="flex-grow">
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/LO-Website/" element={<Home />} />
               <Route path="/LO-Website/about-us" element={<AboutUs />} />
               <Route path="/about-us" element={<AboutUs />} />
               <Route path="/LO-Website/about-dr-gatson" element={<AboutDrGatson />} />
