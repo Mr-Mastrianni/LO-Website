@@ -94,10 +94,10 @@ const EventDetail = () => {
               </div>
               
               <div className="flex justify-center">
-                <img  
-                  className="w-full max-w-md rounded-xl shadow-xl" 
+                <img
+                  className="w-full max-w-md rounded-xl shadow-xl"
                   alt={`${event.title} event image`}
-                 src="/images/event-placeholder.jpg" />
+                  src={`${import.meta.env.BASE_URL}images/event-placeholder.jpg`} />
               </div>
             </div>
           </motion.div>

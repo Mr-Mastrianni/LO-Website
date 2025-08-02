@@ -113,10 +113,10 @@ const Home = () => {
               </div>
               <div className="flex justify-center">
                 <div className="w-80 h-80 bg-gradient-to-br from-green-200 to-yellow-200 rounded-full flex items-center justify-center shadow-xl">
-                  <img   
-                    className="w-72 h-72 rounded-full object-cover shadow-lg" 
+                  <img
+                    className="w-72 h-72 rounded-full object-cover shadow-lg"
                     alt="Dr. Na Tosha Gatson, MD, PhD, FAAN - Founder and CEO of Living Oncology"
-                   src="/images/dr-gatson.png" />
+                    src={`${import.meta.env.BASE_URL}images/dr-gatson.png`} />
                 </div>
               </div>
             </div>

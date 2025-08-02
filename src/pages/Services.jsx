@@ -105,10 +105,10 @@ const Services = () => {
               className="flex justify-center"
             >
               <div className="relative">
-                <img  
-                  className="w-full max-w-md rounded-xl shadow-xl" 
+                <img
+                  className="w-full max-w-md rounded-xl shadow-xl"
                   alt="Dr. Gatson consulting with a patient in a comfortable medical office setting"
-                 src="/images/consultation.jpg" />
+                  src={`${import.meta.env.BASE_URL}images/consultation.jpg`} />
                 <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-primary rounded-full flex items-center justify-center shadow-lg">
                   <Stethoscope className="w-12 h-12 text-white" />
                 </div>

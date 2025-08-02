@@ -8,31 +8,31 @@ const AboutUs = () => {
       name: "Mike Vanderslice",
       role: "Chief Operating Officer",
       imageDescription: "Portrait of Mike Vanderslice, Chief Operating Officer",
-      imageUrl: "/images/team/mike-vanderslice.png"
+      imageUrl: `${import.meta.env.BASE_URL}images/team/mike-vanderslice.png`
     },
     {
       name: "Y'Marii CLMastrianni",
       role: "Chief Financial Officer",
       imageDescription: "Portrait of Y'Marii CLMastrianni, Chief Financial Officer",
-      imageUrl: "/images/team/ymarii-clmastrianni.png"
+      imageUrl: `${import.meta.env.BASE_URL}images/team/ymarii-clmastrianni.png`
     },
     {
       name: "Saseshmu Ra Herut",
       role: "AI Tech/Product Manager",
       imageDescription: "Portrait of Saseshmu Ra Herut, AI Tech/Product Manager",
-      imageUrl: "/images/team/saseshmu-ra-herut.png"
+      imageUrl: `${import.meta.env.BASE_URL}images/team/saseshmu-ra-herut.png`
     },
     {
       name: "Sara Ornelas",
       role: "Product Designer",
       imageDescription: "Portrait of Sara Ornelas, Product Designer",
-      imageUrl: "/images/team/sara-ornelas.png"
+      imageUrl: `${import.meta.env.BASE_URL}images/team/sara-ornelas.png`
     },
     {
       name: "Aristide Norman",
       role: "Gen AI Communications and Engineering Architect",
       imageDescription: "Portrait of Aristide Norman, Gen AI Communications and Engineering Architect",
-      imageUrl: "/images/team/aristide-norman.png"
+      imageUrl: `${import.meta.env.BASE_URL}images/team/aristide-norman.png`
     }
   ];
 
@@ -72,10 +72,10 @@ const AboutUs = () => {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <img 
+              <img
                 className="w-full rounded-lg shadow-2xl"
                 alt="Two diverse hands holding each other in front of a large brass bell, symbolizing support, community, and hope."
-               src="/images/about-us-hero.png" />
+                src={`${import.meta.env.BASE_URL}images/about-us-hero.png`} />
             </motion.div>
           </div>
         </section>
@@ -94,7 +94,7 @@ const AboutUs = () => {
               <div className="inline-block">
                 <img
                   className="w-64 h-64 md:w-80 md:h-80 rounded-lg object-cover shadow-2xl"
-                  src="/images/dr-gatson-about.png"
+                  src={`${import.meta.env.BASE_URL}images/dr-gatson-about.png`}
                   alt="Dr. Na Tosha N. Gatson, MD, PhD, FAAN"
                 />
                 <div className="mt-6">
