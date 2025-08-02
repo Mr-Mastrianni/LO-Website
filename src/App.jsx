@@ -40,16 +40,15 @@ function App() {
             <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
             <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
           </Helmet>
-          
+
           <a href="#main-content" className="skip-link">
             Skip to main content
           </a>
-          
+
           <Navigation />
-          
-          <main id="main-content" className="flex-grow">
+
+        <main id="main-content" className="flex-grow">
             <Routes>
-              <Route path="/LO-Website/" element={<Home />} />
               <Route path="/" element={<Home />} />
               <Route path="/LO-Website/about-us" element={<AboutUs />} />
               <Route path="/about-us" element={<AboutUs />} />
