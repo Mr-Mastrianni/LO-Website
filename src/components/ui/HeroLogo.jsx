@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import LivingOncologyLogoPNG from '@/assets/living-oncology-logo.png';
 
 const HeroLogo = ({
   className = "w-full max-w-md mx-auto"
