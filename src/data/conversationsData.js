@@ -1,5 +1,16 @@
 export const conversations = [
   {
+    id: 8,
+    type: 'video',
+    url: 'https://youtu.be/5aJQvQTokyk',
+    title: "Community Voices: Living with Oncology",
+    author: "Living Oncology",
+    date: "January 28, 2026",
+    summary: "A heartfelt conversation featuring community members sharing their experiences, insights, and perspectives on living with oncology.",
+    category: "Community Voices",
+    duration: "Video"
+  },
+  {
     id: 7,
     type: 'video',
     url: 'https://youtu.be/pdBZVAR5yPk',
@@ -75,7 +86,7 @@ export const conversations = [
 export const categories = [
   "Community Voices",
   "Patient Advocacy",
-  "Caregiver Support", 
+  "Caregiver Support",
   "Clinical Research",
   "Treatment Support",
   "Healthcare Navigation",
