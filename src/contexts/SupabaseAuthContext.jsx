@@ -83,7 +83,10 @@ export const AuthProvider = ({ children }) => {
       const { error } = await supabase.auth.signUp({
         email,
         password,
-        options,
+        options: {
+          ...options,
+          emailRedirectTo: 'https://mr-mastrianni.github.io/LO-Website/'
+        },
       });
 
       if (error) {
