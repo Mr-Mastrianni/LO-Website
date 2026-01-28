@@ -20,7 +20,7 @@ const interestsList = [
 const AssessmentStep = ({ formData, updateFormData, prevStep }) => {
   const { toast } = useToast();
   const navigate = useNavigate();
-  const { signup } = useAuth();
+  const { signUp } = useAuth();
   const [localData, setLocalData] = useState({
     interests: formData.interests,
     diagnosis: formData.diagnosis,
@@ -42,7 +42,7 @@ const AssessmentStep = ({ formData, updateFormData, prevStep }) => {
     setLocalData(prev => ({ ...prev, [id]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     updateFormData(localData);
@@ -54,23 +54,32 @@ const AssessmentStep = ({ formData, updateFormData, prevStep }) => {
       finalUserData.role = finalUserData.otherRole;
     }
     
-    setTimeout(() => {
-      const user = signup(finalUserData);
-      if (user) {
-        toast({
-          title: "Account Created Successfully!",
-          description: "Welcome to the Living Oncology community.",
-        });
-        navigate('/profile');
+    try {
+      const { error } = await signUp(finalUserData.email, finalUserData.password, {
+        data: {
+          full_name: finalUserData.name,
+          role: finalUserData.role,
+          interests: finalUserData.interests,
+          diagnosis: finalUserData.diagnosis,
+          supportNeeded: finalUserData.supportNeeded,
+        }
+      });
+      
+      if (!error) {
+        // Note: User will need to verify email before being fully logged in
+        navigate('/login');
       } else {
-        toast({
-          title: "Signup Failed",
-          description: "An error occurred. Please try again.",
-          variant: "destructive",
-        });
         setIsSubmitting(false);
       }
-    }, 1000);
+    } catch (err) {
+      console.error('Signup error:', err);
+      toast({
+        title: "Signup Failed",
+        description: "An error occurred. Please try again.",
+        variant: "destructive",
+      });
+      setIsSubmitting(false);
+    }
   };
 
   return (
