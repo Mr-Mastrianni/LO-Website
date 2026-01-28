@@ -39,9 +39,6 @@ const Testimonials = () => {
             <p className="text-xl md:text-2xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
               Hear from patients, families, and healthcare professionals whose lives have been touched by our mission
             </p>
-            <p className="text-lg text-gray-600 mt-4">
-              {testimonials.length} testimonials from our community
-            </p>
           </motion.div>
         </div>
       </section>
@@ -112,8 +109,8 @@ const Testimonials = () => {
                     onClick={() => handlePageChange(currentPage - 1)}
                     disabled={currentPage === 1}
                     className={`p-2 rounded-lg border transition-colors ${currentPage === 1
-                        ? 'border-gray-200 text-gray-300 cursor-not-allowed'
-                        : 'border-gray-300 text-gray-700 hover:bg-gray-100 hover:border-primary'
+                      ? 'border-gray-200 text-gray-300 cursor-not-allowed'
+                      : 'border-gray-300 text-gray-700 hover:bg-gray-100 hover:border-primary'
                       }`}
                   >
                     <ChevronLeft className="w-5 h-5" />
@@ -126,8 +123,8 @@ const Testimonials = () => {
                         key={page}
                         onClick={() => handlePageChange(page)}
                         className={`w-10 h-10 rounded-lg font-semibold transition-colors ${currentPage === page
-                            ? 'bg-primary text-white'
-                            : 'border border-gray-300 text-gray-700 hover:bg-gray-100 hover:border-primary'
+                          ? 'bg-primary text-white'
+                          : 'border border-gray-300 text-gray-700 hover:bg-gray-100 hover:border-primary'
                           }`}
                       >
                         {page}
@@ -139,8 +136,8 @@ const Testimonials = () => {
                     onClick={() => handlePageChange(currentPage + 1)}
                     disabled={currentPage === totalPages}
                     className={`p-2 rounded-lg border transition-colors ${currentPage === totalPages
-                        ? 'border-gray-200 text-gray-300 cursor-not-allowed'
-                        : 'border-gray-300 text-gray-700 hover:bg-gray-100 hover:border-primary'
+                      ? 'border-gray-200 text-gray-300 cursor-not-allowed'
+                      : 'border-gray-300 text-gray-700 hover:bg-gray-100 hover:border-primary'
                       }`}
                   >
                     <ChevronRight className="w-5 h-5" />
