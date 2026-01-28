@@ -102,7 +102,7 @@ CREATE POLICY "Admins can view all resources" ON resources
   );
 
 CREATE POLICY "Admins can manage resources" ON resources
-  FOR INSERT, UPDATE, DELETE USING (
+  FOR ALL USING (
     EXISTS (
       SELECT 1 FROM profiles 
       WHERE id = auth.uid() AND is_admin = TRUE
