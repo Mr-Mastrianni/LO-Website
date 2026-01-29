@@ -72,7 +72,14 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const getSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
-      handleSession(session);
+
+      // Check if this is an email confirmation redirect
+      const hashParams = new URLSearchParams(window.location.hash.substring(1));
+      const isEmailConfirmation = hashParams.get('type') === 'signup' ||
+        hashParams.get('type') === 'email_confirmation' ||
+        window.location.pathname === '/welcome';
+
+      handleSession(session, isEmailConfirmation);
     };
 
     getSession();
@@ -80,8 +87,12 @@ export const AuthProvider = ({ children }) => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
         console.log('Auth event:', event);
-        // Detect if this is a new signup (email verification)
-        const isSignup = event === 'SIGNED_IN' && session?.user?.email_confirmed_at;
+        // Detect if this is a new signup (email verification or recovery)
+        const isSignup = event === 'SIGNED_IN' && (
+          window.location.pathname === '/welcome' ||
+          window.location.hash.includes('type=signup') ||
+          window.location.hash.includes('type=email_confirmation')
+        );
         handleSession(session, isSignup);
       }
     );
