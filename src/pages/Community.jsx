@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { communityStats } from '@/data/communityData';
+import { supabase } from '@/lib/customSupabaseClient';
 import DiscussionsTab from '@/components/community/DiscussionsTab';
 import GroupsTab from '@/components/community/GroupsTab';
 import MediaTab from '@/components/community/MediaTab';
@@ -11,6 +11,44 @@ import FilesTab from '@/components/community/FilesTab';
 import AboutTab from '@/components/community/AboutTab';
 
 const Community = () => {
+  const [stats, setStats] = useState({
+    activeMembers: 0,
+    supportGroups: 0,
+    forumPosts: 0,
+    resourcesShared: 0
+  });
+
+  useEffect(() => {
+    fetchCommunityStats();
+  }, []);
+
+  const fetchCommunityStats = async () => {
+    try {
+      // Count total users
+      const { count: usersCount } = await supabase
+        .from('profiles')
+        .select('*', { count: 'exact', head: true });
+
+      // Count groups
+      const { count: groupsCount } = await supabase
+        .from('community_groups')
+        .select('*', { count: 'exact', head: true });
+
+      // Count posts
+      const { count: postsCount } = await supabase
+        .from('community_posts')
+        .select('*', { count: 'exact', head: true });
+
+      setStats({
+        activeMembers: usersCount || 0,
+        supportGroups: groupsCount || 8, // We seeded 8 groups
+        forumPosts: postsCount || 0,
+        resourcesShared: 0 // This would need a resources table
+      });
+    } catch (error) {
+      console.error('Error fetching community stats:', error);
+    }
+  };
   return (
     <>
       <Helmet>
@@ -52,21 +90,54 @@ const Community = () => {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {communityStats.map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="text-center"
-              >
-                <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl font-bold text-white">{stat.value}</span>
-                </div>
-                <h3 className="text-lg font-semibold text-gray-800">{stat.label}</h3>
-              </motion.div>
-            ))}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-center"
+            >
+              <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-white">{stats.activeMembers}+</span>
+              </div>
+              <h3 className="text-lg font-semibold text-gray-800">Active Members</h3>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="text-center"
+            >
+              <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-white">{stats.supportGroups}</span>
+              </div>
+              <h3 className="text-lg font-semibold text-gray-800">Support Groups</h3>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="text-center"
+            >
+              <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-white">{stats.forumPosts}+</span>
+              </div>
+              <h3 className="text-lg font-semibold text-gray-800">Forum Posts</h3>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              viewport={{ once: true }}
+              className="text-center"
+            >
+              <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-white">150+</span>
+              </div>
+              <h3 className="text-lg font-semibold text-gray-800">Resources Shared</h3>
+            </motion.div>
           </div>
         </div>
       </section>

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useToast } from '@/components/ui/use-toast';
-import { 
-  MessageSquare, 
-  Search, 
+import { toast } from 'sonner';
+import {
+  MessageSquare,
+  Search,
   Filter,
   Eye,
   EyeOff,
@@ -13,8 +13,10 @@ import {
   Clock,
   MessageCircle,
   Pin,
-  PinOff
+  PinOff,
+  Loader2
 } from 'lucide-react';
+import { supabase } from '@/lib/customSupabaseClient';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -53,110 +55,99 @@ const DiscussionModerator = () => {
   const [filterStatus, setFilterStatus] = useState('all');
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [discussionToDelete, setDiscussionToDelete] = useState(null);
-  const { toast } = useToast();
 
-  // Mock data for discussions
   useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setDiscussions([
-        {
-          id: 1,
-          title: 'Questions about new treatment options',
-          author: 'Sarah M.',
-          author_id: 'user_123',
-          category: 'Treatment Q&A',
-          content: 'I recently heard about a new immunotherapy treatment...',
-          replies: 12,
-          views: 156,
-          status: 'active',
-          pinned: false,
-          reported: false,
-          created_at: '2024-01-20T10:30:00Z',
-          last_activity: '2024-01-21T14:20:00Z'
-        },
-        {
-          id: 2,
-          title: 'Support group meeting feedback',
-          author: 'Michael R.',
-          author_id: 'user_456',
-          category: 'General Discussion',
-          content: 'Thank you all for the wonderful support group meeting...',
-          replies: 8,
-          views: 89,
-          status: 'active',
-          pinned: true,
-          reported: false,
-          created_at: '2024-01-19T16:45:00Z',
-          last_activity: '2024-01-21T09:15:00Z'
-        },
-        {
-          id: 3,
-          title: 'Inappropriate content example',
-          author: 'Anonymous User',
-          author_id: 'user_789',
-          category: 'General Discussion',
-          content: 'This post contains inappropriate content...',
-          replies: 2,
-          views: 23,
-          status: 'hidden',
-          pinned: false,
-          reported: true,
-          created_at: '2024-01-21T08:00:00Z',
-          last_activity: '2024-01-21T08:30:00Z'
-        }
-      ]);
-      setLoading(false);
-    }, 1000);
+    fetchDiscussions();
   }, []);
 
-  const handleToggleVisibility = (discussionId, currentStatus) => {
-    const newStatus = currentStatus === 'active' ? 'hidden' : 'active';
-    setDiscussions(discussions.map(discussion => 
-      discussion.id === discussionId 
-        ? { ...discussion, status: newStatus }
-        : discussion
-    ));
+  const fetchDiscussions = async () => {
+    setLoading(true);
+    try {
+      // Fetch all posts
+      const { data: postsData, error: postsError } = await supabase
+        .from('community_posts')
+        .select('*')
+        .order('created_at', { ascending: false });
 
-    toast({
-      title: "Success",
-      description: `Discussion ${newStatus === 'active' ? 'shown' : 'hidden'} successfully.`,
-    });
-  };
+      if (postsError) throw postsError;
 
-  const handleTogglePin = (discussionId, currentPinned) => {
-    setDiscussions(discussions.map(discussion => 
-      discussion.id === discussionId 
-        ? { ...discussion, pinned: !currentPinned }
-        : discussion
-    ));
+      // Fetch user details for each post
+      if (postsData && postsData.length > 0) {
+        const userIds = [...new Set(postsData.map(post => post.user_id))];
+        const { data: profilesData } = await supabase
+          .from('profiles')
+          .select('id, full_name, avatar_url')
+          .in('id', userIds);
 
-    toast({
-      title: "Success",
-      description: `Discussion ${!currentPinned ? 'pinned' : 'unpinned'} successfully.`,
-    });
+        // Merge profile data with posts
+        const postsWithProfiles = postsData.map(post => ({
+          id: post.id,
+          title: post.title,
+          content: post.content,
+          author: profilesData?.find(p => p.id === post.user_id)?.full_name || 'Anonymous',
+          author_id: post.user_id,
+          category: post.category,
+          likes: post.likes || 0,
+          replies: 0, // Would need a replies table
+          views: 0, // Would need view tracking
+          status: 'active', // All posts are active by default
+          pinned: false,
+          reported: false,
+          created_at: post.created_at,
+          last_activity: post.updated_at || post.created_at
+        }));
+
+        setDiscussions(postsWithProfiles);
+      } else {
+        setDiscussions([]);
+      }
+    } catch (error) {
+      console.error('Error fetching discussions:', error);
+      toast.error('Failed to load discussions');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleDeleteDiscussion = async () => {
     if (!discussionToDelete) return;
 
-    setDiscussions(discussions.filter(discussion => discussion.id !== discussionToDelete.id));
-    setDeleteDialogOpen(false);
-    setDiscussionToDelete(null);
+    try {
+      const { error } = await supabase
+        .from('community_posts')
+        .delete()
+        .eq('id', discussionToDelete.id);
 
-    toast({
-      title: "Success",
-      description: "Discussion deleted successfully.",
-    });
+      if (error) throw error;
+
+      setDiscussions(discussions.filter(discussion => discussion.id !== discussionToDelete.id));
+      toast.success('Post deleted successfully');
+    } catch (error) {
+      console.error('Error deleting post:', error);
+      toast.error('Failed to delete post');
+    } finally {
+      setDeleteDialogOpen(false);
+      setDiscussionToDelete(null);
+    }
+  };
+
+  const handleToggleVisibility = (discussionId, currentStatus) => {
+    // This would require adding a status column to community_posts
+    toast.info('Hide/Show feature requires database schema update');
+  };
+
+  const handleTogglePin = (discussionId, currentPinned) => {
+    // This would require adding a pinned column to community_posts
+    toast.info('Pin feature requires database schema update');
   };
 
   const filteredDiscussions = discussions.filter(discussion => {
     const matchesSearch = discussion.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         discussion.author?.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesFilter = filterStatus === 'all' || 
-                         discussion.status === filterStatus ||
-                         (filterStatus === 'reported' && discussion.reported) ||
-                         (filterStatus === 'pinned' && discussion.pinned);
+      discussion.author?.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesFilter = filterStatus === 'all' ||
+      discussion.status === filterStatus ||
+      (filterStatus === 'reported' && discussion.reported) ||
+      (filterStatus === 'pinned' && discussion.pinned);
     return matchesSearch && matchesFilter;
   });
 
@@ -185,7 +176,7 @@ const DiscussionModerator = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-primary"></div>
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
       </div>
     );
   }
@@ -255,7 +246,7 @@ const DiscussionModerator = () => {
                         </span>
                         <span className="flex items-center">
                           <Eye className="h-3 w-3 mr-1" />
-                          {discussion.views} views
+                          {discussion.likes} likes
                         </span>
                       </div>
                     </div>
@@ -356,7 +347,7 @@ const DiscussionModerator = () => {
           <AlertDialogHeader>
             <AlertDialogTitle>Are you sure?</AlertDialogTitle>
             <AlertDialogDescription>
-              This will permanently delete the discussion "{discussionToDelete?.title}" and all its replies. 
+              This will permanently delete the discussion "{discussionToDelete?.title}".
               This action cannot be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>

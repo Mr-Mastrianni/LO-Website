@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useToast } from '@/components/ui/use-toast';
+import { useAuth } from '@/contexts/SupabaseAuthContext';
+import NotificationDropdown from './NotificationDropdown';
 
 const navLinks = [
   { name: 'Home', path: '/' },
-  { 
-    name: 'About Us', 
+  {
+    name: 'About Us',
     path: '/about-us',
     dropdown: [
       { name: 'Our Mission', path: '/about-us' },
@@ -31,7 +32,7 @@ const NavItem = ({ item, closeMenu }) => {
 
   if (item.dropdown) {
     return (
-      <div 
+      <div
         className="relative"
         onMouseEnter={() => setDropdownOpen(true)}
         onMouseLeave={() => setDropdownOpen(false)}
@@ -58,8 +59,7 @@ const NavItem = ({ item, closeMenu }) => {
                     to={subItem.path}
                     onClick={handleLinkClick}
                     className={({ isActive }) =>
-                      `block px-4 py-2 text-sm ${
-                        isActive ? 'bg-primary-green text-white' : 'text-gray-700'
+                      `block px-4 py-2 text-sm ${isActive ? 'bg-primary-green text-white' : 'text-gray-700'
                       } hover:bg-gray-100 hover:text-primary-green`
                     }
                   >
@@ -79,8 +79,7 @@ const NavItem = ({ item, closeMenu }) => {
       to={item.path}
       onClick={handleLinkClick}
       className={({ isActive }) =>
-        `text-gray-700 hover:text-primary-green transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary-green rounded-md px-2 py-1 ${
-          isActive ? 'font-bold text-primary-green' : ''
+        `text-gray-700 hover:text-primary-green transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary-green rounded-md px-2 py-1 ${isActive ? 'font-bold text-primary-green' : ''
         }`
       }
     >
@@ -91,14 +90,7 @@ const NavItem = ({ item, closeMenu }) => {
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { toast } = useToast();
-
-  const handleLoginClick = () => {
-    toast({
-      title: "Feature Coming Soon!",
-      description: "🚧 This feature isn't implemented yet—but don't worry! You can request it in your next prompt! 🚀",
-    });
-  };
+  const { user } = useAuth();
 
   return (
     <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-sm shadow-md">
@@ -113,9 +105,19 @@ const Header = () => {
             ))}
           </div>
           <div className="hidden lg:flex items-center space-x-4">
-            <button onClick={handleLoginClick} className="text-gray-700 hover:text-primary-green transition-colors duration-300">Log In</button>
+            {user ? (
+              <>
+                <NotificationDropdown />
+                <Link to="/profile" className="flex items-center gap-2 text-gray-700 hover:text-primary transition-colors">
+                  <User className="w-5 h-5" />
+                  <span>Profile</span>
+                </Link>
+              </>
+            ) : (
+              <Link to="/login" className="text-gray-700 hover:text-primary transition-colors">Log In</Link>
+            )}
             <Link to="/donate">
-              <Button className="bg-accent-gold hover:bg-accent-gold/90 text-white">Donate</Button>
+              <Button className="bg-yellow-500 hover:bg-yellow-600 text-white">Donate</Button>
             </Link>
           </div>
           <div className="lg:hidden flex items-center">

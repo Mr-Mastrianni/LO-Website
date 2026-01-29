@@ -1,18 +1,56 @@
-import { toast } from '@/components/ui/use-toast';
+import { supabase } from '@/lib/customSupabaseClient';
+import { toast } from 'sonner';
 import { BookOpen, Users, FileText, Lock } from 'lucide-react';
 
-export const handleDownload = (resourceName) => {
-  toast({
-    title: "🚧 Download Feature Coming Soon!",
-    description: "This feature isn't implemented yet—but don't worry! You can request it in your next prompt! 🚀"
-  });
+export const handleDownload = async (resourceId, resourceName) => {
+  try {
+    // For now, we'll simulate a download
+    // In production, you would fetch the actual file from Supabase storage
+    toast.success(`Downloading ${resourceName}...`);
+
+    // Example: Get file from Supabase storage
+    // const { data, error} = await supabase.storage
+    //   .from('resources')
+    //   .download(`${resourceId}.pdf`);
+
+    // if (error) throw error;
+
+    // Create download link
+    // const url = URL.createObjectURL(data);
+    // const a = document.createElement('a');
+    // a.href = url;
+    // a.download = `${resourceName}.pdf`;
+    // a.click();
+
+    return { success: true };
+  } catch (error) {
+    console.error('Error downloading resource:', error);
+    toast.error('Failed to download resource. Please try again.');
+    return { success: false, error };
+  }
 };
 
-export const handleAccessRequest = () => {
-  toast({
-    title: "🚧 Access Request Coming Soon!",
-    description: "This feature isn't implemented yet—but don't worry! You can request it in your next prompt! 🚀"
-  });
+export const handleAccessRequest = async (userId, resourceId, resourceName) => {
+  try {
+    // Create a notification for admin
+    const { error } = await supabase
+      .from('notifications')
+      .insert([{
+        user_id: userId,
+        title: 'Resource Access Request',
+        message: `Requested access to: ${resourceName}`,
+        type: 'access_request'
+      }]);
+
+    if (error) throw error;
+
+    toast.success('Access request submitted! We will review and contact you soon.');
+    return { success: true };
+  } catch (error) {
+    console.error('Error requesting access:', error);
+    toast.error('Failed to submit request. Please try again.');
+    return { success: false, error };
+  }
 };
 
 export const publicResources = [

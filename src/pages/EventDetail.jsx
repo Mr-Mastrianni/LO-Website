@@ -1,20 +1,90 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, Clock, Users, ArrowLeft, ArrowRight } from 'lucide-react';
-import { toast } from '@/components/ui/use-toast';
+import { Calendar, MapPin, Clock, Users, ArrowLeft, ArrowRight, Check } from 'lucide-react';
+import { toast } from 'sonner';
+import { supabase } from '@/lib/customSupabaseClient';
+import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { events } from '@/data/eventsData';
 
 const EventDetail = () => {
   const { eventId } = useParams();
+  const { user } = useAuth();
   const event = events[eventId];
+  const [isRegistered, setIsRegistered] = useState(false);
+  const [registrationCount, setRegistrationCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleRegister = () => {
-    toast({
-      title: "🚧 Registration Coming Soon!",
-      description: "This feature isn't implemented yet—but don't worry! You can request it in your next prompt! 🚀"
-    });
+  useEffect(() => {
+    if (user && event) {
+      checkRegistrationStatus();
+      fetchRegistrationCount();
+    }
+  }, [user, event]);
+
+  const checkRegistrationStatus = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('event_registrations')
+        .select('id')
+        .eq('event_id', eventId)
+        .eq('user_id', user.id)
+        .single();
+
+      if (data) setIsRegistered(true);
+    } catch (error) {
+      // User not registered, which is fine
+    }
+  };
+
+  const fetchRegistrationCount = async () => {
+    try {
+      const { count, error } = await supabase
+        .from('event_registrations')
+        .select('*', { count: 'exact', head: true })
+        .eq('event_id', eventId);
+
+      if (!error && count) setRegistrationCount(count);
+    } catch (error) {
+      console.error('Error fetching registration count:', error);
+    }
+  };
+
+  const handleRegister = async () => {
+    if (!user) {
+      toast.error('Please log in to register for events');
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const { data, error } = await supabase
+        .from('event_registrations')
+        .insert([{
+          event_id: eventId,
+          user_id: user.id,
+          status: 'registered'
+        }])
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      setIsRegistered(true);
+      setRegistrationCount(prev => prev + 1);
+      toast.success('Successfully registered for the event!');
+    } catch (error) {
+      console.error('Error registering for event:', error);
+      if (error.code === '23505') {
+        toast.error('You are already registered for this event');
+      } else {
+        toast.error('Failed to register. Please try again.');
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   if (!event) {
@@ -56,8 +126,8 @@ const EventDetail = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
                 <div className={`inline-block px-4 py-2 rounded-full text-sm font-semibold mb-4 ${event.status === 'upcoming'
-                    ? 'bg-gray-100 text-primary'
-                    : 'bg-gray-200 text-gray-700'
+                  ? 'bg-gray-100 text-primary'
+                  : 'bg-gray-200 text-gray-700'
                   }`}>
                   {event.status === 'upcoming' ? 'Upcoming Event' : 'Past Event'}
                 </div>
@@ -82,13 +152,28 @@ const EventDetail = () => {
                 </div>
 
                 {event.status === 'upcoming' && (
-                  <button
-                    onClick={handleRegister}
-                    className="btn-primary inline-flex items-center"
-                  >
-                    Register Now
-                    <ArrowRight className="ml-2 w-4 h-4" />
-                  </button>
+                  <div>
+                    {isRegistered ? (
+                      <div className="inline-flex items-center px-6 py-3 bg-gray-100 text-gray-700 rounded-lg font-semibold">
+                        <Check className="w-5 h-5 mr-2" />
+                        You're Registered!
+                      </div>
+                    ) : (
+                      <button
+                        onClick={handleRegister}
+                        disabled={isLoading}
+                        className="btn-primary inline-flex items-center"
+                      >
+                        {isLoading ? 'Registering...' : 'Register Now'}
+                        <ArrowRight className="ml-2 w-4 h-4" />
+                      </button>
+                    )}
+                    {registrationCount > 0 && (
+                      <p className="text-sm text-gray-600 mt-2">
+                        {registrationCount} {registrationCount === 1 ? 'person' : 'people'} registered
+                      </p>
+                    )}
+                  </div>
                 )}
               </div>
 
@@ -187,15 +272,35 @@ const EventDetail = () => {
 
                   {event.status === 'upcoming' && (
                     <div className="pt-4 border-t border-gray-200">
-                      <button
-                        onClick={handleRegister}
-                        className="btn-primary w-full"
-                      >
-                        Register Now
-                      </button>
-                      <p className="text-sm text-gray-600 mt-2 text-center">
-                        Registration is required for all events
-                      </p>
+                      {isRegistered ? (
+                        <div className="text-center">
+                          <div className="inline-flex items-center px-6 py-3 bg-gray-100 text-gray-700 rounded-lg font-semibold w-full justify-center mb-2">
+                            <Check className="w-5 h-5 mr-2" />
+                            You're Registered!
+                          </div>
+                          <p className="text-sm text-gray-600 mt-2">
+                            We'll send you event details via email
+                          </p>
+                        </div>
+                      ) : (
+                        <>
+                          <button
+                            onClick={handleRegister}
+                            disabled={isLoading}
+                            className="btn-primary w-full"
+                          >
+                            {isLoading ? 'Registering...' : 'Register Now'}
+                          </button>
+                          <p className="text-sm text-gray-600 mt-2 text-center">
+                            Registration is required for all events
+                          </p>
+                        </>
+                      )}
+                      {registrationCount > 0 && (
+                        <p className="text-xs text-gray-500 mt-2 text-center">
+                          {registrationCount} {registrationCount === 1 ? 'person' : 'people'} registered
+                        </p>
+                      )}
                     </div>
                   )}
                 </div>
