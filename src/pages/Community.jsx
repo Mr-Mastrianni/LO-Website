@@ -18,9 +18,9 @@ const Community = () => {
         <meta name="description" content="Join Living Oncology's supportive community. Connect with other patients, caregivers, and healthcare professionals through our forums and support groups." />
       </Helmet>
 
-      <section className="bg-gradient-to-br from-green-50 to-yellow-50 py-20">
+      <section className="bg-gradient-to-br from-gray-50 to-yellow-50 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -38,7 +38,7 @@ const Community = () => {
 
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -53,7 +53,7 @@ const Community = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {communityStats.map((stat, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -98,7 +98,7 @@ const Community = () => {
         </div>
       </section>
 
-      <section className="py-16 bg-gradient-to-r from-green-600 to-green-700">
+      <section className="py-16 bg-gradient-to-r from-gray-600 to-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -109,11 +109,11 @@ const Community = () => {
             <h2 className="text-4xl font-bold text-white mb-6">
               Ready to Join Our Community?
             </h2>
-            <p className="text-xl text-green-100 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-100 mb-8 max-w-3xl mx-auto">
               Connect with others who understand your journey. Share experiences, find support, and build meaningful relationships.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/members-directory" className="bg-white text-green-700 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
+              <Link to="/members-directory" className="bg-white text-gray-700 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
                 View Members
               </Link>
               <Link to="/contact" className="btn-primary">

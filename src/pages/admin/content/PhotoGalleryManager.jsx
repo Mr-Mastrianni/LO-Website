@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useToast } from '@/components/ui/use-toast';
-import { 
-  Plus, 
-  Edit, 
-  Trash2, 
+import {
+  Plus,
+  Edit,
+  Trash2,
   Search,
   Image,
   Upload,
@@ -87,11 +87,11 @@ const PhotoGalleryManager = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
       if (editingPhoto) {
         // Update existing photo
-        setPhotos(photos.map(photo => 
+        setPhotos(photos.map(photo =>
           photo.id === editingPhoto.id ? { ...photo, ...formData } : photo
         ));
 
@@ -168,7 +168,7 @@ const PhotoGalleryManager = () => {
   const getCategoryBadge = (category) => {
     const categories = {
       'events': { label: 'Events', color: 'bg-blue-100 text-blue-800' },
-      'community': { label: 'Community', color: 'bg-green-100 text-green-800' },
+      'community': { label: 'Community', color: 'bg-gray-100 text-gray-800' },
       'medical': { label: 'Medical', color: 'bg-purple-100 text-purple-800' },
       'facilities': { label: 'Facilities', color: 'bg-orange-100 text-orange-800' },
       'general': { label: 'General', color: 'bg-gray-100 text-gray-800' }
@@ -226,7 +226,7 @@ const PhotoGalleryManager = () => {
                 <label className="text-sm font-medium">Photo Title</label>
                 <Input
                   value={formData.title}
-                  onChange={(e) => setFormData({...formData, title: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                   placeholder="Photo title"
                   required
                 />
@@ -235,7 +235,7 @@ const PhotoGalleryManager = () => {
                 <label className="text-sm font-medium">Description</label>
                 <Textarea
                   value={formData.description}
-                  onChange={(e) => setFormData({...formData, description: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   placeholder="Photo description..."
                   rows={3}
                 />
@@ -244,7 +244,7 @@ const PhotoGalleryManager = () => {
                 <label className="text-sm font-medium">Alt Text (for accessibility)</label>
                 <Input
                   value={formData.alt_text}
-                  onChange={(e) => setFormData({...formData, alt_text: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, alt_text: e.target.value })}
                   placeholder="Describe what's in the photo"
                   required
                 />
@@ -254,7 +254,7 @@ const PhotoGalleryManager = () => {
                   <label className="text-sm font-medium">Category</label>
                   <select
                     value={formData.category}
-                    onChange={(e) => setFormData({...formData, category: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                   >
                     <option value="events">Events</option>
@@ -269,7 +269,7 @@ const PhotoGalleryManager = () => {
                     type="checkbox"
                     id="featured"
                     checked={formData.featured}
-                    onChange={(e) => setFormData({...formData, featured: e.target.checked})}
+                    onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
                     className="rounded"
                   />
                   <label htmlFor="featured" className="text-sm font-medium">Featured Photo</label>

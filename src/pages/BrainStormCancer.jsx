@@ -48,9 +48,9 @@ const BrainStormCancer = () => {
         <meta name="description" content="Join Living Oncology's BrainStorm Cancer events including our annual conference, workshops, and educational sessions for the neuro-oncology community." />
       </Helmet>
 
-      <section className="bg-gradient-to-br from-green-50 to-yellow-50 py-20">
+      <section className="bg-gradient-to-br from-gray-50 to-yellow-50 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -69,7 +69,7 @@ const BrainStormCancer = () => {
       {upcomingEvents.find(event => event.featured) && (
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -80,13 +80,13 @@ const BrainStormCancer = () => {
             </motion.div>
 
             {upcomingEvents.filter(event => event.featured).map((event) => (
-              <motion.div 
+              <motion.div
                 key={event.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
                 viewport={{ once: true }}
-                className="bg-gradient-to-r from-green-50 to-yellow-50 rounded-2xl p-8 md:p-12 shadow-xl"
+                className="bg-gradient-to-r from-gray-50 to-yellow-50 rounded-2xl p-8 md:p-12 shadow-xl"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                   <div>
@@ -113,7 +113,7 @@ const BrainStormCancer = () => {
                     <p className="text-lg text-gray-700 mb-6 leading-relaxed">
                       {event.summary}
                     </p>
-                    <Link 
+                    <Link
                       to={`/brainstorm-cancer/${event.id}`}
                       className="btn-primary inline-flex items-center"
                     >
@@ -122,10 +122,10 @@ const BrainStormCancer = () => {
                     </Link>
                   </div>
                   <div className="flex justify-center">
-                    <img 
-                      className="w-full max-w-md rounded-xl shadow-lg" 
+                    <img
+                      className="w-full max-w-md rounded-xl shadow-lg"
                       alt="BrainStorm Cancer 2025 conference venue in Tempe, Arizona"
-                     src="https://images.unsplash.com/photo-1672396309399-353d95b114a1" />
+                      src="https://images.unsplash.com/photo-1672396309399-353d95b114a1" />
                   </div>
                 </div>
               </motion.div>
@@ -162,7 +162,7 @@ const BrainStormCancer = () => {
                 >
                   <div className="p-6">
                     <div className="flex items-center justify-between mb-4">
-                      <div className="bg-green-100 text-primary px-3 py-1 rounded-full text-sm font-semibold">
+                      <div className="bg-gray-100 text-primary px-3 py-1 rounded-full text-sm font-semibold">
                         Upcoming
                       </div>
                       <Users className="w-5 h-5 text-gray-400" />
@@ -234,7 +234,7 @@ const BrainStormCancer = () => {
 
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -249,7 +249,7 @@ const BrainStormCancer = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {pastEvents.map((event, index) => (
-              <motion.div 
+              <motion.div
                 key={event.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -280,9 +280,9 @@ const BrainStormCancer = () => {
                   <p className="text-gray-700 text-sm mb-6">
                     {event.summary}
                   </p>
-                  <Link 
+                  <Link
                     to={`/brainstorm-cancer/${event.id}`}
-                    className="text-primary hover:text-green-800 font-semibold inline-flex items-center"
+                    className="text-primary hover:text-gray-800 font-semibold inline-flex items-center"
                   >
                     View Event Summary
                     <ArrowRight className="ml-2 w-4 h-4" />
@@ -294,7 +294,7 @@ const BrainStormCancer = () => {
         </div>
       </section>
 
-      <section className="py-16 bg-gradient-to-r from-green-600 to-green-700">
+      <section className="py-16 bg-gradient-to-r from-gray-600 to-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -305,11 +305,11 @@ const BrainStormCancer = () => {
             <h2 className="text-4xl font-bold text-white mb-6">
               Stay Connected
             </h2>
-            <p className="text-xl text-green-100 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-100 mb-8 max-w-3xl mx-auto">
               Don't miss our upcoming events! Join our community to receive updates about new events, educational opportunities, and ways to get involved.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/contact" className="bg-white text-green-700 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
+              <Link to="/contact" className="bg-white text-gray-700 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
                 Get Event Updates
               </Link>
               <Link to="/community" className="btn-primary">

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  FileText, 
-  Calendar, 
-  BookOpen, 
+import {
+  FileText,
+  Calendar,
+  BookOpen,
   Image,
   Plus
 } from 'lucide-react';
@@ -31,7 +31,7 @@ const ContentManagement = () => {
       name: 'Events',
       icon: Calendar,
       description: 'Create and manage BrainStorm Cancer events',
-      color: 'text-green-600'
+      color: 'text-gray-600'
     },
     {
       id: 'resources',
@@ -69,9 +69,8 @@ const ContentManagement = () => {
                 key={type.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className={`p-4 border rounded-lg cursor-pointer transition-all hover:shadow-md ${
-                  activeTab === type.id ? 'border-primary bg-primary/5' : 'hover:border-gray-300'
-                }`}
+                className={`p-4 border rounded-lg cursor-pointer transition-all hover:shadow-md ${activeTab === type.id ? 'border-primary bg-primary/5' : 'hover:border-gray-300'
+                  }`}
                 onClick={() => setActiveTab(type.id)}
               >
                 <type.icon className={`h-6 w-6 ${type.color} mb-2`} />

@@ -126,11 +126,11 @@ const OnboardingTour = () => {
             callback={handleJoyrideCallback}
             styles={{
                 options: {
-                    primaryColor: '#166534', // Primary green
+                    primaryColor: '#6B7280', // Gray
                     textColor: '#374151',
                     backgroundColor: '#fff',
                     overlayColor: 'rgba(0, 0, 0, 0.5)',
-                    spotlightShadow: '0 0 20px rgba(22, 101, 52, 0.5)',
+                    spotlightShadow: '0 0 20px rgba(107, 114, 128, 0.5)',
                     zIndex: 10000,
                 },
                 tooltip: {
@@ -141,14 +141,14 @@ const OnboardingTour = () => {
                     textAlign: 'left',
                 },
                 buttonNext: {
-                    backgroundColor: '#166534',
+                    backgroundColor: '#6B7280',
                     borderRadius: 8,
                     padding: '10px 20px',
                     fontSize: 14,
                     fontWeight: 600,
                 },
                 buttonBack: {
-                    color: '#166534',
+                    color: '#6B7280',
                     marginRight: 10,
                 },
                 buttonSkip: {

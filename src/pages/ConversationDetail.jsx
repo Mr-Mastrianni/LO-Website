@@ -36,9 +36,9 @@ const ConversationDetail = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <Link 
+            <Link
               to="/oncology-conversations"
-              className="inline-flex items-center text-primary hover:text-green-800 mb-6 transition-colors"
+              className="inline-flex items-center text-primary hover:text-gray-800 mb-6 transition-colors"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Conversations

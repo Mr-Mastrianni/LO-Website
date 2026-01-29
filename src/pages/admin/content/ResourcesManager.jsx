@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useToast } from '@/components/ui/use-toast';
-import { 
-  Plus, 
-  Edit, 
-  Trash2, 
+import {
+  Plus,
+  Edit,
+  Trash2,
   Search,
   BookOpen,
   Download,
@@ -92,11 +92,11 @@ const ResourcesManager = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
       if (editingResource) {
         // Update existing resource
-        setResources(resources.map(resource => 
+        setResources(resources.map(resource =>
           resource.id === editingResource.id ? { ...resource, ...formData } : resource
         ));
 
@@ -187,7 +187,7 @@ const ResourcesManager = () => {
   const getCategoryBadge = (category) => {
     const categories = {
       'education': { label: 'Education', color: 'bg-blue-100 text-blue-800' },
-      'wellness': { label: 'Wellness', color: 'bg-green-100 text-green-800' },
+      'wellness': { label: 'Wellness', color: 'bg-gray-100 text-gray-800' },
       'research': { label: 'Research', color: 'bg-purple-100 text-purple-800' },
       'support': { label: 'Support', color: 'bg-orange-100 text-orange-800' },
       'general': { label: 'General', color: 'bg-gray-100 text-gray-800' }
@@ -245,7 +245,7 @@ const ResourcesManager = () => {
                 <label className="text-sm font-medium">Resource Title</label>
                 <Input
                   value={formData.title}
-                  onChange={(e) => setFormData({...formData, title: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                   placeholder="Resource title"
                   required
                 />
@@ -254,7 +254,7 @@ const ResourcesManager = () => {
                 <label className="text-sm font-medium">Description</label>
                 <Textarea
                   value={formData.description}
-                  onChange={(e) => setFormData({...formData, description: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   placeholder="Resource description..."
                   rows={3}
                   required
@@ -264,7 +264,7 @@ const ResourcesManager = () => {
                 <label className="text-sm font-medium">URL or File Path</label>
                 <Input
                   value={formData.url}
-                  onChange={(e) => setFormData({...formData, url: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, url: e.target.value })}
                   placeholder="https://example.com or /files/resource.pdf"
                   required
                 />
@@ -274,7 +274,7 @@ const ResourcesManager = () => {
                   <label className="text-sm font-medium">Type</label>
                   <select
                     value={formData.type}
-                    onChange={(e) => setFormData({...formData, type: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, type: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                   >
                     <option value="guide">Guide</option>
@@ -287,7 +287,7 @@ const ResourcesManager = () => {
                   <label className="text-sm font-medium">Category</label>
                   <select
                     value={formData.category}
-                    onChange={(e) => setFormData({...formData, category: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                   >
                     <option value="general">General</option>
@@ -303,7 +303,7 @@ const ResourcesManager = () => {
                   <label className="text-sm font-medium">Access Level</label>
                   <select
                     value={formData.access}
-                    onChange={(e) => setFormData({...formData, access: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, access: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                   >
                     <option value="public">Public</option>
@@ -316,7 +316,7 @@ const ResourcesManager = () => {
                     type="checkbox"
                     id="featured"
                     checked={formData.featured}
-                    onChange={(e) => setFormData({...formData, featured: e.target.checked})}
+                    onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
                     className="rounded"
                   />
                   <label htmlFor="featured" className="text-sm font-medium">Featured Resource</label>

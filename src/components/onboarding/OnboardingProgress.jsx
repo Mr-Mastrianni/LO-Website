@@ -39,8 +39,8 @@ const OnboardingProgress = ({
                             className="flex flex-col items-center gap-1"
                         >
                             <div className={`w-8 h-8 rounded-full flex items-center justify-center ${step.completed
-                                    ? 'bg-green-500 text-white'
-                                    : 'bg-gray-200 text-gray-400'
+                                ? 'bg-gray-500 text-white'
+                                : 'bg-gray-200 text-gray-400'
                                 }`}>
                                 {step.completed ? (
                                     <CheckCircle className="w-5 h-5" />
@@ -48,7 +48,7 @@ const OnboardingProgress = ({
                                     <span className="text-sm font-medium">{index + 1}</span>
                                 )}
                             </div>
-                            <span className={`text-xs ${step.completed ? 'text-green-600 font-medium' : 'text-gray-500'
+                            <span className={`text-xs ${step.completed ? 'text-gray-600 font-medium' : 'text-gray-500'
                                 }`}>
                                 {step.title}
                             </span>

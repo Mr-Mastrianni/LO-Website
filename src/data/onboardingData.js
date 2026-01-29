@@ -33,7 +33,7 @@ export const achievements = {
         title: 'Verified Member',
         description: 'Verified your email address',
         icon: 'CheckCircle',
-        color: 'text-green-500',
+        color: 'text-gray-500',
     },
     TOUR_COMPLETED: {
         key: 'TOUR_COMPLETED',

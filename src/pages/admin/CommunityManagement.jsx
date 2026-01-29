@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  MessageSquare, 
-  Users, 
-  Flag, 
+import {
+  MessageSquare,
+  Users,
+  Flag,
   Shield,
   Activity,
   Settings
@@ -33,7 +33,7 @@ const CommunityManagement = () => {
       name: 'Groups',
       icon: Users,
       description: 'Manage community groups and memberships',
-      color: 'text-green-600',
+      color: 'text-gray-600',
       count: 8
     },
     {
@@ -82,17 +82,15 @@ const CommunityManagement = () => {
                 key={area.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className={`p-4 border rounded-lg cursor-pointer transition-all hover:shadow-md ${
-                  activeTab === area.id ? 'border-primary bg-primary/5' : 'hover:border-gray-300'
-                }`}
+                className={`p-4 border rounded-lg cursor-pointer transition-all hover:shadow-md ${activeTab === area.id ? 'border-primary bg-primary/5' : 'hover:border-gray-300'
+                  }`}
                 onClick={() => setActiveTab(area.id)}
               >
                 <div className="flex items-center justify-between mb-2">
                   <area.icon className={`h-5 w-5 ${area.color}`} />
                   {area.count !== null && (
-                    <span className={`text-xs font-bold px-2 py-1 rounded-full ${
-                      area.count > 0 ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-600'
-                    }`}>
+                    <span className={`text-xs font-bold px-2 py-1 rounded-full ${area.count > 0 ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-600'
+                      }`}>
                       {area.count}
                     </span>
                   )}

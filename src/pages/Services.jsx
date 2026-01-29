@@ -47,9 +47,9 @@ const Services = () => {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-green-50 to-yellow-50 py-20">
+      <section className="bg-gradient-to-br from-gray-50 to-yellow-50 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -61,7 +61,7 @@ const Services = () => {
             <p className="text-xl md:text-2xl text-gray-700 max-w-4xl mx-auto leading-relaxed mb-8">
               Expert guidance and support tailored to your unique cancer journey
             </p>
-            <Link 
+            <Link
               to="/request-consultation"
               className="btn-primary inline-flex items-center text-lg px-8 py-4"
             >
@@ -121,7 +121,7 @@ const Services = () => {
       {/* Service Features */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -136,7 +136,7 @@ const Services = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {serviceFeatures.map((feature, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -162,7 +162,7 @@ const Services = () => {
       {/* Benefits Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -177,13 +177,13 @@ const Services = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {consultationBenefits.map((benefit, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
                 initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="flex items-start space-x-3 bg-gradient-to-br from-green-50 to-yellow-50 rounded-lg p-4"
+                className="flex items-start space-x-3 bg-gradient-to-br from-gray-50 to-yellow-50 rounded-lg p-4"
               >
                 <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
                 <p className="text-gray-700 leading-relaxed">{benefit}</p>
@@ -196,7 +196,7 @@ const Services = () => {
       {/* Process Section */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -227,7 +227,7 @@ const Services = () => {
                 description: "Meet with Dr. Gatson for your detailed consultation, receive your personalized recommendations, and ongoing support as needed."
               }
             ].map((process, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -247,7 +247,7 @@ const Services = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 bg-gradient-to-r from-green-600 to-green-700">
+      <section className="py-16 bg-gradient-to-r from-gray-600 to-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -258,13 +258,13 @@ const Services = () => {
             <h2 className="text-4xl font-bold text-white mb-6">
               Ready to Take the Next Step?
             </h2>
-            <p className="text-xl text-green-100 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-100 mb-8 max-w-3xl mx-auto">
               Don't navigate your cancer journey alone. Get the expert guidance and support you need to make informed decisions about your care.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/request-consultation"
-                className="bg-white text-green-700 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg inline-flex items-center justify-center"
+                className="bg-white text-gray-700 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg inline-flex items-center justify-center"
               >
                 <Stethoscope className="mr-2 w-4 h-4" />
                 Request Consultation

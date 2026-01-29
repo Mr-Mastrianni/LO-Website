@@ -8,13 +8,13 @@ const FeaturedResource = () => {
   if (!featured) return null;
 
   return (
-    <motion.div 
+    <motion.div
       key={featured.id}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
       viewport={{ once: true }}
-      className="bg-gradient-to-r from-green-50 to-yellow-50 rounded-2xl p-8 md:p-12 shadow-xl"
+      className="bg-gradient-to-r from-gray-50 to-yellow-50 rounded-2xl p-8 md:p-12 shadow-xl"
     >
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
         <div>
@@ -34,7 +34,7 @@ const FeaturedResource = () => {
           <p className="text-lg text-gray-700 mb-6 leading-relaxed">
             {featured.description}
           </p>
-          <button 
+          <button
             onClick={() => handleDownload(featured.title)}
             className="btn-primary inline-flex items-center"
           >
@@ -44,10 +44,10 @@ const FeaturedResource = () => {
         </div>
         <div className="flex justify-center">
           <div className="relative">
-            <img  
-              className="w-full max-w-sm rounded-xl shadow-lg" 
+            <img
+              className="w-full max-w-sm rounded-xl shadow-lg"
               alt="Understanding Your Brain Tumor Diagnosis guide cover"
-             src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570" />
+              src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570" />
             <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-primary rounded-full flex items-center justify-center shadow-lg">
               <FileText className="w-8 h-8 text-white" />
             </div>

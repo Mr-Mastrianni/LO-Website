@@ -18,13 +18,13 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { toast } = useToast();
-  
+
   const from = location.state?.from?.pathname || "/profile";
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     setTimeout(() => {
       const user = login(email, password);
 
@@ -51,7 +51,7 @@ const LoginPage = () => {
         <title>Login - Living Oncology</title>
         <meta name="description" content="Log in to your Living Oncology account to access your personalized profile and community features." />
       </Helmet>
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-yellow-50 p-4">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-yellow-50 p-4">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}

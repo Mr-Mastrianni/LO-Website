@@ -47,7 +47,7 @@ const OncologyConversations = () => {
       </Dialog>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-green-50 to-yellow-50 py-20">
+      <section className="bg-gradient-to-br from-gray-50 to-yellow-50 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -158,7 +158,7 @@ const OncologyConversations = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-gradient-to-br from-green-50 to-yellow-50 rounded-xl shadow-lg card-hover overflow-hidden"
+                className="bg-gradient-to-br from-gray-50 to-yellow-50 rounded-xl shadow-lg card-hover overflow-hidden"
               >
                 {/* Video Thumbnail */}
                 {conversation.type === 'video' && conversation.url && (
@@ -210,7 +210,7 @@ const OncologyConversations = () => {
                   {conversation.type === 'video' ? (
                     <button
                       onClick={() => setSelectedVideo(conversation)}
-                      className="text-primary hover:text-green-800 font-semibold inline-flex items-center transition-colors"
+                      className="text-primary hover:text-gray-800 font-semibold inline-flex items-center transition-colors"
                     >
                       Watch Video
                       <ArrowRight className="ml-2 w-4 h-4" />
@@ -218,7 +218,7 @@ const OncologyConversations = () => {
                   ) : (
                     <Link
                       to={`/oncology-conversations/${conversation.id}`}
-                      className="text-primary hover:text-green-800 font-semibold inline-flex items-center transition-colors"
+                      className="text-primary hover:text-gray-800 font-semibold inline-flex items-center transition-colors"
                     >
                       Read Conversation
                       <ArrowRight className="ml-2 w-4 h-4" />
@@ -232,7 +232,7 @@ const OncologyConversations = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 bg-gradient-to-r from-green-600 to-green-700">
+      <section className="py-16 bg-gradient-to-r from-gray-600 to-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -243,11 +243,11 @@ const OncologyConversations = () => {
             <h2 className="text-4xl font-bold text-white mb-6">
               Join the Conversation
             </h2>
-            <p className="text-xl text-green-100 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-100 mb-8 max-w-3xl mx-auto">
               Have a story to share or a topic you'd like us to explore? We'd love to hear from you and include your voice in our ongoing conversations.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/contact" className="bg-white text-green-700 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg inline-flex items-center justify-center">
+              <a href="/contact" className="bg-white text-gray-700 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg inline-flex items-center justify-center">
                 <Heart className="mr-2 w-4 h-4" />
                 Share Your Story
               </a>

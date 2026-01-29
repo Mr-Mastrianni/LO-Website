@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  BarChart3, 
-  Users, 
-  TrendingUp, 
+import {
+  BarChart3,
+  Users,
+  TrendingUp,
   Globe,
   Download,
   Calendar
@@ -34,7 +34,7 @@ const AnalyticsDashboard = () => {
       name: 'Users',
       icon: Users,
       description: 'User behavior and demographics',
-      color: 'text-green-600'
+      color: 'text-gray-600'
     },
     {
       id: 'content',
@@ -111,9 +111,8 @@ const AnalyticsDashboard = () => {
                 key={area.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className={`p-4 border rounded-lg cursor-pointer transition-all hover:shadow-md ${
-                  activeTab === area.id ? 'border-primary bg-primary/5' : 'hover:border-gray-300'
-                }`}
+                className={`p-4 border rounded-lg cursor-pointer transition-all hover:shadow-md ${activeTab === area.id ? 'border-primary bg-primary/5' : 'hover:border-gray-300'
+                  }`}
                 onClick={() => setActiveTab(area.id)}
               >
                 <area.icon className={`h-5 w-5 ${area.color} mb-2`} />

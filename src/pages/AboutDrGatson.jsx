@@ -51,10 +51,10 @@ const AboutDrGatson = () => {
         <meta name="description" content="Learn about Dr. Na Tosha Gatson, MD, PhD, FAAN, founder of Living Oncology. Discover her credentials, research interests, and dedication to neuro-oncology patient care." />
       </Helmet>
 
-      <section className="bg-gradient-to-br from-green-50 to-yellow-50 py-20">
+      <section className="bg-gradient-to-br from-gray-50 to-yellow-50 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
@@ -80,11 +80,11 @@ const AboutDrGatson = () => {
               className="flex justify-center"
             >
               <div className="relative">
-                <div className="w-80 h-80 bg-gradient-to-br from-green-200 to-yellow-200 rounded-full flex items-center justify-center shadow-xl">
-                  <img   
-                    className="w-72 h-72 rounded-full object-cover shadow-lg" 
+                <div className="w-80 h-80 bg-gradient-to-br from-gray-200 to-yellow-200 rounded-full flex items-center justify-center shadow-xl">
+                  <img
+                    className="w-72 h-72 rounded-full object-cover shadow-lg"
                     alt="Dr. Na Tosha Gatson, MD, PhD, FAAN - Professional portrait"
-                   src="https://storage.googleapis.com/hostinger-horizons-assets-prod/852aedb6-5a53-4567-88c5-7e3cc5ed6cb7/4ffd3399a8a056778c8328f55c4eae31.png" />
+                    src="https://storage.googleapis.com/hostinger-horizons-assets-prod/852aedb6-5a53-4567-88c5-7e3cc5ed6cb7/4ffd3399a8a056778c8328f55c4eae31.png" />
                 </div>
                 <div className="absolute -bottom-4 -right-4 w-16 h-16 bg-primary rounded-full flex items-center justify-center shadow-lg">
                   <GraduationCap className="w-8 h-8 text-white" />
@@ -97,7 +97,7 @@ const AboutDrGatson = () => {
 
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -112,13 +112,13 @@ const AboutDrGatson = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {credentials.map((credential, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-gradient-to-br from-green-50 to-yellow-50 rounded-xl p-6 text-center shadow-lg card-hover"
+                className="bg-gradient-to-br from-gray-50 to-yellow-50 rounded-xl p-6 text-center shadow-lg card-hover"
               >
                 <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
                   <Award className="w-6 h-6 text-white" />
@@ -132,7 +132,7 @@ const AboutDrGatson = () => {
 
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -147,7 +147,7 @@ const AboutDrGatson = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {researchInterests.map((interest, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -212,8 +212,8 @@ const AboutDrGatson = () => {
                   </div>
                 ))}
               </div>
-              
-              <div className="mt-8 p-6 bg-gradient-to-br from-green-50 to-yellow-50 rounded-xl">
+
+              <div className="mt-8 p-6 bg-gradient-to-br from-gray-50 to-yellow-50 rounded-xl">
                 <h4 className="text-xl font-bold text-primary mb-3">Philosophy</h4>
                 <p className="text-gray-700 leading-relaxed italic">
                   "Every patient deserves to understand their diagnosis, their treatment options, and their prognosis in terms that empower rather than overwhelm. When we bridge the gap between medical complexity and human understanding, we don't just treat disease—we restore hope and dignity to the healing process."
@@ -224,7 +224,7 @@ const AboutDrGatson = () => {
         </div>
       </section>
 
-      <section className="py-16 bg-gradient-to-r from-green-600 to-green-700">
+      <section className="py-16 bg-gradient-to-r from-gray-600 to-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -235,11 +235,11 @@ const AboutDrGatson = () => {
             <h2 className="text-4xl font-bold text-white mb-6">
               Join Dr. Gatson's Mission
             </h2>
-            <p className="text-xl text-green-100 mb-8 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-gray-100 mb-8 max-w-3xl mx-auto leading-relaxed">
               Be part of the movement to improve neuro-oncology health literacy and support patients and families on their journey.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/contact" className="bg-white text-green-700 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
+              <a href="/contact" className="bg-white text-gray-700 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
                 Get Involved
               </a>
               <a href="/donate" className="btn-primary">

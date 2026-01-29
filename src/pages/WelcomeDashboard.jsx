@@ -118,7 +118,7 @@ const WelcomeDashboard = () => {
                 <meta name="description" content="Welcome to Living Oncology. Get started with your personalized journey." />
             </Helmet>
 
-            <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-yellow-50">
+            <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-yellow-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                     {/* Hero Welcome Section */}
                     <motion.div
@@ -127,7 +127,7 @@ const WelcomeDashboard = () => {
                         transition={{ duration: 0.6 }}
                         className="text-center mb-12"
                     >
-                        <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-green-400 to-yellow-400 rounded-full mb-6 shadow-lg">
+                        <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-gray-400 to-yellow-400 rounded-full mb-6 shadow-lg">
                             <Sparkles className="w-10 h-10 text-white" />
                         </div>
                         <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">
@@ -179,14 +179,14 @@ const WelcomeDashboard = () => {
                                         >
                                             <Card
                                                 className={`cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-[1.02] ${step.completed
-                                                    ? 'bg-green-50 border-green-200'
+                                                    ? 'bg-gray-50 border-gray-200'
                                                     : 'bg-white hover:bg-gray-50'
                                                     }`}
                                                 onClick={step.action}
                                             >
                                                 <CardContent className="p-4 flex items-center gap-4">
                                                     <div className={`w-12 h-12 rounded-full flex items-center justify-center ${step.completed
-                                                        ? 'bg-green-500 text-white'
+                                                        ? 'bg-gray-500 text-white'
                                                         : 'bg-gray-100 text-gray-500'
                                                         }`}>
                                                         {step.completed ? (
@@ -196,7 +196,7 @@ const WelcomeDashboard = () => {
                                                         )}
                                                     </div>
                                                     <div className="flex-1">
-                                                        <h3 className={`font-semibold ${step.completed ? 'text-green-700' : 'text-gray-900'}`}>
+                                                        <h3 className={`font-semibold ${step.completed ? 'text-gray-700' : 'text-gray-900'}`}>
                                                             {step.title}
                                                         </h3>
                                                         <p className="text-sm text-gray-500">{step.description}</p>
@@ -285,7 +285,7 @@ const WelcomeDashboard = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.5 }}
                     >
-                        <Card className="bg-gradient-to-r from-primary to-green-600 text-white shadow-xl border-0">
+                        <Card className="bg-gradient-to-r from-primary to-gray-600 text-white shadow-xl border-0">
                             <CardContent className="py-8">
                                 <div className="text-center mb-6">
                                     <h3 className="text-2xl font-bold mb-2">Ready to {userGoal}?</h3>

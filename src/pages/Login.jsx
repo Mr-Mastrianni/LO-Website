@@ -20,7 +20,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    
+
     const { error } = await signIn(email, password);
 
     setIsLoading(false);
@@ -36,7 +36,7 @@ const Login = () => {
         <title>Log In - Living Oncology</title>
         <meta name="description" content="Log in to your Living Oncology account to access your profile, community features, and personalized resources." />
       </Helmet>
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-yellow-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-yellow-50 py-12 px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}

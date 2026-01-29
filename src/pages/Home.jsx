@@ -31,7 +31,7 @@ const Home = () => {
         <meta name="description" content="Living Oncology, a 501(c)(3) nonprofit, bridges the gap between cancer patients, caregivers, and scientific research through education and support. LIVING is larger than Life." />
       </Helmet>
 
-      <section className="relative bg-gradient-to-br from-green-50 to-yellow-50 py-20 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-gray-50 to-yellow-50 py-20 overflow-hidden">
         <div className="absolute inset-0 bg-white/80"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
@@ -82,12 +82,12 @@ const Home = () => {
 
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-r from-green-50 to-yellow-50 rounded-2xl p-8 md:p-12 shadow-lg"
+            className="bg-gradient-to-r from-gray-50 to-yellow-50 rounded-2xl p-8 md:p-12 shadow-lg"
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               <div>
@@ -103,8 +103,8 @@ const Home = () => {
                 <p className="text-lg text-gray-700 mb-6 leading-relaxed">
                   Her passion for "standing in the gaps" between complex medical science and patient understanding drives our mission to make oncology knowledge accessible to all.
                 </p>
-                <Link 
-                  to="/about-dr-gatson" 
+                <Link
+                  to="/about-dr-gatson"
                   className="btn-secondary inline-flex items-center"
                 >
                   Learn More About Dr. Gatson
@@ -112,7 +112,7 @@ const Home = () => {
                 </Link>
               </div>
               <div className="flex justify-center">
-                <div className="w-80 h-80 bg-gradient-to-br from-green-200 to-yellow-200 rounded-full flex items-center justify-center shadow-xl">
+                <div className="w-80 h-80 bg-gradient-to-br from-gray-200 to-yellow-200 rounded-full flex items-center justify-center shadow-xl">
                   <img
                     className="w-72 h-72 rounded-full object-cover shadow-lg"
                     alt="Dr. Na Tosha Gatson, MD, PhD, FAAN - Founder and CEO of Living Oncology"
@@ -127,7 +127,7 @@ const Home = () => {
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
@@ -145,7 +145,7 @@ const Home = () => {
               </p>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
@@ -171,7 +171,7 @@ const Home = () => {
 
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -186,13 +186,13 @@ const Home = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {impactItems.map((item, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.2 }}
                 viewport={{ once: true }}
-                className="bg-gradient-to-br from-green-50 to-yellow-50 rounded-xl p-8 text-center shadow-lg card-hover"
+                className="bg-gradient-to-br from-gray-50 to-yellow-50 rounded-xl p-8 text-center shadow-lg card-hover"
               >
                 <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-6">
                   <item.icon className="w-8 h-8 text-white" />
@@ -205,7 +205,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="py-16 bg-gradient-to-r from-green-600 to-green-700">
+      <section className="py-16 bg-gradient-to-r from-gray-600 to-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -216,11 +216,11 @@ const Home = () => {
             <h2 className="text-4xl font-bold text-white mb-6">
               Ready to Make a Difference?
             </h2>
-            <p className="text-xl text-green-100 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-100 mb-8 max-w-3xl mx-auto">
               Join us in our mission to improve cancer health literacy and support those affected by neuro-oncology conditions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/contact" className="bg-white text-green-700 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg inline-flex items-center justify-center">
+              <Link to="/contact" className="bg-white text-gray-700 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg inline-flex items-center justify-center">
                 Get in Touch
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Link>

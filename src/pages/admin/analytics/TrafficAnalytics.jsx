@@ -31,7 +31,7 @@ const TrafficAnalytics = ({ dateRange }) => {
 
   const trafficCards = [
     { title: 'Total Sessions', value: analytics.trafficMetrics?.totalSessions || 0, icon: Globe, color: 'text-blue-600' },
-    { title: 'Unique Visitors', value: analytics.trafficMetrics?.uniqueVisitors || 0, icon: Users, color: 'text-green-600' },
+    { title: 'Unique Visitors', value: analytics.trafficMetrics?.uniqueVisitors || 0, icon: Users, color: 'text-gray-600' },
     { title: 'Page Views', value: analytics.trafficMetrics?.pageViews || 0, icon: TrendingUp, color: 'text-purple-600' },
     { title: 'Bounce Rate', value: `${analytics.trafficMetrics?.bounceRate || 0}%`, icon: Clock, color: 'text-orange-600' }
   ];

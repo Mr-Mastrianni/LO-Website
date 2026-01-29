@@ -44,9 +44,9 @@ const RequestConsultation = () => {
         <meta name="description" content="Request a personalized neuro-oncology consultation with Dr. Na Tosha Gatson. Fill out the form to get started." />
       </Helmet>
 
-      <div className="bg-gradient-to-br from-green-50 to-yellow-50 py-20">
+      <div className="bg-gradient-to-br from-gray-50 to-yellow-50 py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -60,19 +60,19 @@ const RequestConsultation = () => {
                 Take the first step towards getting personalized expert guidance. Please fill out the form below, and our team will contact you to schedule your consultation with Dr. Gatson.
               </p>
             </div>
-            
+
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <Label htmlFor="name" className="text-lg">Full Name</Label>
                   <div className="relative mt-2">
                     <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                    <Input 
-                      id="name" 
-                      name="name" 
-                      type="text" 
-                      required 
-                      className="pl-10 text-lg" 
+                    <Input
+                      id="name"
+                      name="name"
+                      type="text"
+                      required
+                      className="pl-10 text-lg"
                       placeholder="Your Full Name"
                       value={formData.name}
                       onChange={handleChange}
@@ -83,12 +83,12 @@ const RequestConsultation = () => {
                   <Label htmlFor="email" className="text-lg">Email Address</Label>
                   <div className="relative mt-2">
                     <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                    <Input 
-                      id="email" 
-                      name="email" 
-                      type="email" 
-                      required 
-                      className="pl-10 text-lg" 
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      className="pl-10 text-lg"
                       placeholder="your.email@example.com"
                       value={formData.email}
                       onChange={handleChange}
@@ -100,11 +100,11 @@ const RequestConsultation = () => {
                 <Label htmlFor="phone" className="text-lg">Phone Number (Optional)</Label>
                 <div className="relative mt-2">
                   <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                  <Input 
-                    id="phone" 
-                    name="phone" 
-                    type="tel" 
-                    className="pl-10 text-lg" 
+                  <Input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    className="pl-10 text-lg"
                     placeholder="(555) 123-4567"
                     value={formData.phone}
                     onChange={handleChange}
@@ -115,21 +115,21 @@ const RequestConsultation = () => {
                 <Label htmlFor="message" className="text-lg">
                   Briefly describe your reason for consultation
                 </Label>
-                <Textarea 
-                  id="message" 
-                  name="message" 
-                  required 
+                <Textarea
+                  id="message"
+                  name="message"
+                  required
                   rows={6}
-                  className="mt-2 text-lg" 
+                  className="mt-2 text-lg"
                   placeholder="For example: I'm newly diagnosed and would like a second opinion."
                   value={formData.message}
                   onChange={handleChange}
                 />
               </div>
               <div className="text-center pt-4">
-                <Button 
-                  type="submit" 
-                  className="btn-primary text-lg px-10 py-6" 
+                <Button
+                  type="submit"
+                  className="btn-primary text-lg px-10 py-6"
                   disabled={isLoading}
                 >
                   {isLoading ? (

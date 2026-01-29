@@ -32,7 +32,7 @@ const Testimonials = () => {
         <meta name="description" content="Read inspiring stories from patients, families, and healthcare professionals who have been impacted by Living Oncology's mission and services." />
       </Helmet>
 
-      <section className="bg-gradient-to-br from-green-50 to-yellow-50 py-20">
+      <section className="bg-gradient-to-br from-gray-50 to-yellow-50 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold text-primary mb-6">Stories of Hope & Healing</h1>
@@ -59,7 +59,7 @@ const Testimonials = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-gradient-to-r from-green-50 to-yellow-50 rounded-2xl p-6 md:p-8 shadow-xl"
+                  className="bg-gradient-to-r from-gray-50 to-yellow-50 rounded-2xl p-6 md:p-8 shadow-xl"
                 >
                   <div className="flex justify-start mb-4">
                     {[...Array(5)].map((_, i) => (
@@ -165,11 +165,11 @@ const Testimonials = () => {
         </div>
       </section>
 
-      <section className="py-16 bg-gradient-to-r from-green-600 to-green-700">
+      <section className="py-16 bg-gradient-to-r from-gray-600 to-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }}>
             <h2 className="text-4xl font-bold text-white mb-6">Your Voice Matters</h2>
-            <p className="text-xl text-green-100 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-100 mb-8 max-w-3xl mx-auto">
               Every story provides hope and guidance to others facing similar challenges.
             </p>
           </motion.div>

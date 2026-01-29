@@ -4,7 +4,7 @@ import { PlusCircle, MessageCircle } from 'lucide-react';
 import { forumCategories, recentPosts, handleCreatePost } from '@/data/communityData';
 
 const DiscussionsTab = () => (
-  <motion.div 
+  <motion.div
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     transition={{ duration: 0.5 }}
@@ -12,7 +12,7 @@ const DiscussionsTab = () => (
   >
     <div className="flex justify-between items-center">
       <h3 className="text-2xl font-bold text-primary">Forum Discussions</h3>
-      <button 
+      <button
         onClick={handleCreatePost}
         className="btn-primary inline-flex items-center"
       >
@@ -54,7 +54,7 @@ const DiscussionsTab = () => (
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-500">{post.replies} replies</span>
-                <button className="text-primary hover:text-green-800 text-sm font-semibold">
+                <button className="text-primary hover:text-gray-800 text-sm font-semibold">
                   View Discussion
                 </button>
               </div>

@@ -77,7 +77,7 @@ const IntroductionPrompt = () => {
                 className="relative bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden"
             >
                 {/* Header */}
-                <div className="p-6 border-b bg-gradient-to-r from-primary to-green-600 text-white">
+                <div className="p-6 border-b bg-gradient-to-r from-primary to-gray-600 text-white">
                     <button
                         onClick={handleClose}
                         className="absolute top-4 right-4 p-2 rounded-full hover:bg-white/20 transition-colors"

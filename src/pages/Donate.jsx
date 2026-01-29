@@ -41,7 +41,7 @@ const Donate = () => {
     "Direct impact on improving neuro-oncology health literacy",
     "Supporting a community of patients, caregivers, and healthcare professionals"
   ];
-  
+
   const zeffyDonationUrl = 'https://www.zeffy.com/en-US/embed/donation-form/0750dbd9-2db9-41ea-890e-998e0da32bb6';
 
   return (
@@ -54,7 +54,7 @@ const Donate = () => {
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary/20 to-accent/10 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -76,7 +76,7 @@ const Donate = () => {
       {/* Donation Form */}
       <section id="donate-form" className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -89,24 +89,24 @@ const Donate = () => {
             </p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
             className="bg-primary/10 rounded-2xl p-4 md:p-8 shadow-xl"
           >
-             {zeffyDonationUrl ? (
-                <ZeffyEmbed src={zeffyDonationUrl} />
-              ) : (
-                <div className="text-center p-8 bg-yellow-50 border-2 border-dashed border-yellow-400 rounded-lg">
-                  <AlertTriangle className="w-12 h-12 text-yellow-500 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold text-yellow-800 mb-2">Donation Form Setup Needed</h3>
-                  <p className="text-yellow-700">
-                    Please provide your Zeffy donation form URL to activate this section. Once provided, your live donation form will appear here.
-                  </p>
-                </div>
-              )}
+            {zeffyDonationUrl ? (
+              <ZeffyEmbed src={zeffyDonationUrl} />
+            ) : (
+              <div className="text-center p-8 bg-yellow-50 border-2 border-dashed border-yellow-400 rounded-lg">
+                <AlertTriangle className="w-12 h-12 text-yellow-500 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-yellow-800 mb-2">Donation Form Setup Needed</h3>
+                <p className="text-yellow-700">
+                  Please provide your Zeffy donation form URL to activate this section. Once provided, your live donation form will appear here.
+                </p>
+              </div>
+            )}
           </motion.div>
         </div>
       </section>
@@ -114,7 +114,7 @@ const Donate = () => {
       {/* Impact Areas */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -129,7 +129,7 @@ const Donate = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {impactAreas.map((area, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -171,7 +171,7 @@ const Donate = () => {
               <p className="text-lg text-foreground/80 leading-relaxed mb-8">
                 When you donate, you're joining a movement to transform how patients and families navigate neuro-oncology. Your support enables our vital work in education, advocacy, and community building.
               </p>
-              
+
               <div className="space-y-4">
                 {donationBenefits.map((benefit, index) => (
                   <div key={index} className="flex items-start space-x-3">
@@ -181,7 +181,7 @@ const Donate = () => {
                 ))}
               </div>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -190,7 +190,7 @@ const Donate = () => {
               className="flex justify-center"
             >
               <div className="relative">
-                <img  class="w-full max-w-md rounded-xl shadow-xl" alt="Patients and families benefiting from Living Oncology programs" src="https://images.unsplash.com/photo-1594813967918-3d04c5af997d" />
+                <img className="w-full max-w-md rounded-xl shadow-xl" alt="Patients and families benefiting from Living Oncology programs" src="https://images.unsplash.com/photo-1594813967918-3d04c5af997d" />
                 <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-accent rounded-full flex items-center justify-center shadow-lg">
                   <Heart className="w-12 h-12 text-white" />
                 </div>
@@ -216,7 +216,7 @@ const Donate = () => {
               Your generosity helps us continue our mission. Every donation brings us closer to a world where no one faces cancer alone or uninformed.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a 
+              <a
                 href="#donate-form"
                 className="bg-white text-accent hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg inline-flex items-center justify-center"
               >

@@ -3,12 +3,12 @@ import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { supabase } from '@/lib/customSupabaseClient';
-import { 
-  Users, 
-  FileText, 
-  MessageSquare, 
-  Settings, 
-  BarChart3, 
+import {
+  Users,
+  FileText,
+  MessageSquare,
+  Settings,
+  BarChart3,
   Calendar,
   Shield,
   Activity
@@ -85,7 +85,7 @@ const AdminDashboard = () => {
       value: stats.newUsersThisMonth,
       icon: Activity,
       description: 'New user registrations',
-      color: 'text-green-600'
+      color: 'text-gray-600'
     },
     {
       title: 'Testimonials',
@@ -191,7 +191,7 @@ const AdminDashboard = () => {
                       onClick={() => setActiveTab('content')}
                       className="p-4 border rounded-lg hover:bg-gray-50 text-left transition-colors"
                     >
-                      <FileText className="h-6 w-6 text-green-600 mb-2" />
+                      <FileText className="h-6 w-6 text-gray-600 mb-2" />
                       <h3 className="font-medium">Content Management</h3>
                       <p className="text-sm text-gray-600">Edit testimonials and resources</p>
                     </button>

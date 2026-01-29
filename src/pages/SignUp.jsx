@@ -66,9 +66,9 @@ const SignUp = () => {
       return;
     }
     setIsLoading(true);
-    
+
     const { error } = await signUp(formData.email, formData.password, {
-      data: { 
+      data: {
         full_name: formData.name,
         role: formData.role,
         goal: formData.goal,
@@ -94,7 +94,7 @@ const SignUp = () => {
         <title>Sign Up - Living Oncology</title>
         <meta name="description" content="Create an account with Living Oncology to join our community, access personalized resources, and connect with others." />
       </Helmet>
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-yellow-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-yellow-50 py-12 px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -178,7 +178,7 @@ const SignUp = () => {
                     </div>
                     <div className="flex items-center space-x-2 p-4 border rounded-lg">
                       <RadioGroupItem value="Healthcare Professional" id="r3" />
-                      <Label htmlFor="r3" className="flex items-center text-lg cursor-pointer"><User className="mr-2 h-5 w-5 text-green-500" /> I am a healthcare professional.</Label>
+                      <Label htmlFor="r3" className="flex items-center text-lg cursor-pointer"><User className="mr-2 h-5 w-5 text-gray-500" /> I am a healthcare professional.</Label>
                     </div>
                   </RadioGroup>
                 )}

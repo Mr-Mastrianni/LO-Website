@@ -75,7 +75,7 @@ const EducationalHub = () => {
         <meta name="description" content="Enhance your health literacy with Living Oncology's Educational Hub. Test your knowledge with our interactive brain tumor terminology quiz and access key resources." />
       </Helmet>
 
-      <section className="bg-gradient-to-br from-green-50 to-yellow-50 py-20">
+      <section className="bg-gradient-to-br from-gray-50 to-yellow-50 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
             <h1 className="text-4xl md:text-6xl font-bold text-primary mb-6">Educational Community Hub</h1>
@@ -124,9 +124,9 @@ const EducationalHub = () => {
                     </div>
                   </motion.div>
                 )}
-                
+
                 {showResult && currentQuestionIndex < quizQuestions.length && (
-                   <motion.div
+                  <motion.div
                     key="result"
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -142,7 +142,7 @@ const EducationalHub = () => {
                         let variant = "outline";
                         if (isSelected && !isCorrect) variant = "destructive";
                         if (isAnswer) variant = "default";
-                        
+
                         return (
                           <Button
                             key={index}
@@ -150,23 +150,23 @@ const EducationalHub = () => {
                             size="lg"
                             className="w-full justify-start text-left h-auto py-4 pointer-events-none"
                           >
-                             {isAnswer ? <Check className="mr-3 h-5 w-5"/> : isSelected ? <X className="mr-3 h-5 w-5"/> : <div className="w-8"></div>}
+                            {isAnswer ? <Check className="mr-3 h-5 w-5" /> : isSelected ? <X className="mr-3 h-5 w-5" /> : <div className="w-8"></div>}
                             {option}
                           </Button>
                         );
                       })}
                     </div>
-                    
+
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.2, duration: 0.3 }}
-                      className="p-4 bg-green-50 border-l-4 border-primary rounded-r-lg"
+                      className="p-4 bg-gray-50 border-l-4 border-primary rounded-r-lg"
                     >
                       <p className="font-semibold text-primary mb-2">Explanation:</p>
                       <p className="text-gray-700">{currentQuestion.explanation}</p>
                     </motion.div>
-                    
+
                     <div className="mt-8 text-center">
                       <Button onClick={handleNextQuestion} size="lg">
                         {currentQuestionIndex < quizQuestions.length - 1 ? 'Next Question' : 'Show Final Score'}
@@ -175,25 +175,25 @@ const EducationalHub = () => {
                     </div>
                   </motion.div>
                 )}
-                
-                {showResult && currentQuestionIndex === quizQuestions.length-1 && (
-                     <motion.div
-                        key="final-score"
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5 }}
-                        className="text-center p-8"
-                    >
-                        <h2 className="text-3xl font-bold text-primary mb-4">Quiz Complete!</h2>
-                        <p className="text-xl text-gray-700 mb-6">You scored {score} out of {quizQuestions.length}</p>
-                        <div className="w-32 h-32 mx-auto bg-gradient-to-br from-green-100 to-yellow-100 rounded-full flex items-center justify-center mb-8">
-                            <span className="text-4xl font-bold text-primary">{Math.round((score/quizQuestions.length)*100)}%</span>
-                        </div>
-                        <Button onClick={handleRestartQuiz} size="lg">
-                            <RefreshCw className="mr-2 h-5 w-5" />
-                            Restart Quiz
-                        </Button>
-                    </motion.div>
+
+                {showResult && currentQuestionIndex === quizQuestions.length - 1 && (
+                  <motion.div
+                    key="final-score"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5 }}
+                    className="text-center p-8"
+                  >
+                    <h2 className="text-3xl font-bold text-primary mb-4">Quiz Complete!</h2>
+                    <p className="text-xl text-gray-700 mb-6">You scored {score} out of {quizQuestions.length}</p>
+                    <div className="w-32 h-32 mx-auto bg-gradient-to-br from-gray-100 to-yellow-100 rounded-full flex items-center justify-center mb-8">
+                      <span className="text-4xl font-bold text-primary">{Math.round((score / quizQuestions.length) * 100)}%</span>
+                    </div>
+                    <Button onClick={handleRestartQuiz} size="lg">
+                      <RefreshCw className="mr-2 h-5 w-5" />
+                      Restart Quiz
+                    </Button>
+                  </motion.div>
                 )}
               </AnimatePresence>
             </CardContent>

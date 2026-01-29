@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Activity, 
-  Users, 
-  MessageSquare, 
+import {
+  Activity,
+  Users,
+  MessageSquare,
   TrendingUp,
   Calendar,
   Eye,
@@ -71,7 +71,7 @@ const CommunityAnalytics = () => {
       value: analytics.overview?.activeMembers || 0,
       change: '+8%',
       icon: Activity,
-      color: 'text-green-600'
+      color: 'text-gray-600'
     },
     {
       title: 'Discussions',
@@ -101,7 +101,7 @@ const CommunityAnalytics = () => {
 
   const getActivityColor = (type) => {
     const colors = {
-      'new_member': 'text-green-600',
+      'new_member': 'text-gray-600',
       'new_post': 'text-blue-600',
       'new_comment': 'text-purple-600',
       'group_join': 'text-orange-600'
@@ -141,7 +141,7 @@ const CommunityAnalytics = () => {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{stat.value}</div>
-                <p className="text-xs text-green-600 flex items-center">
+                <p className="text-xs text-gray-600 flex items-center">
                   <TrendingUp className="h-3 w-3 mr-1" />
                   {stat.change} from last month
                 </p>
@@ -226,11 +226,10 @@ const CommunityAnalytics = () => {
                     <h4 className="text-sm font-medium">{group.name}</h4>
                     <p className="text-xs text-gray-500">{group.members} members</p>
                   </div>
-                  <div className={`px-2 py-1 rounded-full text-xs font-medium ${
-                    group.activity === 'High' ? 'bg-green-100 text-green-800' :
-                    group.activity === 'Medium' ? 'bg-yellow-100 text-yellow-800' :
-                    'bg-gray-100 text-gray-800'
-                  }`}>
+                  <div className={`px-2 py-1 rounded-full text-xs font-medium ${group.activity === 'High' ? 'bg-gray-100 text-gray-800' :
+                      group.activity === 'Medium' ? 'bg-yellow-100 text-yellow-800' :
+                        'bg-gray-100 text-gray-800'
+                    }`}>
                     {group.activity}
                   </div>
                 </div>

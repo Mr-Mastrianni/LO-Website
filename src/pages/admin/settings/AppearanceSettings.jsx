@@ -8,10 +8,10 @@ import { Switch } from '@/components/ui/switch';
 
 const AppearanceSettings = () => {
   const { toast } = useToast();
-  
+
   const [settings, setSettings] = useState({
     primaryColor: '#3B82F6',
-    secondaryColor: '#10B981',
+    secondaryColor: '#6B7280',
     accentColor: '#F59E0B',
     backgroundColor: '#FFFFFF',
     textColor: '#1F2937',
@@ -256,13 +256,13 @@ const AppearanceSettings = () => {
           <CardDescription>Preview your appearance changes</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="border rounded-lg p-6" style={{ 
+          <div className="border rounded-lg p-6" style={{
             backgroundColor: settings.backgroundColor,
             color: settings.textColor,
             fontFamily: settings.fontFamily
           }}>
             <div className="flex items-center space-x-4 mb-4">
-              <div 
+              <div
                 className="w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold"
                 style={{ backgroundColor: settings.primaryColor }}
               >
@@ -274,21 +274,21 @@ const AppearanceSettings = () => {
               </div>
             </div>
             <div className="space-y-3">
-              <button 
+              <button
                 className="px-4 py-2 rounded text-white font-medium"
                 style={{ backgroundColor: settings.primaryColor }}
               >
                 Primary Button
               </button>
-              <button 
+              <button
                 className="px-4 py-2 rounded text-white font-medium ml-2"
                 style={{ backgroundColor: settings.secondaryColor }}
               >
                 Secondary Button
               </button>
-              <div 
+              <div
                 className="p-3 rounded border-l-4"
-                style={{ 
+                style={{
                   borderLeftColor: settings.accentColor,
                   backgroundColor: settings.accentColor + '10'
                 }}

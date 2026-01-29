@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Settings, 
-  Globe, 
-  Mail, 
+import {
+  Settings,
+  Globe,
+  Mail,
   Shield,
   Database,
   Palette,
@@ -44,7 +44,7 @@ const SettingsPanel = () => {
       name: 'Email',
       icon: Mail,
       description: 'Email configuration and templates',
-      color: 'text-green-600'
+      color: 'text-gray-600'
     },
     {
       id: 'appearance',
@@ -89,9 +89,8 @@ const SettingsPanel = () => {
                 key={area.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className={`p-4 border rounded-lg cursor-pointer transition-all hover:shadow-md ${
-                  activeTab === area.id ? 'border-primary bg-primary/5' : 'hover:border-gray-300'
-                }`}
+                className={`p-4 border rounded-lg cursor-pointer transition-all hover:shadow-md ${activeTab === area.id ? 'border-primary bg-primary/5' : 'hover:border-gray-300'
+                  }`}
                 onClick={() => setActiveTab(area.id)}
               >
                 <area.icon className={`h-5 w-5 ${area.color} mb-2`} />

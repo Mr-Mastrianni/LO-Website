@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useToast } from '@/components/ui/use-toast';
-import { 
-  Users, 
-  Plus, 
-  Edit, 
-  Trash2, 
+import {
+  Users,
+  Plus,
+  Edit,
+  Trash2,
   Search,
   UserPlus,
   UserMinus,
@@ -103,11 +103,11 @@ const GroupsManager = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
       if (editingGroup) {
         // Update existing group
-        setGroups(groups.map(group => 
+        setGroups(groups.map(group =>
           group.id === editingGroup.id ? { ...group, ...formData } : group
         ));
 
@@ -200,7 +200,7 @@ const GroupsManager = () => {
 
   const getPrivacyBadge = (privacy) => {
     const privacyColors = {
-      'public': 'bg-green-100 text-green-800',
+      'public': 'bg-gray-100 text-gray-800',
       'restricted': 'bg-yellow-100 text-yellow-800',
       'private': 'bg-red-100 text-red-800'
     };
@@ -256,7 +256,7 @@ const GroupsManager = () => {
                 <label className="text-sm font-medium">Group Name</label>
                 <Input
                   value={formData.name}
-                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="Group name"
                   required
                 />
@@ -265,7 +265,7 @@ const GroupsManager = () => {
                 <label className="text-sm font-medium">Description</label>
                 <Textarea
                   value={formData.description}
-                  onChange={(e) => setFormData({...formData, description: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   placeholder="Group description..."
                   rows={3}
                   required
@@ -276,7 +276,7 @@ const GroupsManager = () => {
                   <label className="text-sm font-medium">Group Type</label>
                   <select
                     value={formData.type}
-                    onChange={(e) => setFormData({...formData, type: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, type: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                   >
                     <option value="support">Support</option>
@@ -289,7 +289,7 @@ const GroupsManager = () => {
                   <label className="text-sm font-medium">Privacy</label>
                   <select
                     value={formData.privacy}
-                    onChange={(e) => setFormData({...formData, privacy: e.target.value})}
+                    onChange={(e) => setFormData({ ...formData, privacy: e.target.value })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                   >
                     <option value="public">Public</option>
@@ -303,7 +303,7 @@ const GroupsManager = () => {
                 <Input
                   type="number"
                   value={formData.max_members}
-                  onChange={(e) => setFormData({...formData, max_members: e.target.value})}
+                  onChange={(e) => setFormData({ ...formData, max_members: e.target.value })}
                   placeholder="Leave empty for unlimited"
                   min="1"
                 />
@@ -372,7 +372,7 @@ const GroupsManager = () => {
                 {getTypeBadge(group.type)}
                 {getPrivacyBadge(group.privacy)}
               </div>
-              
+
               <div className="flex items-center justify-between text-sm text-gray-600">
                 <span className="flex items-center">
                   <Users className="h-4 w-4 mr-1" />
@@ -419,7 +419,7 @@ const GroupsManager = () => {
           <AlertDialogHeader>
             <AlertDialogTitle>Are you sure?</AlertDialogTitle>
             <AlertDialogDescription>
-              This will permanently delete the group "{groupToDelete?.name}" and remove all {groupToDelete?.members} members. 
+              This will permanently delete the group "{groupToDelete?.name}" and remove all {groupToDelete?.members} members.
               This action cannot be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>

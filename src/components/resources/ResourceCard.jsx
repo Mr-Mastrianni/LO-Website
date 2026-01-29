@@ -4,7 +4,7 @@ import { Download, FileText, Lock, ExternalLink } from 'lucide-react';
 import { handleDownload, handleAccessRequest } from '@/data/resourcesData';
 
 const ResourceCard = ({ resource, index, isRestricted = false }) => (
-  <motion.div 
+  <motion.div
     key={resource.id}
     initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -14,7 +14,7 @@ const ResourceCard = ({ resource, index, isRestricted = false }) => (
   >
     <div className="p-6">
       <div className="flex items-center justify-between mb-4">
-        <span className={`px-3 py-1 rounded-full text-sm font-semibold ${isRestricted ? 'bg-gray-200 text-gray-700' : 'bg-green-100 text-primary'}`}>
+        <span className={`px-3 py-1 rounded-full text-sm font-semibold ${isRestricted ? 'bg-gray-200 text-gray-700' : 'bg-gray-100 text-primary'}`}>
           {resource.category}
         </span>
         {isRestricted ? <Lock className="w-5 h-5 text-gray-500" /> : <FileText className="w-5 h-5 text-gray-400" />}
@@ -39,7 +39,7 @@ const ResourceCard = ({ resource, index, isRestricted = false }) => (
         {resource.description}
       </p>
       {isRestricted ? (
-        <button 
+        <button
           onClick={handleAccessRequest}
           className="w-full bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors inline-flex items-center justify-center"
         >
@@ -47,7 +47,7 @@ const ResourceCard = ({ resource, index, isRestricted = false }) => (
           Request Access
         </button>
       ) : (
-        <button 
+        <button
           onClick={() => handleDownload(resource.title)}
           className="btn-secondary w-full inline-flex items-center justify-center"
         >

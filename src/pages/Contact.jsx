@@ -25,14 +25,14 @@ const Contact = () => {
       [name]: type === 'checkbox' ? checked : value
     }));
   };
-  
+
   const handleCheckboxChange = (checked) => {
     setFormData(prev => ({ ...prev, subscribe: checked }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!formData.name || !formData.email || !formData.message) {
       toast({
         title: "Please fill in all required fields",
@@ -82,9 +82,9 @@ const Contact = () => {
         <meta name="description" content="Get in touch with Living Oncology for partnerships, speaking engagements, patient support, or general inquiries. Subscribe to our newsletter." />
       </Helmet>
 
-      <section className="bg-gradient-to-br from-green-50 to-yellow-50 py-20">
+      <section className="bg-gradient-to-br from-gray-50 to-yellow-50 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -143,10 +143,10 @@ const Contact = () => {
                   <Label htmlFor="message" className="text-primary font-semibold">Your Message *</Label>
                   <Textarea id="message" name="message" value={formData.message} onChange={handleInputChange} className="mt-2 min-h-[150px]" placeholder="Tell us how we can help..." required />
                 </div>
-                
+
                 <div className="flex items-start space-x-3">
-                    <Checkbox id="subscribe" checked={formData.subscribe} onCheckedChange={handleCheckboxChange} className="mt-1" />
-                    <Label htmlFor="subscribe" className="text-sm text-gray-700 leading-relaxed">Subscribe to our newsletter for updates on events, resources, and community news.</Label>
+                  <Checkbox id="subscribe" checked={formData.subscribe} onCheckedChange={handleCheckboxChange} className="mt-1" />
+                  <Label htmlFor="subscribe" className="text-sm text-gray-700 leading-relaxed">Subscribe to our newsletter for updates on events, resources, and community news.</Label>
                 </div>
 
                 <div className="text-center">
@@ -156,7 +156,7 @@ const Contact = () => {
                 </div>
               </form>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -164,40 +164,40 @@ const Contact = () => {
               viewport={{ once: true }}
               className="space-y-8"
             >
-                <div className="bg-white rounded-xl shadow-lg p-8">
-                    <h3 className="text-2xl font-bold text-primary mb-4">Contact Information</h3>
-                    <div className="flex items-start space-x-4">
-                        <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
-                            <Mail className="w-6 h-6 text-white" />
-                        </div>
-                        <div>
-                            <h4 className="font-bold text-primary">Email</h4>
-                            <p className="text-gray-700 hover:text-accent transition-colors">
-                                <a href="mailto:thepresident@livingoncology.org">thepresident@livingoncology.org</a>
-                            </p>
-                        </div>
-                    </div>
+              <div className="bg-white rounded-xl shadow-lg p-8">
+                <h3 className="text-2xl font-bold text-primary mb-4">Contact Information</h3>
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Mail className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-primary">Email</h4>
+                    <p className="text-gray-700 hover:text-accent transition-colors">
+                      <a href="mailto:thepresident@livingoncology.org">thepresident@livingoncology.org</a>
+                    </p>
+                  </div>
                 </div>
-                <div className="bg-white rounded-xl shadow-lg p-8">
-                    <h3 className="text-2xl font-bold text-primary mb-4">Mailing Address</h3>
-                    <div className="flex items-start space-x-4">
-                        <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
-                            <MapPin className="w-6 h-6 text-white" />
-                        </div>
-                        <div>
-                            <p className="font-semibold text-gray-800">Na Tosha Gatson</p>
-                            <p className="text-gray-700">c/o Living Oncology</p>
-                            <p className="text-gray-700">PO Box 12863</p>
-                            <p className="text-gray-700">Chandler, AZ 85248-9998</p>
-                        </div>
-                    </div>
+              </div>
+              <div className="bg-white rounded-xl shadow-lg p-8">
+                <h3 className="text-2xl font-bold text-primary mb-4">Mailing Address</h3>
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-800">Na Tosha Gatson</p>
+                    <p className="text-gray-700">c/o Living Oncology</p>
+                    <p className="text-gray-700">PO Box 12863</p>
+                    <p className="text-gray-700">Chandler, AZ 85248-9998</p>
+                  </div>
                 </div>
+              </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      <section className="py-16 bg-gradient-to-r from-green-600 to-green-700">
+      <section className="py-16 bg-gradient-to-r from-gray-600 to-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -207,13 +207,13 @@ const Contact = () => {
           >
             <div className="flex justify-center mb-6">
               <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center">
-                <CheckCircle className="w-8 h-8 text-green-600" />
+                <CheckCircle className="w-8 h-8 text-gray-600" />
               </div>
             </div>
             <h2 className="text-4xl font-bold text-white mb-6">
               We're Here to Help
             </h2>
-            <p className="text-xl text-green-100 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-100 mb-8 max-w-3xl mx-auto">
               Whether you're a patient, caregiver, healthcare professional, or supporter, we're committed to providing you with the resources and support you need. Thank you for being part of our mission.
             </p>
           </motion.div>

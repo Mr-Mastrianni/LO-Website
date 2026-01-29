@@ -101,14 +101,14 @@ const ReportsManager = () => {
   }, []);
 
   const handleResolveReport = (reportId, action) => {
-    setReports(reports.map(report => 
-      report.id === reportId 
-        ? { 
-            ...report, 
-            status: action === 'approve' ? 'resolved' : 'dismissed',
-            reviewed_at: new Date().toISOString(),
-            reviewed_by: 'Admin'
-          }
+    setReports(reports.map(report =>
+      report.id === reportId
+        ? {
+          ...report,
+          status: action === 'approve' ? 'resolved' : 'dismissed',
+          reviewed_at: new Date().toISOString(),
+          reviewed_by: 'Admin'
+        }
         : report
     ));
 
@@ -125,8 +125,8 @@ const ReportsManager = () => {
 
   const filteredReports = reports.filter(report => {
     const matchesSearch = report.content_title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         report.reported_user?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         report.reason?.toLowerCase().includes(searchTerm.toLowerCase());
+      report.reported_user?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      report.reason?.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesFilter = filterStatus === 'all' || report.status === filterStatus;
     return matchesSearch && matchesFilter;
   });
@@ -144,7 +144,7 @@ const ReportsManager = () => {
 
   const getPriorityBadge = (priority) => {
     const priorities = {
-      'low': 'bg-green-100 text-green-800',
+      'low': 'bg-gray-100 text-gray-800',
       'medium': 'bg-yellow-100 text-yellow-800',
       'high': 'bg-orange-100 text-orange-800',
       'critical': 'bg-red-100 text-red-800'
@@ -298,7 +298,7 @@ const ReportsManager = () => {
                             variant="ghost"
                             size="sm"
                             onClick={() => handleResolveReport(report.id, 'approve')}
-                            className="text-green-600 hover:text-green-700"
+                            className="text-gray-600 hover:text-gray-700"
                           >
                             <Check className="h-4 w-4" />
                           </Button>

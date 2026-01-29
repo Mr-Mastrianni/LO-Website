@@ -29,7 +29,7 @@ const EngagementAnalytics = ({ dateRange }) => {
 
   const engagementCards = [
     { title: 'Comments', value: analytics.engagementMetrics?.totalComments || 0, icon: MessageSquare, color: 'text-blue-600' },
-    { title: 'Shares', value: analytics.engagementMetrics?.totalShares || 0, icon: Share2, color: 'text-green-600' },
+    { title: 'Shares', value: analytics.engagementMetrics?.totalShares || 0, icon: Share2, color: 'text-gray-600' },
     { title: 'Likes', value: analytics.engagementMetrics?.totalLikes || 0, icon: ThumbsUp, color: 'text-purple-600' },
     { title: 'Event Registrations', value: analytics.engagementMetrics?.eventRegistrations || 0, icon: Calendar, color: 'text-orange-600' }
   ];

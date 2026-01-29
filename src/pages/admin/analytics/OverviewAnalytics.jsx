@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Users, 
-  Eye, 
-  MessageSquare, 
+import {
+  Users,
+  Eye,
+  MessageSquare,
   TrendingUp,
   TrendingDown,
   Calendar,
@@ -80,7 +80,7 @@ const OverviewAnalytics = ({ dateRange }) => {
       value: analytics.keyMetrics?.pageViews || 0,
       change: analytics.growth?.pageViews || 0,
       icon: Eye,
-      color: 'text-green-600'
+      color: 'text-gray-600'
     },
     {
       title: 'Active Users',
@@ -109,7 +109,7 @@ const OverviewAnalytics = ({ dateRange }) => {
   };
 
   const getChangeColor = (change) => {
-    return change >= 0 ? 'text-green-600' : 'text-red-600';
+    return change >= 0 ? 'text-gray-600' : 'text-red-600';
   };
 
   if (loading) {
@@ -227,7 +227,7 @@ const OverviewAnalytics = ({ dateRange }) => {
                     default: return TrendingUp;
                   }
                 };
-                
+
                 const getActivityLabel = (type) => {
                   switch (type) {
                     case 'user_signup': return 'New Signups';
@@ -239,7 +239,7 @@ const OverviewAnalytics = ({ dateRange }) => {
                 };
 
                 const Icon = getActivityIcon(activity.type);
-                
+
                 return (
                   <div key={index} className="flex items-center justify-between p-3 border rounded">
                     <div className="flex items-center space-x-3">
@@ -272,7 +272,7 @@ const OverviewAnalytics = ({ dateRange }) => {
                     <span>{percentage}%</span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div 
+                    <div
                       className="bg-primary h-2 rounded-full transition-all duration-500"
                       style={{ width: `${percentage}%` }}
                     ></div>
@@ -287,7 +287,7 @@ const OverviewAnalytics = ({ dateRange }) => {
               </div>
               <div className="flex items-center justify-between mt-1">
                 <span className="text-sm font-medium">New Users</span>
-                <span className="text-sm text-green-600">{analytics.keyMetrics?.newUsers}</span>
+                <span className="text-sm text-gray-600">{analytics.keyMetrics?.newUsers}</span>
               </div>
             </div>
           </CardContent>

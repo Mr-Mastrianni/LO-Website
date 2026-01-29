@@ -113,7 +113,7 @@ const ProfileWizard = () => {
                 return (
                     <div className="space-y-6 text-center">
                         <div className="relative inline-block">
-                            <div className="w-32 h-32 rounded-full bg-gradient-to-br from-green-200 to-yellow-200 flex items-center justify-center mx-auto border-4 border-white shadow-lg overflow-hidden">
+                            <div className="w-32 h-32 rounded-full bg-gradient-to-br from-gray-200 to-yellow-200 flex items-center justify-center mx-auto border-4 border-white shadow-lg overflow-hidden">
                                 {formData.avatar_url ? (
                                     <img
                                         src={formData.avatar_url}
@@ -124,14 +124,57 @@ const ProfileWizard = () => {
                                     <User className="w-16 h-16 text-primary" />
                                 )}
                             </div>
-                            <button className="absolute bottom-0 right-0 w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center shadow-lg hover:bg-primary/90 transition-colors">
+                            <button
+                                onClick={() => document.getElementById('avatar-upload').click()}
+                                className="absolute bottom-0 right-0 w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center shadow-lg hover:bg-primary/90 transition-colors"
+                            >
                                 <Camera className="w-5 h-5" />
                             </button>
                         </div>
                         <p className="text-gray-500 text-sm">
                             A photo helps others recognize you in the community
                         </p>
-                        <Button variant="outline" className="mx-auto">
+                        <input
+                            id="avatar-upload"
+                            type="file"
+                            accept="image/*"
+                            className="hidden"
+                            onChange={async (e) => {
+                                const file = e.target.files?.[0];
+                                if (!file || !user) return;
+
+                                try {
+                                    // Upload to Supabase storage
+                                    const fileExt = file.name.split('.').pop();
+                                    const fileName = `${user.id}-${Date.now()}.${fileExt}`;
+                                    const { data, error } = await supabase.storage
+                                        .from('avatars')
+                                        .upload(fileName, file, { upsert: true });
+
+                                    if (error) throw error;
+
+                                    // Get public URL
+                                    const { data: { publicUrl } } = supabase.storage
+                                        .from('avatars')
+                                        .getPublicUrl(fileName);
+
+                                    setFormData({ ...formData, avatar_url: publicUrl });
+
+                                    // Update profile immediately
+                                    await supabase
+                                        .from('profiles')
+                                        .update({ avatar_url: publicUrl })
+                                        .eq('id', user.id);
+                                } catch (err) {
+                                    console.error('Error uploading avatar:', err);
+                                }
+                            }}
+                        />
+                        <Button
+                            variant="outline"
+                            className="mx-auto"
+                            onClick={() => document.getElementById('avatar-upload').click()}
+                        >
                             <Upload className="w-4 h-4 mr-2" />
                             Upload Photo
                         </Button>
@@ -172,22 +215,22 @@ const ProfileWizard = () => {
                                     key={interest.value}
                                     onClick={() => handleInterestToggle(interest.value)}
                                     className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${formData.interests.includes(interest.value)
-                                            ? 'border-primary bg-primary/5'
-                                            : 'border-gray-200 hover:border-gray-300'
+                                        ? 'border-primary bg-primary/5'
+                                        : 'border-gray-200 hover:border-gray-300'
                                         }`}
                                 >
                                     <div className="flex items-center gap-3">
                                         <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${formData.interests.includes(interest.value)
-                                                ? 'border-primary bg-primary text-white'
-                                                : 'border-gray-300'
+                                            ? 'border-primary bg-primary text-white'
+                                            : 'border-gray-300'
                                             }`}>
                                             {formData.interests.includes(interest.value) && (
                                                 <Check className="w-4 h-4" />
                                             )}
                                         </div>
                                         <span className={`text-sm font-medium ${formData.interests.includes(interest.value)
-                                                ? 'text-primary'
-                                                : 'text-gray-700'
+                                            ? 'text-primary'
+                                            : 'text-gray-700'
                                             }`}>
                                             {interest.label}
                                         </span>

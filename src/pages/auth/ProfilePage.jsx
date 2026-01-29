@@ -38,7 +38,7 @@ const ProfilePage = () => {
   };
 
   if (!user) {
-    return null; 
+    return null;
   }
 
   return (
@@ -47,7 +47,7 @@ const ProfilePage = () => {
         <title>My Profile - Living Oncology</title>
         <meta name="description" content="Manage your Living Oncology profile, update your information, and view your community assessment details." />
       </Helmet>
-      <div className="min-h-screen bg-gradient-to-br from-green-50 to-yellow-50 p-4 sm:p-6 lg:p-8">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-yellow-50 p-4 sm:p-6 lg:p-8">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -83,14 +83,14 @@ const ProfilePage = () => {
                   <Label htmlFor="role">Role in Community</Label>
                   <Input id="role" value={formData.role} disabled />
                 </div>
-                 <div className="space-y-2">
+                <div className="space-y-2">
                   <Label htmlFor="bio">Bio</Label>
                   <Textarea id="bio" value={formData.bio} onChange={handleInputChange} disabled={!isEditing} className="min-h-[100px]" />
                 </div>
               </div>
               <div className="space-y-6">
                 <h3 className="text-xl font-semibold text-primary border-b pb-2">My Assessment</h3>
-                 <div className="space-y-2">
+                <div className="space-y-2">
                   <Label htmlFor="diagnosis">Primary Diagnosis</Label>
                   <Input id="diagnosis" value={formData.diagnosis} onChange={handleInputChange} disabled={!isEditing} />
                 </div>
@@ -99,7 +99,7 @@ const ProfilePage = () => {
                   <div className="flex flex-wrap gap-2">
                     {user.interests && user.interests.length > 0 ? (
                       user.interests.map(interest => (
-                        <span key={interest} className="bg-green-100 text-primary text-sm font-medium px-3 py-1 rounded-full">{interest}</span>
+                        <span key={interest} className="bg-gray-100 text-primary text-sm font-medium px-3 py-1 rounded-full">{interest}</span>
                       ))
                     ) : (
                       <p className="text-sm text-gray-500">No interests specified.</p>
@@ -112,8 +112,8 @@ const ProfilePage = () => {
                 </div>
               </div>
             </CardContent>
-             <CardFooter className="flex justify-end">
-                <Button variant="destructive" onClick={logout}>Logout</Button>
+            <CardFooter className="flex justify-end">
+              <Button variant="destructive" onClick={logout}>Logout</Button>
             </CardFooter>
           </Card>
         </motion.div>

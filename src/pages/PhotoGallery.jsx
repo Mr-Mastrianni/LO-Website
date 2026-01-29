@@ -478,7 +478,7 @@ const PhotoGallery = () => {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-green-50 to-yellow-50 py-20">
+      <section className="bg-gradient-to-br from-gray-50 to-yellow-50 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -611,11 +611,10 @@ const PhotoGallery = () => {
                     <button
                       key={image.id}
                       onClick={() => goToSlide(index)}
-                      className={`flex-shrink-0 w-12 h-10 md:w-20 md:h-16 rounded-lg overflow-hidden border-2 transition-all duration-300 touch-manipulation ${
-                        currentSlideIndex === index
+                      className={`flex-shrink-0 w-12 h-10 md:w-20 md:h-16 rounded-lg overflow-hidden border-2 transition-all duration-300 touch-manipulation ${currentSlideIndex === index
                           ? 'border-primary shadow-lg scale-110'
                           : 'border-gray-300 hover:border-gray-400'
-                      }`}
+                        }`}
                     >
                       <img
                         src={image.src}
@@ -687,7 +686,7 @@ const PhotoGallery = () => {
       </AnimatePresence>
 
       {/* Call to Action */}
-      <section className="py-16 bg-gradient-to-r from-green-600 to-green-700">
+      <section className="py-16 bg-gradient-to-r from-gray-600 to-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -698,11 +697,11 @@ const PhotoGallery = () => {
             <h2 className="text-4xl font-bold text-white mb-6">
               Join Our Community
             </h2>
-            <p className="text-xl text-green-100 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-100 mb-8 max-w-3xl mx-auto">
               Be part of our growing community and help us create more moments of hope, learning, and connection.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/brainstorm-cancer" className="bg-white text-green-700 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
+              <a href="/brainstorm-cancer" className="bg-white text-gray-700 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
                 View Our Events
               </a>
               <a href="/contact" className="btn-primary">

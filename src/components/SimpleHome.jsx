@@ -2,7 +2,7 @@ import React from 'react';
 
 const SimpleHome = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-yellow-50 py-20">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-yellow-50 py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-gray-800 mb-6">
@@ -15,7 +15,7 @@ const SimpleHome = () => {
             <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
               Learn More About Us
             </button>
-            <button className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors">
+            <button className="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors">
               Partner with Us
             </button>
           </div>

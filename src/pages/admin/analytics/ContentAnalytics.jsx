@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  FileText, 
-  Eye, 
-  Download, 
+import {
+  FileText,
+  Eye,
+  Download,
   MessageSquare,
   Calendar,
   Star,
@@ -32,7 +32,7 @@ const ContentAnalytics = ({ dateRange }) => {
           totalDownloads: 2847
         },
         topContent: [
-          { 
+          {
             title: 'Understanding Brain Cancer Types',
             type: 'resource',
             views: 2847,
@@ -40,7 +40,7 @@ const ContentAnalytics = ({ dateRange }) => {
             engagement: 8.3,
             rating: 4.8
           },
-          { 
+          {
             title: 'Sarah\'s Journey: A Survivor\'s Story',
             type: 'testimonial',
             views: 2156,
@@ -48,7 +48,7 @@ const ContentAnalytics = ({ dateRange }) => {
             engagement: 12.7,
             rating: 4.9
           },
-          { 
+          {
             title: 'Monthly Support Group Meeting',
             type: 'event',
             views: 1923,
@@ -56,7 +56,7 @@ const ContentAnalytics = ({ dateRange }) => {
             engagement: 15.2,
             rating: 4.7
           },
-          { 
+          {
             title: 'Nutrition During Treatment',
             type: 'resource',
             views: 1654,
@@ -64,7 +64,7 @@ const ContentAnalytics = ({ dateRange }) => {
             engagement: 6.8,
             rating: 4.6
           },
-          { 
+          {
             title: 'Dr. Gatson\'s Treatment Approach',
             type: 'page',
             views: 1432,
@@ -116,9 +116,9 @@ const ContentAnalytics = ({ dateRange }) => {
   const contentMetricCards = [
     {
       title: 'Total Content',
-      value: (analytics.contentMetrics?.totalPages || 0) + 
-             (analytics.contentMetrics?.totalTestimonials || 0) + 
-             (analytics.contentMetrics?.totalResources || 0),
+      value: (analytics.contentMetrics?.totalPages || 0) +
+        (analytics.contentMetrics?.totalTestimonials || 0) +
+        (analytics.contentMetrics?.totalResources || 0),
       icon: FileText,
       color: 'text-blue-600'
     },
@@ -126,7 +126,7 @@ const ContentAnalytics = ({ dateRange }) => {
       title: 'Total Downloads',
       value: analytics.contentMetrics?.totalDownloads || 0,
       icon: Download,
-      color: 'text-green-600'
+      color: 'text-gray-600'
     },
     {
       title: 'Avg. Time on Page',
@@ -244,7 +244,7 @@ const ContentAnalytics = ({ dateRange }) => {
                   <div className="flex items-center space-x-3">
                     {getContentTypeBadge(content.type)}
                     <div className="text-right">
-                      <div className="text-sm font-bold text-green-600">
+                      <div className="text-sm font-bold text-gray-600">
                         {content.engagement}% engagement
                       </div>
                     </div>
@@ -374,7 +374,7 @@ const ContentAnalytics = ({ dateRange }) => {
                     <span>{formatNumber(category.views)} views</span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div 
+                    <div
                       className="bg-primary h-2 rounded-full transition-all duration-500"
                       style={{ width: `${category.percentage}%` }}
                     ></div>

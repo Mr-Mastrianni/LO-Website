@@ -41,7 +41,7 @@ const Profile = () => {
       case 'Caregiver/Family':
         return { icon: Shield, color: 'text-blue-500', description: 'Supporting a loved one through their journey.' };
       case 'Healthcare Professional':
-        return { icon: User, color: 'text-green-500', description: 'Providing medical care and expertise.' };
+        return { icon: User, color: 'text-gray-500', description: 'Providing medical care and expertise.' };
       default:
         return { icon: BookOpen, color: 'text-yellow-500', description: 'A valued member of our community.' };
     }
@@ -55,7 +55,7 @@ const Profile = () => {
         <title>My Profile - Living Oncology</title>
         <meta name="description" content="Manage your Living Oncology profile, view your information, and update your details." />
       </Helmet>
-      <div className="bg-gradient-to-br from-green-50 to-yellow-50 min-h-screen">
+      <div className="bg-gradient-to-br from-gray-50 to-yellow-50 min-h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -70,7 +70,7 @@ const Profile = () => {
               </div>
               <div className="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
                 <div className="flex-shrink-0">
-                  <div className="w-32 h-32 bg-gradient-to-br from-green-200 to-yellow-200 rounded-full flex items-center justify-center shadow-lg">
+                  <div className="w-32 h-32 bg-gradient-to-br from-gray-200 to-yellow-200 rounded-full flex items-center justify-center shadow-lg">
                     <User className="w-16 h-16 text-primary" />
                   </div>
                 </div>
