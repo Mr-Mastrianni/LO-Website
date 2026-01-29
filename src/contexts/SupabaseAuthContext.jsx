@@ -75,9 +75,19 @@ export const AuthProvider = ({ children }) => {
 
       // Check if this is an email confirmation redirect
       const hashParams = new URLSearchParams(window.location.hash.substring(1));
-      const isEmailConfirmation = hashParams.get('type') === 'signup' ||
-        hashParams.get('type') === 'email_confirmation' ||
-        window.location.pathname === '/welcome';
+      const confirmationType = hashParams.get('type');
+      const isEmailConfirmation = confirmationType === 'signup' ||
+        confirmationType === 'email_confirmation' ||
+        confirmationType === 'recovery';
+
+      // If this is an email confirmation and we have a session, redirect to welcome
+      if (isEmailConfirmation && session) {
+        console.log('Email confirmation detected, redirecting to /welcome');
+        handleSession(session, true);
+        // Clear the hash and redirect to welcome page
+        window.history.replaceState(null, '', '/welcome');
+        return;
+      }
 
       handleSession(session, isEmailConfirmation);
     };
@@ -87,12 +97,26 @@ export const AuthProvider = ({ children }) => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
         console.log('Auth event:', event);
+
+        // Check for email confirmation in URL
+        const hashParams = new URLSearchParams(window.location.hash.substring(1));
+        const confirmationType = hashParams.get('type');
+        const isEmailConfirmation = confirmationType === 'signup' ||
+          confirmationType === 'email_confirmation';
+
         // Detect if this is a new signup (email verification or recovery)
-        const isSignup = event === 'SIGNED_IN' && (
-          window.location.pathname === '/welcome' ||
-          window.location.hash.includes('type=signup') ||
-          window.location.hash.includes('type=email_confirmation')
-        );
+        const isSignup = (event === 'SIGNED_IN' && isEmailConfirmation) ||
+          (event === 'SIGNED_IN' && window.location.pathname === '/welcome');
+
+        // If email confirmation, redirect to welcome
+        if (event === 'SIGNED_IN' && isEmailConfirmation && session) {
+          console.log('Auth event: email confirmation detected, setting new user and redirecting');
+          handleSession(session, true);
+          window.history.replaceState(null, '', '/welcome');
+          window.location.reload(); // Force reload to trigger the welcome page
+          return;
+        }
+
         handleSession(session, isSignup);
       }
     );
