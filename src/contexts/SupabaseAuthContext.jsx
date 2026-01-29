@@ -12,8 +12,9 @@ export const AuthProvider = ({ children }) => {
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(true);
   const [profile, setProfile] = useState(null);
+  const [isNewUser, setIsNewUser] = useState(false);
 
-  const handleSession = useCallback(async (session) => {
+  const handleSession = useCallback(async (session, isSignup = false) => {
     setSession(session);
     setUser(session?.user ?? null);
 
@@ -28,9 +29,16 @@ export const AuthProvider = ({ children }) => {
 
         if (!error && profileData) {
           setProfile(profileData);
+          // Check if this is a new user (profile was just created - no created_at more than 1 minute old)
+          const profileAge = new Date() - new Date(profileData.created_at);
+          const isRecentlyCreated = profileAge < 60000; // Less than 1 minute
+          if (isSignup || isRecentlyCreated) {
+            setIsNewUser(true);
+          }
         } else if (!profileData) {
-          // Profile doesn't exist, create one
+          // Profile doesn't exist, create one - this is definitely a new user
           console.log('Profile not found, creating new profile...');
+          setIsNewUser(true);
           const { data: newProfile, error: createError } = await supabase
             .from('profiles')
             .insert({
@@ -55,6 +63,7 @@ export const AuthProvider = ({ children }) => {
       }
     } else {
       setProfile(null);
+      setIsNewUser(false);
     }
 
     setLoading(false);
@@ -70,7 +79,10 @@ export const AuthProvider = ({ children }) => {
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
-        handleSession(session);
+        console.log('Auth event:', event);
+        // Detect if this is a new signup (email verification)
+        const isSignup = event === 'SIGNED_IN' && session?.user?.email_confirmed_at;
+        handleSession(session, isSignup);
       }
     );
 
@@ -85,7 +97,7 @@ export const AuthProvider = ({ children }) => {
         password,
         options: {
           ...options,
-          emailRedirectTo: 'https://mr-mastrianni.github.io/LO-Website/'
+          emailRedirectTo: 'https://www.livingoncology.org/welcome'
         },
       });
 
@@ -152,16 +164,23 @@ export const AuthProvider = ({ children }) => {
     return profile?.role === 'admin' || profile?.is_admin === true;
   }, [profile]);
 
+  // Function to clear new user flag after onboarding
+  const clearNewUserFlag = useCallback(() => {
+    setIsNewUser(false);
+  }, []);
+
   const value = useMemo(() => ({
     user,
     session,
     loading,
     profile,
     isAdmin,
+    isNewUser,
     signUp,
     signIn,
     signOut,
-  }), [user, session, loading, profile, isAdmin, signUp, signIn, signOut]);
+    clearNewUserFlag,
+  }), [user, session, loading, profile, isAdmin, isNewUser, signUp, signIn, signOut, clearNewUserFlag]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

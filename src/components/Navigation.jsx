@@ -27,11 +27,12 @@ const Navigation = () => {
   const navItems = [
     { name: 'Home', path: '/' },
     { name: 'About Us', path: '/about-us' },
-    { name: 'BrainStorm Cancer', path: '/brainstorm-cancer' },
-    { name: 'Educational Hub', path: '/educational-hub' },
+    { name: 'BrainStorm Cancer', path: '/brainstorm-cancer', tourId: 'nav-events' },
+    { name: 'Educational Hub', path: '/educational-hub', tourId: 'nav-resources' },
     { name: 'Oncology Conversations', path: '/oncology-conversations' },
     { name: 'Testimonials', path: '/testimonials' },
     { name: 'Photo Gallery', path: '/photo-gallery' },
+    { name: 'Community', path: '/community', tourId: 'nav-community' },
     { name: 'Contact', path: '/contact' }
   ];
 
@@ -64,11 +65,11 @@ const Navigation = () => {
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
-                    location.pathname === item.path
+                  data-tour={item.tourId}
+                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${location.pathname === item.path
                       ? 'bg-primary text-primary-foreground'
                       : 'text-foreground hover:text-accent hover:bg-primary/50'
-                  }`}
+                    }`}
                   aria-current={location.pathname === item.path ? 'page' : undefined}
                 >
                   {item.name}
@@ -80,7 +81,10 @@ const Navigation = () => {
           <div className="hidden md:flex items-center space-x-4">
             {user ? (
               <DropdownMenu>
-                <DropdownMenuTrigger className="flex items-center space-x-1 text-foreground hover:text-accent transition-colors duration-200 focus:outline-none">
+                <DropdownMenuTrigger
+                  data-tour="nav-profile"
+                  className="flex items-center space-x-1 text-foreground hover:text-accent transition-colors duration-200 focus:outline-none"
+                >
                   <UserCircle className="w-5 h-5" />
                   <span>{profile?.full_name?.split(' ')[0] || 'Account'}</span>
                 </DropdownMenuTrigger>
@@ -152,11 +156,10 @@ const Navigation = () => {
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
-                    location.pathname === item.path
+                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${location.pathname === item.path
                       ? 'bg-primary text-primary-foreground'
                       : 'text-foreground hover:text-accent hover:bg-primary/50'
-                  }`}
+                    }`}
                   onClick={() => setIsOpen(false)}
                   aria-current={location.pathname === item.path ? 'page' : undefined}
                 >
