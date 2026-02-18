@@ -7,6 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { toast } from '@/components/ui/use-toast';
 import { Checkbox } from '@/components/ui/checkbox';
+import { supabase } from '@/lib/customSupabaseClient';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -45,24 +46,19 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: formData,
       });
 
-      if (response.ok) {
-        toast({
-          title: "Message sent successfully!",
-          description: "Thank you for reaching out. We'll get back to you shortly."
-        });
-        setFormData({ name: '', email: '', message: '', category: 'General Inquiry', subscribe: false });
-      } else {
-        throw new Error('Failed to send message');
-      }
+      if (error) throw error;
+
+      toast({
+        title: "Message sent successfully!",
+        description: "Thank you for reaching out. We'll get back to you shortly."
+      });
+      setFormData({ name: '', email: '', message: '', category: 'General Inquiry', subscribe: false });
     } catch (error) {
+      console.error('Error sending contact form:', error);
       toast({
         title: "Failed to send message",
         description: "Something went wrong. Please try again later.",

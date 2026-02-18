@@ -7,32 +7,35 @@ import { Calendar, MapPin, Users, ArrowRight, Clock } from 'lucide-react';
 const BrainStormCancer = () => {
   const events = [
     {
+      id: 2026,
+      title: "BrainStorm Cancer - Arizona Symposium",
+      date: "May 9, 2026",
+      time: "8:00 AM - 1:00 PM",
+      location: "Marriott Resort Tempe at The Buttes, Tempe, AZ",
+      summary: "A transformative half day dedicated to advancing brain tumor care through education, networking, and shared insights from experts and survivors alike. This comprehensive educational and networking symposium aims to unite patients, physicians, nurses, caregivers, scientists, and vendors.",
+      image: "/images/01 (151).jpg",
+      status: "upcoming",
+      featured: true
+    },
+    {
       id: 1,
       title: "BrainStorm Cancer '25",
       date: "May 10, 2025",
       time: "9:00 AM - 4:00 PM",
-      location: "Tempe, Arizona",
+      location: "Marriott Resort Tempe at The Buttes, Tempe, AZ",
       summary: "Our flagship annual conference brought together patients, caregivers, and medical professionals for a comprehensive one-day event with expert-led sessions and community connections.",
+      image: "/images/01 (1).jpg",
       status: "past",
       featured: false
     },
     {
       id: 4,
-      title: "BrainStorm Cancer Arizona 2024",
-      date: "March 15, 2024",
+      title: "BrainStorm Cancer 2024",
+      date: "May 11, 2024",
       time: "9:00 AM - 4:00 PM",
-      location: "Phoenix Convention Center, Phoenix, AZ",
+      location: "Marriott Resort Tempe at The Buttes, Tempe, AZ",
       summary: "Our successful 2024 conference brought together over 500 participants for education, networking, and inspiration in the fight against brain cancer.",
-      status: "past",
-      featured: false
-    },
-    {
-      id: 5,
-      title: "Young Adult Brain Tumor Support Group Launch",
-      date: "January 15, 2024",
-      time: "6:00 PM - 7:30 PM",
-      location: "Virtual Event",
-      summary: "The inaugural meeting of our new support group specifically designed for young adults (ages 18-39) affected by brain tumors.",
+      image: "/images/01 (62).jpg",
       status: "past",
       featured: false
     }
@@ -124,8 +127,8 @@ const BrainStormCancer = () => {
                   <div className="flex justify-center">
                     <img
                       className="w-full max-w-md rounded-xl shadow-lg"
-                      alt="BrainStorm Cancer 2025 conference venue in Tempe, Arizona"
-                      src="https://images.unsplash.com/photo-1672396309399-353d95b114a1" />
+                      alt={event.title}
+                      src={event.image} />
                   </div>
                 </div>
               </motion.div>
@@ -257,6 +260,13 @@ const BrainStormCancer = () => {
                 viewport={{ once: true }}
                 className="bg-gray-50 rounded-xl shadow-lg card-hover overflow-hidden"
               >
+                {event.image && (
+                  <img
+                    src={event.image}
+                    alt={event.title}
+                    className="w-full h-48 object-cover"
+                  />
+                )}
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
                     <div className="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm font-semibold">

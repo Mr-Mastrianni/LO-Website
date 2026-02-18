@@ -7,6 +7,7 @@ import { toast } from 'sonner';
 import { supabase } from '@/lib/customSupabaseClient';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { events } from '@/data/eventsData';
+import EventRegistrationModal from '@/components/events/EventRegistrationModal';
 
 const EventDetail = () => {
   const { eventId } = useParams();
@@ -159,14 +160,29 @@ const EventDetail = () => {
                         You're Registered!
                       </div>
                     ) : (
-                      <button
-                        onClick={handleRegister}
-                        disabled={isLoading}
-                        className="btn-primary inline-flex items-center"
-                      >
-                        {isLoading ? 'Registering...' : 'Register Now'}
-                        <ArrowRight className="ml-2 w-4 h-4" />
-                      </button>
+                      event.registrationTypes ? (
+                        <EventRegistrationModal
+                          event={event}
+                          eventId={eventId}
+                          onRegistered={() => {
+                            setIsRegistered(true);
+                            setRegistrationCount(prev => prev + 1);
+                          }}
+                          triggerAttributes={{
+                            className: "btn-primary inline-flex items-center",
+                            disabled: isLoading
+                          }}
+                        />
+                      ) : (
+                        <button
+                          onClick={handleRegister}
+                          disabled={isLoading}
+                          className="btn-primary inline-flex items-center"
+                        >
+                          {isLoading ? 'Registering...' : 'Register Now'}
+                          <ArrowRight className="ml-2 w-4 h-4" />
+                        </button>
+                      )
                     )}
                     {registrationCount > 0 && (
                       <p className="text-sm text-gray-600 mt-2">
@@ -181,7 +197,7 @@ const EventDetail = () => {
                 <img
                   className="w-full max-w-md rounded-xl shadow-xl"
                   alt={`${event.title} event image`}
-                  src={`${import.meta.env.BASE_URL}images/event-placeholder.jpg`} />
+                  src={event.image || `${import.meta.env.BASE_URL}images/event-placeholder.jpg`} />
               </div>
             </div>
           </motion.div>
@@ -284,13 +300,28 @@ const EventDetail = () => {
                         </div>
                       ) : (
                         <>
-                          <button
-                            onClick={handleRegister}
-                            disabled={isLoading}
-                            className="btn-primary w-full"
-                          >
-                            {isLoading ? 'Registering...' : 'Register Now'}
-                          </button>
+                          {event.registrationTypes ? (
+                            <EventRegistrationModal
+                              event={event}
+                              eventId={eventId}
+                              onRegistered={() => {
+                                setIsRegistered(true);
+                                setRegistrationCount(prev => prev + 1);
+                              }}
+                              triggerAttributes={{
+                                className: "btn-primary w-full",
+                                disabled: isLoading
+                              }}
+                            />
+                          ) : (
+                            <button
+                              onClick={handleRegister}
+                              disabled={isLoading}
+                              className="btn-primary w-full"
+                            >
+                              {isLoading ? 'Registering...' : 'Register Now'}
+                            </button>
+                          )}
                           <p className="text-sm text-gray-600 mt-2 text-center">
                             Registration is required for all events
                           </p>

@@ -31,15 +31,14 @@ const ZeffyEmbed = ({ src }) => {
   }
 
   return (
-    <div className="relative w-full" style={{ paddingBottom: '120%' }}>
+    <div className="relative w-full" style={{ minHeight: '800px' }}>
       <iframe
         ref={iframeRef}
         src={src}
         title="Zeffy Donation Form"
-        className="absolute top-0 left-0 w-full h-full border-0 rounded-lg"
+        style={{ width: '100%', height: '800px', border: 'none', borderRadius: '8px' }}
         allowpaymentrequest="true"
         allowtransparency="true"
-        sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
       ></iframe>
     </div>
   );

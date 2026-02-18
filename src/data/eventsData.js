@@ -3,8 +3,9 @@ export const events = {
     title: "BrainStorm Cancer '25",
     date: "May 10, 2025",
     time: "9:00 AM - 4:00 PM",
-    location: "Tempe, Arizona",
+    location: "Marriott Resort Tempe at The Buttes, Tempe, AZ",
     description: "Our flagship annual conference brought together patients, caregivers, and medical professionals for a comprehensive one-day event with expert-led sessions and community connections. This successful event featured leading neuro-oncology experts, patient advocates, and breakthrough research presentations.",
+    image: "/images/01 (1).jpg",
     agenda: [
       { time: "9:00 AM - 9:30 AM", activity: "Registration & Welcome Coffee" },
       { time: "9:30 AM - 10:30 AM", activity: "Keynote: Latest Advances in Brain Tumor Treatment" },
@@ -23,11 +24,12 @@ export const events = {
     status: "past"
   },
   4: {
-    title: "BrainStorm Cancer Arizona 2024",
-    date: "March 15, 2024",
+    title: "BrainStorm Cancer 2024",
+    date: "May 11, 2024",
     time: "9:00 AM - 4:00 PM",
-    location: "Phoenix Convention Center, Phoenix, AZ",
+    location: "Marriott Resort Tempe at The Buttes, Tempe, AZ",
     description: "Our successful 2024 conference brought together over 500 participants for education, networking, and inspiration in the fight against brain cancer. This comprehensive event featured leading neuro-oncology experts, patient advocates, and breakthrough research presentations.",
+    image: "/images/01 (62).jpg",
     agenda: [
       { time: "9:00 AM - 9:30 AM", activity: "Registration & Welcome Coffee" },
       { time: "9:30 AM - 10:30 AM", activity: "Keynote: Latest Advances in Brain Tumor Treatment" },
@@ -62,5 +64,33 @@ export const events = {
       "Sarah Williams - Young Adult Advocate"
     ],
     status: "past"
+  },
+  2026: {
+    title: "BrainStorm Cancer - Arizona Symposium",
+    date: "May 9, 2026",
+    time: "8:00 AM - 1:00 PM",
+    location: "Marriott Resort Tempe at The Buttes, 2000 W Westcourt Way, Tempe, AZ 85282",
+    description: "Planned as a transformative half day dedicated to advancing brain tumor care through education, networking, and shared insights from experts and survivors alike. This comprehensive educational and networking symposium aims to unite a diverse group of participants, including patients, physicians, nurses, caregivers, scientists, and vendors to share insights, offer support, and explore advancements in the treatment and care of brain tumors. The event structure facilitates in-depth discussions on various aspects of brain tumor management, including alternative medicine, nutrition, and supportive care, aiming to provide a comprehensive perspective on living cancer.",
+    mission: "We endeavor to reconnect patients and their caregivers with the science and educational resources that afford optimized living through their oncology journey. We are uniquely positioned to provide ample patient-facing learning spaces for physicians and oncology care experts to intersect for the betterment of the patient. Living Oncology is indispensable to cancer education.",
+    agenda: [
+      { time: "6:00 AM", activity: "Doors Open for Vendor Set-up" },
+      { time: "8:00 AM", activity: "Breakfast & Registration" },
+      { time: "9:00 AM", activity: "Symposium Begins" }
+    ],
+    registrationTypes: [
+      { type: "patient", label: "Patient/Caregiver", price: "Free", fields: ["firstName", "lastName", "email", "ticketCount", "phone"] },
+      { type: "physician", label: "Physician/APP/Provider", price: "Donation", fields: ["firstName", "lastName", "credentials", "institution", "email", "phone"] },
+      { type: "researcher", label: "Researcher", price: "Donation", fields: ["firstName", "lastName", "credentials", "institution", "email", "phone"] },
+      { type: "vendor", label: "Scientist/Vendor", price: "$850", fields: ["firstName", "lastName", "organization", "email", "phone"] },
+      { type: "sponsor", label: "Sponsor", price: "Direct Link", fields: ["firstName", "lastName", "organization", "email", "sponsorshipLevel", "phone"] }
+    ],
+    sponsorshipLevels: [
+      { name: "Gold", price: "$4,500", benefits: ["1 Vendor Admission", "Honoring-A-Patient Award (Partial)", "Listed on Syllabus Sponsor Page"] },
+      { name: "Platinum", price: "$8,000", benefits: ["2 Vendor Admissions", "Private Luncheon Intro (10 min)", "1 We Are The Storm Award", "Full-Page Ad", "Social Media Promotion"] },
+      { name: "Diamond", price: "$15,000", benefits: ["3 Vendor Admissions", "Private Physician Luncheon (40 min)", "3 We Are The Storm Awards", "2-Page Ad", "Banner at Stage", "Bag Inserts", "Named Sponsor for Vivere Luncheon"] }
+    ],
+    image: "/images/01 (151).jpg",
+    status: "upcoming",
+    featured: true
   }
 };

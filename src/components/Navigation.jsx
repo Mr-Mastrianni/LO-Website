@@ -27,7 +27,7 @@ const Navigation = () => {
   const navItems = [
     { name: 'Home', path: '/' },
     { name: 'About Us', path: '/about-us' },
-    { name: 'BrainStorm Cancer', path: '/brainstorm-cancer', tourId: 'nav-events' },
+    { name: 'Events', path: '/brainstorm-cancer', tourId: 'nav-events' },
     { name: 'Educational Hub', path: '/educational-hub', tourId: 'nav-resources' },
     { name: 'Oncology Conversations', path: '/oncology-conversations' },
     { name: 'Testimonials', path: '/testimonials' },
@@ -67,8 +67,8 @@ const Navigation = () => {
                   to={item.path}
                   data-tour={item.tourId}
                   className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${location.pathname === item.path
-                      ? 'bg-primary text-primary-foreground'
-                      : 'text-foreground hover:text-accent hover:bg-primary/50'
+                    ? 'bg-primary text-primary-foreground'
+                    : 'text-foreground hover:text-accent hover:bg-primary/50'
                     }`}
                   aria-current={location.pathname === item.path ? 'page' : undefined}
                 >
@@ -157,8 +157,8 @@ const Navigation = () => {
                   key={item.name}
                   to={item.path}
                   className={`block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${location.pathname === item.path
-                      ? 'bg-primary text-primary-foreground'
-                      : 'text-foreground hover:text-accent hover:bg-primary/50'
+                    ? 'bg-primary text-primary-foreground'
+                    : 'text-foreground hover:text-accent hover:bg-primary/50'
                     }`}
                   onClick={() => setIsOpen(false)}
                   aria-current={location.pathname === item.path ? 'page' : undefined}
