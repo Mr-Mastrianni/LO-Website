@@ -61,6 +61,13 @@ const Navigation = () => {
 
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
+              <Link
+                to="/donate"
+                className="px-3 py-2 rounded-md text-sm font-medium bg-accent text-white hover:bg-accent/90 transition-colors duration-200"
+                aria-label="Donate to Living Oncology"
+              >
+                Donate
+              </Link>
               {navItems.map((item) => (
                 <Link
                   key={item.name}
@@ -121,13 +128,6 @@ const Navigation = () => {
                 <span>Log In</span>
               </Link>
             )}
-            <Link
-              to="/donate"
-              className="btn-primary"
-              aria-label="Donate to Living Oncology"
-            >
-              Donate
-            </Link>
           </div>
 
           <div className="md:hidden">
@@ -187,7 +187,7 @@ const Navigation = () => {
                   )}
                   <Link
                     to="/donate"
-                    className="btn-primary w-full text-center"
+                    className="block px-3 py-2 rounded-md text-base font-medium bg-accent text-white text-center hover:bg-accent/90 transition-colors duration-200"
                     onClick={() => setIsOpen(false)}
                   >
                     Donate

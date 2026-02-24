@@ -1,28 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { UserPlus, UserMinus, Users, Loader2 } from 'lucide-react';
+import { UserPlus, UserMinus, Users, Loader2, LogIn } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
 import { supabase } from '@/lib/customSupabaseClient';
+import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { handleJoinGroup, handleLeaveGroup } from '@/data/communityData';
 
 const GroupsTab = () => {
+  const { user } = useAuth();
   const [groups, setGroups] = useState([]);
   const [userMemberships, setUserMemberships] = useState(new Set());
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    checkUser();
     fetchGroups();
-  }, []);
-
-  const checkUser = async () => {
-    const { data: { session } } = await supabase.auth.getSession();
-    setUser(session?.user || null);
-    if (session?.user) {
-      fetchUserMemberships(session.user.id);
+    if (user) {
+      fetchUserMemberships(user.id);
     }
-  };
+  }, [user]);
 
   const fetchGroups = async () => {
     try {
@@ -150,22 +146,32 @@ const GroupsTab = () => {
                 )}
               </div>
 
-              {isMember ? (
-                <button
-                  onClick={() => onLeaveGroup(group.id)}
-                  className="w-full inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors"
-                >
-                  <UserMinus className="mr-2 w-4 h-4" />
-                  Leave Group
-                </button>
+              {user ? (
+                isMember ? (
+                  <button
+                    onClick={() => onLeaveGroup(group.id)}
+                    className="w-full inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors"
+                  >
+                    <UserMinus className="mr-2 w-4 h-4" />
+                    Leave Group
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => onJoinGroup(group.id)}
+                    className="btn-secondary w-full inline-flex items-center justify-center"
+                  >
+                    <UserPlus className="mr-2 w-4 h-4" />
+                    Join Group
+                  </button>
+                )
               ) : (
-                <button
-                  onClick={() => onJoinGroup(group.id)}
+                <Link
+                  to="/login"
                   className="btn-secondary w-full inline-flex items-center justify-center"
                 >
-                  <UserPlus className="mr-2 w-4 h-4" />
-                  Join Group
-                </button>
+                  <LogIn className="mr-2 w-4 h-4" />
+                  Log in to Join
+                </Link>
               )}
             </motion.div>
           );

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { PlusCircle, MessageCircle, Loader2 } from 'lucide-react';
+import { PlusCircle, MessageCircle, Loader2, LogIn } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { supabase } from '@/lib/customSupabaseClient';
+import { useAuth } from '@/contexts/SupabaseAuthContext';
 import CreatePostModal from './CreatePostModal';
 import PostDetailModal from './PostDetailModal';
 
 const DiscussionsTab = () => {
+  const { user } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
@@ -133,13 +136,23 @@ const DiscussionsTab = () => {
       >
         <div className="flex justify-between items-center">
           <h3 className="text-2xl font-bold text-primary">Forum Discussions</h3>
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className="btn-primary inline-flex items-center"
-          >
-            <PlusCircle className="mr-2 w-4 h-4" />
-            Create Post
-          </button>
+          {user ? (
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="btn-primary inline-flex items-center"
+            >
+              <PlusCircle className="mr-2 w-4 h-4" />
+              Create Post
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              className="btn-secondary inline-flex items-center"
+            >
+              <LogIn className="mr-2 w-4 h-4" />
+              Log in to Post
+            </Link>
+          )}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

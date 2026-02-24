@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { MessageCircle, Calendar, User, ArrowRight, BookOpen, Heart, Video, X, Play } from 'lucide-react';
-import ReactPlayer from 'react-player/youtube';
+import { MessageCircle, Calendar, User, ArrowRight, Heart, Video, Play } from 'lucide-react';
+import ReactPlayer from 'react-player';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { conversations, categories } from '@/data/conversationsData';
+import { conversations } from '@/data/conversationsData';
 import { Link } from 'react-router-dom';
 
 // Helper function to extract YouTube video ID from URL
@@ -18,6 +18,17 @@ const getYouTubeVideoId = (url) => {
 const getYouTubeThumbnail = (url) => {
   const videoId = getYouTubeVideoId(url);
   return videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : null;
+};
+
+// Helper function to get thumbnail for a conversation
+const getThumbnail = (conversation) => {
+  if (conversation.thumbnail) {
+    return conversation.thumbnail;
+  }
+  if (conversation.videoType === 'youtube' || (!conversation.videoType && conversation.url?.includes('youtu'))) {
+    return getYouTubeThumbnail(conversation.url);
+  }
+  return '/images/event-placeholder.jpg';
 };
 
 const OncologyConversations = () => {
@@ -95,45 +106,6 @@ const OncologyConversations = () => {
         </div>
       </section>
 
-      {/* Featured Categories */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl font-bold text-primary mb-4">Conversation Topics</h2>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-              Explore conversations organized by key areas of interest and need
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {categories.map((category, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-xl p-6 shadow-lg card-hover text-center"
-              >
-                <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center mx-auto mb-4">
-                  {category === "Community Voices" ? <Video className="w-6 h-6 text-white" /> : <BookOpen className="w-6 h-6 text-white" />}
-                </div>
-                <h3 className="text-lg font-bold text-primary mb-2">{category}</h3>
-                <p className="text-gray-600 text-sm">
-                  {conversations.filter(conv => conv.category === category).length} conversations
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Conversations Grid */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -158,73 +130,64 @@ const OncologyConversations = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-gradient-to-br from-gray-50 to-yellow-50 rounded-xl shadow-lg card-hover overflow-hidden"
+                className="relative rounded-xl shadow-lg overflow-hidden group cursor-pointer"
+                onClick={() => setSelectedVideo(conversation)}
               >
                 {/* Video Thumbnail */}
                 {conversation.type === 'video' && conversation.url && (
-                  <div
-                    className="relative cursor-pointer group"
-                    onClick={() => setSelectedVideo(conversation)}
-                  >
+                  <>
                     <img
-                      src={getYouTubeThumbnail(conversation.url)}
+                      src={getThumbnail(conversation)}
                       alt={conversation.title}
-                      className="w-full h-48 object-cover"
+                      className="w-full h-64 object-cover object-center"
                     />
-                    <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center group-hover:bg-opacity-50 transition-all duration-300">
-                      <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                        <Play className="w-8 h-8 text-white ml-1" fill="white" />
+                    
+                    {/* Default overlay with just play button */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent transition-opacity duration-300 group-hover:opacity-0" />
+                    <div className="absolute bottom-4 right-4 z-10">
+                      <div className="w-14 h-14 bg-primary/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300">
+                        <Play className="w-6 h-6 text-white ml-1" fill="white" />
                       </div>
                     </div>
-                  </div>
+                    
+                    {/* Hover overlay with info */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/80 to-primary/40 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-6">
+                      <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <div className="flex items-center space-x-2 mb-2">
+                          <span className="bg-white/20 text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center backdrop-blur-sm">
+                            {conversation.type === 'video' && <Video className="w-3 h-3 mr-1" />}
+                            {conversation.category}
+                          </span>
+                          <span className="text-white/80 text-xs">{conversation.duration}</span>
+                        </div>
+                        
+                        <h3 className="text-xl font-bold text-white mb-2 leading-tight">
+                          {conversation.title}
+                        </h3>
+                        
+                        <div className="flex items-center space-x-4 mb-3 text-xs text-white/90">
+                          <div className="flex items-center space-x-1">
+                            <User className="w-3 h-3" />
+                            <span>{conversation.author}</span>
+                          </div>
+                          <div className="flex items-center space-x-1">
+                            <Calendar className="w-3 h-3" />
+                            <span>{conversation.date}</span>
+                          </div>
+                        </div>
+                        
+                        <p className="text-white/90 text-sm leading-relaxed line-clamp-2 mb-3">
+                          {conversation.summary}
+                        </p>
+                        
+                        <span className="text-white font-semibold inline-flex items-center text-sm">
+                          Watch Video
+                          <ArrowRight className="ml-2 w-4 h-4" />
+                        </span>
+                      </div>
+                    </div>
+                  </>
                 )}
-
-                <div className="p-8">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="bg-primary text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center">
-                      {conversation.type === 'video' && <Video className="w-4 h-4 mr-2" />}
-                      {conversation.category}
-                    </span>
-                    <span className="text-gray-500 text-sm">{conversation.duration}</span>
-                  </div>
-
-                  <h3 className="text-xl font-bold text-primary mb-3 leading-tight">
-                    {conversation.title}
-                  </h3>
-
-                  <div className="flex items-center space-x-4 mb-4 text-sm text-gray-600">
-                    <div className="flex items-center space-x-1">
-                      <User className="w-4 h-4" />
-                      <span>{conversation.author}</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <Calendar className="w-4 h-4" />
-                      <span>{conversation.date}</span>
-                    </div>
-                  </div>
-
-                  <p className="text-gray-700 leading-relaxed mb-6">
-                    {conversation.summary}
-                  </p>
-
-                  {conversation.type === 'video' ? (
-                    <button
-                      onClick={() => setSelectedVideo(conversation)}
-                      className="text-primary hover:text-gray-800 font-semibold inline-flex items-center transition-colors"
-                    >
-                      Watch Video
-                      <ArrowRight className="ml-2 w-4 h-4" />
-                    </button>
-                  ) : (
-                    <Link
-                      to={`/oncology-conversations/${conversation.id}`}
-                      className="text-primary hover:text-gray-800 font-semibold inline-flex items-center transition-colors"
-                    >
-                      Read Conversation
-                      <ArrowRight className="ml-2 w-4 h-4" />
-                    </Link>
-                  )}
-                </div>
               </motion.article>
             ))}
           </div>

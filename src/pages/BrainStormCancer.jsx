@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, Users, ArrowRight, Clock } from 'lucide-react';
+import { Calendar, MapPin, Users, ArrowRight, Clock, Heart } from 'lucide-react';
 
 const BrainStormCancer = () => {
   const events = [
@@ -124,11 +124,28 @@ const BrainStormCancer = () => {
                       <ArrowRight className="ml-2 w-4 h-4" />
                     </Link>
                   </div>
-                  <div className="flex justify-center">
+                  <div className="flex flex-col items-center">
                     <img
-                      className="w-full max-w-md rounded-xl shadow-lg"
+                      className="w-full max-w-md rounded-xl shadow-lg mb-6"
                       alt={event.title}
                       src={event.image} />
+                    {/* Glowing Action Buttons */}
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <Link
+                        to="/donate"
+                        className="relative inline-flex items-center justify-center px-8 py-3 font-bold text-white transition-all duration-300 bg-accent rounded-lg hover:bg-accent/90 hover:scale-105 shadow-[0_0_20px_rgba(249,115,22,0.5)] hover:shadow-[0_0_30px_rgba(249,115,22,0.8)]"
+                      >
+                        <Heart className="w-5 h-5 mr-2" />
+                        Donate
+                      </Link>
+                      <Link
+                        to={`/brainstorm-cancer/${event.id}`}
+                        className="relative inline-flex items-center justify-center px-8 py-3 font-bold text-white transition-all duration-300 bg-primary rounded-lg hover:bg-primary/90 hover:scale-105 shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:shadow-[0_0_30px_rgba(59,130,246,0.8)]"
+                      >
+                        Register Now
+                        <ArrowRight className="w-5 h-5 ml-2" />
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </motion.div>

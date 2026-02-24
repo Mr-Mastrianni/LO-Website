@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
+import { LogIn, UserPlus } from 'lucide-react';
+import { useAuth } from '@/contexts/SupabaseAuthContext';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { supabase } from '@/lib/customSupabaseClient';
 import DiscussionsTab from '@/components/community/DiscussionsTab';
@@ -11,6 +13,7 @@ import FilesTab from '@/components/community/FilesTab';
 import AboutTab from '@/components/community/AboutTab';
 
 const Community = () => {
+  const { user } = useAuth();
   const [stats, setStats] = useState({
     activeMembers: 0,
     supportGroups: 0,
@@ -184,12 +187,27 @@ const Community = () => {
               Connect with others who understand your journey. Share experiences, find support, and build meaningful relationships.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/members-directory" className="bg-white text-gray-700 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
-                View Members
-              </Link>
-              <Link to="/contact" className="btn-primary">
-                Get Started
-              </Link>
+              {user ? (
+                <>
+                  <Link to="/members-directory" className="bg-white text-gray-700 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    View Members
+                  </Link>
+                  <Link to="/profile" className="btn-primary">
+                    Go to Profile
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link to="/login" className="bg-white text-gray-700 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg inline-flex items-center justify-center">
+                    <LogIn className="w-5 h-5 mr-2" />
+                    Log In
+                  </Link>
+                  <Link to="/signup" className="btn-primary inline-flex items-center justify-center">
+                    <UserPlus className="w-5 h-5 mr-2" />
+                    Join Community
+                  </Link>
+                </>
+              )}
             </div>
           </motion.div>
         </div>

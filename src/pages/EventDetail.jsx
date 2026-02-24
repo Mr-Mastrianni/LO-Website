@@ -283,7 +283,7 @@ const EventDetail = () => {
 
                   <div>
                     <h4 className="font-semibold text-gray-800 mb-2">Cost</h4>
-                    <p className="text-gray-700">Free for all attendees</p>
+                    <p className="text-gray-700">Free for all patients and caregivers</p>
                   </div>
 
                   {event.status === 'upcoming' && (

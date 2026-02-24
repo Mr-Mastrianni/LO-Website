@@ -31,7 +31,7 @@ const EventRegistrationModal = ({ event, eventId, triggerAttributes, onRegistere
     const [isLoading, setIsLoading] = useState(false);
     const [formData, setFormData] = useState({});
     const [isSuccess, setIsSuccess] = useState(false);
-    const [paymentStep, setPaymentStep] = useState(false);
+    const [donationConfirmed, setDonationConfirmed] = useState(false);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -51,13 +51,19 @@ const EventRegistrationModal = ({ event, eventId, triggerAttributes, onRegistere
     const selectedTypeConfig = event.registrationTypes?.find(t => t.type === attendeeType);
 
     // Check if the current attendee type requires payment before registration
-    const requiresPayment = attendeeType === 'sponsor' || attendeeType === 'vendor';
+    // Sponsor, Vendor, and Physician/APP/Provider require donation/payment
+    const requiresPayment = attendeeType === 'sponsor' || attendeeType === 'vendor' || attendeeType === 'physician';
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!attendeeType) {
             toast.error("Please select an attendee type.");
+            return;
+        }
+
+        if (requiresPayment && !donationConfirmed) {
+            toast.error("Please complete your donation and check the confirmation box before submitting.");
             return;
         }
 
@@ -87,12 +93,11 @@ const EventRegistrationModal = ({ event, eventId, triggerAttributes, onRegistere
 
             if (error) throw error;
 
+            setIsSuccess(true);
+
             if (requiresPayment) {
-                // Show payment step instead of success
-                setPaymentStep(true);
-                toast.info("Please complete your payment to finalize registration.");
+                toast.success("Registration submitted! Your spot will be confirmed once payment is verified.");
             } else {
-                setIsSuccess(true);
                 toast.success("Registration submitted successfully!");
             }
 
@@ -140,12 +145,6 @@ const EventRegistrationModal = ({ event, eventId, triggerAttributes, onRegistere
         } finally {
             setIsLoading(false);
         }
-    };
-
-    const handlePaymentComplete = () => {
-        setPaymentStep(false);
-        setIsSuccess(true);
-        toast.success("Thank you! Your registration will be confirmed once payment is verified.");
     };
 
     const renderFields = () => {
@@ -238,24 +237,26 @@ const EventRegistrationModal = ({ event, eventId, triggerAttributes, onRegistere
                     </div>
                 )}
 
+                {/* Price Info Banner */}
                 <div className="pt-2">
                     {selectedTypeConfig.price === 'Free' ? (
                         <div className="text-sm font-semibold text-green-600">
                             Registration is Free for Patients & Caregivers.
                         </div>
                     ) : selectedTypeConfig.price === 'Donation' ? (
-                        <div className="text-sm font-semibold text-primary">
-                            Registration is by voluntary donation. You will be contacted with donation instructions.
+                        <div className="text-sm font-semibold text-amber-700 bg-amber-50 p-3 rounded-md border border-amber-200">
+                            <CreditCard className="inline w-4 h-4 mr-1 -mt-0.5" />
+                            Registration requires a donation. Please complete the donation form below before submitting.
                         </div>
                     ) : selectedTypeConfig.price === 'Direct Link' ? (
                         <div className="text-sm font-semibold text-amber-700 bg-amber-50 p-3 rounded-md border border-amber-200">
                             <CreditCard className="inline w-4 h-4 mr-1 -mt-0.5" />
-                            Payment is required to complete your sponsorship registration. You will be directed to our secure payment form after submitting your details.
+                            Payment is required to complete your sponsorship. Please complete the payment form below before submitting.
                         </div>
                     ) : (
                         <div className="text-sm font-semibold text-amber-700 bg-amber-50 p-3 rounded-md border border-amber-200">
                             <CreditCard className="inline w-4 h-4 mr-1 -mt-0.5" />
-                            Registration Fee: {selectedTypeConfig.price} — Payment is required to complete registration. You will be directed to our secure payment form next.
+                            Registration Fee: {selectedTypeConfig.price} — Please complete payment below before submitting.
                         </div>
                     )}
                 </div>
@@ -263,10 +264,131 @@ const EventRegistrationModal = ({ event, eventId, triggerAttributes, onRegistere
         );
     };
 
+    // Render the inline Zeffy donation form for payment-required attendee types
+    const renderInlinePayment = () => {
+        if (!requiresPayment || !attendeeType) return null;
+
+        return (
+            <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500 delay-200">
+                {/* Divider */}
+                <div className="relative py-2">
+                    <div className="absolute inset-0 flex items-center">
+                        <div className="w-full border-t border-gray-300" />
+                    </div>
+                    <div className="relative flex justify-center">
+                        <span className="bg-white px-4 text-sm font-semibold text-gray-500 uppercase tracking-wider">
+                            {donationConfirmed ? '✅ Payment Received' : 'Step 1: Complete Payment'}
+                        </span>
+                    </div>
+                </div>
+
+                {/* Payment Amount Context */}
+                <div className={`border rounded-lg p-4 ${donationConfirmed ? 'bg-green-50 border-green-200' : 'bg-amber-50 border-amber-200'}`}>
+                    <h3 className={`font-semibold mb-2 flex items-center ${donationConfirmed ? 'text-green-800' : 'text-amber-800'}`}>
+                        {donationConfirmed ? (
+                            <>
+                                <Check className="w-5 h-5 mr-2" />
+                                Payment Completed — You may now submit your registration
+                            </>
+                        ) : (
+                            <>
+                                <CreditCard className="w-5 h-5 mr-2" />
+                                {attendeeType === 'sponsor' ? 'Sponsorship Payment' :
+                                    attendeeType === 'vendor' ? 'Registration Fee Payment' :
+                                        'Registration Donation'}
+                            </>
+                        )}
+                    </h3>
+
+                    {!donationConfirmed && (
+                        <>
+                            {/* Sponsor: show selected level price */}
+                            {attendeeType === 'sponsor' && formData.sponsorshipLevel && (
+                                <div className="mb-2">
+                                    <p className="text-2xl font-bold text-amber-800">
+                                        {event.sponsorshipLevels?.find(l => l.name === formData.sponsorshipLevel)?.price}
+                                    </p>
+                                    <p className="text-sm text-amber-600">
+                                        Please enter this exact amount in the donation form below
+                                    </p>
+                                </div>
+                            )}
+                            {attendeeType === 'sponsor' && !formData.sponsorshipLevel && (
+                                <p className="text-sm text-amber-600">
+                                    Please select a sponsorship level above first
+                                </p>
+                            )}
+
+                            {/* Vendor: show fixed price */}
+                            {attendeeType === 'vendor' && selectedTypeConfig?.price && (
+                                <div className="mb-2">
+                                    <p className="text-2xl font-bold text-amber-800">
+                                        {selectedTypeConfig.price}
+                                    </p>
+                                    <p className="text-sm text-amber-600">
+                                        Please enter this exact amount in the donation form below
+                                    </p>
+                                </div>
+                            )}
+
+                            {/* Physician: show suggested donation */}
+                            {attendeeType === 'physician' && (
+                                <div className="mb-2">
+                                    <p className="text-xl font-bold text-amber-800">
+                                        Suggested: $100 or more
+                                    </p>
+                                    <p className="text-sm text-amber-600">
+                                        Please enter your desired donation amount below
+                                    </p>
+                                </div>
+                            )}
+                        </>
+                    )}
+                </div>
+
+                {/* Embedded Zeffy Form — hidden after completion */}
+                {!donationConfirmed ? (
+                    <div className="rounded-lg overflow-hidden border border-gray-200">
+                        <div className="bg-gray-100 px-4 py-2 text-sm text-gray-600 font-medium border-b flex items-center justify-between">
+                            <span>Secure Payment via Zeffy</span>
+                            <a
+                                href="https://www.zeffy.com/en-US/donation-form/0750dbd9-2db9-41ea-890e-998e0da32bb6"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-xs text-primary hover:underline inline-flex items-center gap-1"
+                            >
+                                <ExternalLink className="w-3 h-3" />
+                                Open in new window
+                            </a>
+                        </div>
+                        <ZeffyEmbed
+                            src={ZEFFY_DONATION_URL}
+                            height={500}
+                            onDonationComplete={() => {
+                                setDonationConfirmed(true);
+                                toast.success("Payment received! You can now submit your registration.");
+                            }}
+                        />
+                    </div>
+                ) : (
+                    <div className="flex items-center gap-3 p-4 bg-green-50 border-2 border-green-300 rounded-lg animate-in fade-in zoom-in duration-300">
+                        <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                            <Check className="w-6 h-6 text-green-600" />
+                        </div>
+                        <div>
+                            <p className="font-semibold text-green-800">Donation completed successfully!</p>
+                            <p className="text-sm text-green-600">Click "Submit Registration" below to finalize your registration.</p>
+                        </div>
+                    </div>
+                )}
+            </div>
+        );
+    };
+
     return (
         <Dialog open={isOpen} onOpenChange={(val) => {
             setIsOpen(val);
-            if (!val) setTimeout(() => { setIsSuccess(false); setPaymentStep(false); setAttendeeType(''); setFormData({}); }, 300);
+            if (!val) setTimeout(() => { setIsSuccess(false); setAttendeeType(''); setFormData({}); setDonationConfirmed(false); }, 300);
         }}>
             <DialogTrigger asChild>
                 {triggerAttributes ? (
@@ -277,10 +399,10 @@ const EventRegistrationModal = ({ event, eventId, triggerAttributes, onRegistere
                     <Button variant="default">Register Now</Button>
                 )}
             </DialogTrigger>
-            <DialogContent className={`${paymentStep ? 'sm:max-w-[700px]' : 'sm:max-w-[600px]'} max-h-[90vh] overflow-y-auto`}>
+            <DialogContent className={`${requiresPayment && attendeeType ? 'sm:max-w-[800px]' : 'sm:max-w-[600px]'} max-h-[90vh] overflow-y-auto`}>
                 <DialogHeader>
                     <DialogTitle className="text-2xl font-bold text-primary">
-                        {paymentStep ? 'Complete Payment' : 'Event Registration'}
+                        Event Registration
                     </DialogTitle>
                     <p className="text-gray-600 mt-1">
                         {event.title}
@@ -305,47 +427,6 @@ const EventRegistrationModal = ({ event, eventId, triggerAttributes, onRegistere
                             Close
                         </Button>
                     </div>
-                ) : paymentStep ? (
-                    <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-300">
-                        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
-                            <h3 className="font-semibold text-amber-800 mb-1">
-                                <CreditCard className="inline w-4 h-4 mr-1 -mt-0.5" />
-                                Payment Required
-                            </h3>
-                            <p className="text-sm text-amber-700">
-                                Your registration details have been saved. Please complete your payment below to finalize your {attendeeType === 'sponsor' ? 'sponsorship' : 'registration'}.
-                                {formData.sponsorshipLevel && (
-                                    <span className="font-semibold block mt-1">
-                                        Sponsorship Level: {formData.sponsorshipLevel} — {event.sponsorshipLevels?.find(l => l.name === formData.sponsorshipLevel)?.price}
-                                    </span>
-                                )}
-                                {selectedTypeConfig?.price && selectedTypeConfig.price !== 'Direct Link' && selectedTypeConfig.price !== 'Free' && selectedTypeConfig.price !== 'Donation' && (
-                                    <span className="font-semibold block mt-1">
-                                        Amount Due: {selectedTypeConfig.price}
-                                    </span>
-                                )}
-                            </p>
-                        </div>
-
-                        <div className="rounded-lg overflow-hidden border border-gray-200">
-                            <ZeffyEmbed src={ZEFFY_DONATION_URL} />
-                        </div>
-
-                        <div className="flex justify-between items-center pt-2">
-                            <a
-                                href="https://www.zeffy.com/en-US/donation-form/0750dbd9-2db9-41ea-890e-998e0da32bb6"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-sm text-primary hover:underline inline-flex items-center gap-1"
-                            >
-                                <ExternalLink className="w-3 h-3" />
-                                Open in new window
-                            </a>
-                            <Button onClick={handlePaymentComplete}>
-                                I've Completed My Payment
-                            </Button>
-                        </div>
-                    </div>
                 ) : (
                     <form onSubmit={handleSubmit} className="space-y-6 mt-4">
                         <div className="space-y-2">
@@ -366,26 +447,35 @@ const EventRegistrationModal = ({ event, eventId, triggerAttributes, onRegistere
 
                         {renderFields()}
 
+                        {/* Inline Zeffy Donation Form for payment-required types */}
+                        {renderInlinePayment()}
+
                         {attendeeType && (
-                            <div className="pt-4 flex justify-end gap-3">
-                                <Button type="button" variant="outline" onClick={() => setIsOpen(false)}>
-                                    Cancel
-                                </Button>
-                                <Button type="submit" disabled={isLoading}>
-                                    {isLoading ? (
-                                        <>
-                                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                                            Processing...
-                                        </>
-                                    ) : requiresPayment ? (
-                                        <>
-                                            <CreditCard className="mr-2 h-4 w-4" />
-                                            Proceed to Payment
-                                        </>
-                                    ) : (
-                                        'Submit Registration'
-                                    )}
-                                </Button>
+                            <div className="pt-4 space-y-3">
+                                <div className="flex justify-end gap-3">
+                                    <Button type="button" variant="outline" onClick={() => setIsOpen(false)}>
+                                        Cancel
+                                    </Button>
+                                    <Button
+                                        type="submit"
+                                        disabled={isLoading || (requiresPayment && !donationConfirmed)}
+                                        className={requiresPayment && !donationConfirmed ? 'opacity-50 cursor-not-allowed' : ''}
+                                    >
+                                        {isLoading ? (
+                                            <>
+                                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                                Processing...
+                                            </>
+                                        ) : requiresPayment ? (
+                                            <>
+                                                <Check className="mr-2 h-4 w-4" />
+                                                Submit Registration
+                                            </>
+                                        ) : (
+                                            'Submit Registration'
+                                        )}
+                                    </Button>
+                                </div>
                             </div>
                         )}
                     </form>
@@ -396,4 +486,3 @@ const EventRegistrationModal = ({ event, eventId, triggerAttributes, onRegistere
 };
 
 export default EventRegistrationModal;
-

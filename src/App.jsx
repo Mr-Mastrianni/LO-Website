@@ -13,6 +13,7 @@ import AboutDrGatson from '@/pages/AboutDrGatson';
 import BrainStormCancer from '@/pages/BrainStormCancer';
 import EventDetail from '@/pages/EventDetail';
 import OncologyConversations from '@/pages/OncologyConversations';
+import ConversationDetail from '@/pages/ConversationDetail';
 import Testimonials from '@/pages/Testimonials';
 import PhotoGallery from '@/pages/PhotoGallery';
 import Contact from '@/pages/Contact';
@@ -59,6 +60,7 @@ function App() {
                 <Route path="/brainstorm-cancer" element={<BrainStormCancer />} />
                 <Route path="/brainstorm-cancer/:eventId" element={<EventDetail />} />
                 <Route path="/oncology-conversations" element={<OncologyConversations />} />
+                <Route path="/oncology-conversations/:conversationId" element={<ConversationDetail />} />
                 <Route path="/educational-hub" element={<EducationalHub />} />
                 <Route path="/testimonials" element={<Testimonials />} />
                 <Route path="/photo-gallery" element={<PhotoGallery />} />

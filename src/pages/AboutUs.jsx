@@ -18,8 +18,8 @@ const AboutUs = () => {
     },
     {
       name: "Saseshmu Ra Herut",
-      role: "AI Tech/Product Manager",
-      imageDescription: "Portrait of Saseshmu Ra Herut, AI Tech/Product Manager",
+      role: "Artificial Intelligence Researcher & Developer/Product Manager",
+      imageDescription: "Portrait of Saseshmu Ra Herut, Artificial Intelligence Researcher & Developer/Product Manager",
       imageUrl: `${import.meta.env.BASE_URL}images/team/saseshmu-ra-herut.png`
     },
     {
