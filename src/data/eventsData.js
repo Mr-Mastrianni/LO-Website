@@ -75,7 +75,8 @@ export const events = {
     agenda: [
       { time: "6:00 AM", activity: "Doors Open for Vendor Set-up" },
       { time: "8:00 AM", activity: "Breakfast & Registration" },
-      { time: "9:00 AM", activity: "Symposium Begins" }
+      { time: "9:00 AM", activity: "Symposium Begins" },
+      { time: "1:00 PM", activity: "Symposium Ends" }
     ],
     registrationTypes: [
       { type: "patient", label: "Patient/Caregiver", price: "Free", fields: ["firstName", "lastName", "email", "ticketCount", "phone"] },
@@ -85,9 +86,11 @@ export const events = {
       { type: "sponsor", label: "Sponsor", price: "Direct Link", fields: ["firstName", "lastName", "organization", "email", "sponsorshipLevel", "phone"] }
     ],
     sponsorshipLevels: [
+      { name: "Other", price: "$3,000", benefits: ["Listed on Syllabus Sponsor Page"] },
       { name: "Gold", price: "$4,500", benefits: ["1 Vendor Admission", "Honoring-A-Patient Award (Partial)", "Listed on Syllabus Sponsor Page"] },
       { name: "Platinum", price: "$8,000", benefits: ["2 Vendor Admissions", "Private Luncheon Intro (10 min)", "1 We Are The Storm Award", "Full-Page Ad", "Social Media Promotion"] },
-      { name: "Diamond", price: "$15,000", benefits: ["3 Vendor Admissions", "Private Physician Luncheon (40 min)", "3 We Are The Storm Awards", "2-Page Ad", "Banner at Stage", "Bag Inserts", "Named Sponsor for Vivere Luncheon"] }
+      { name: "Diamond", price: "$15,000", benefits: ["3 Vendor Admissions", "Private Physician Luncheon (40 min)", "3 We Are The Storm Awards", "2-Page Ad", "Banner at Stage", "Bag Inserts", "Named Sponsor for Vivere Luncheon"] },
+      { name: "Specialized", price: "As Agreed", benefits: ["Custom sponsorship package tailored to your organization"] }
     ],
     image: "/images/01 (151).jpg",
     status: "upcoming",
