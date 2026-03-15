@@ -385,53 +385,6 @@ const EventRegistrationModal = ({ event, eventId, triggerAttributes, onRegistere
         );
     };
 
-    // Render optional donation form for patients/caregivers
-    const renderOptionalDonation = () => {
-        if (requiresPayment || attendeeType !== 'patient') return null;
-
-        return (
-            <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500 delay-200">
-                {/* Divider */}
-                <div className="relative py-2">
-                    <div className="absolute inset-0 flex items-center">
-                        <div className="w-full border-t border-gray-300" />
-                    </div>
-                    <div className="relative flex justify-center">
-                        <span className="bg-white px-4 text-sm font-semibold text-gray-500 uppercase tracking-wider">
-                            Optional Donation
-                        </span>
-                    </div>
-                </div>
-
-                <div className="border rounded-lg p-4 bg-green-50 border-green-200">
-                    <p className="text-sm font-semibold text-green-800">
-                        💚 Caregivers and patients attend at no cost. However, you are free to donate below.
-                    </p>
-                </div>
-
-                {/* Embedded Zeffy Form */}
-                <div className="rounded-lg overflow-hidden border border-gray-200">
-                    <div className="bg-gray-100 px-4 py-2 text-sm text-gray-600 font-medium border-b flex items-center justify-between">
-                        <span>Secure Donation via Zeffy</span>
-                        <a
-                            href="https://www.zeffy.com/en-US/donation-form/0750dbd9-2db9-41ea-890e-998e0da32bb6"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-xs text-primary hover:underline inline-flex items-center gap-1"
-                        >
-                            <ExternalLink className="w-3 h-3" />
-                            Open in new window
-                        </a>
-                    </div>
-                    <ZeffyEmbed
-                        src={ZEFFY_DONATION_URL}
-                        height={500}
-                    />
-                </div>
-            </div>
-        );
-    };
-
     return (
         <Dialog open={isOpen} onOpenChange={(val) => {
             setIsOpen(val);
@@ -496,9 +449,6 @@ const EventRegistrationModal = ({ event, eventId, triggerAttributes, onRegistere
 
                         {/* Inline Zeffy Donation Form for payment-required types */}
                         {renderInlinePayment()}
-
-                        {/* Optional donation form for patients/caregivers */}
-                        {renderOptionalDonation()}
 
                         {attendeeType && (
                             <div className="pt-4 space-y-3">
