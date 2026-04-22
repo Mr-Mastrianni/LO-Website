@@ -32,6 +32,7 @@ const EventRegistrationModal = ({ event, eventId, triggerAttributes, onRegistere
     const [formData, setFormData] = useState({});
     const [isSuccess, setIsSuccess] = useState(false);
     const [donationConfirmed, setDonationConfirmed] = useState(false);
+    const [isSpecializedAgreed, setIsSpecializedAgreed] = useState(false);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -74,6 +75,11 @@ const EventRegistrationModal = ({ event, eventId, triggerAttributes, onRegistere
             const { firstName, lastName, email, phone, ...extraData } = formData;
 
             const registrationStatus = requiresPayment ? 'pending_payment' : 'registered';
+
+            // Include specialized agreement info in registration_data for vendors
+            if (attendeeType === 'vendor') {
+                extraData.isSpecializedAgreed = isSpecializedAgreed;
+            }
 
             const { data, error } = await supabase
                 .from('event_registrations')
@@ -121,7 +127,9 @@ const EventRegistrationModal = ({ event, eventId, triggerAttributes, onRegistere
                     eventLocation: event.location,
                     attendeeType,
                     attendeeTypeLabel: typeConfig?.label || attendeeType,
-                    registrationPrice: typeConfig?.price || 'N/A',
+                    registrationPrice: (attendeeType === 'vendor' && isSpecializedAgreed)
+                        ? `${typeConfig?.price || 'N/A'} (Specialized as agreed)`
+                        : (typeConfig?.price || 'N/A'),
                     firstName: firstName || '',
                     lastName: lastName || '',
                     email: email || '',
@@ -256,7 +264,9 @@ const EventRegistrationModal = ({ event, eventId, triggerAttributes, onRegistere
                     ) : (
                         <div className="text-sm font-semibold text-amber-700 bg-amber-50 p-3 rounded-md border border-amber-200">
                             <CreditCard className="inline w-4 h-4 mr-1 -mt-0.5" />
-                            Registration Fee: {selectedTypeConfig.price} — Please complete payment below before submitting.
+                            {attendeeType === 'vendor' && isSpecializedAgreed
+                                ? `Registration Fee: ${selectedTypeConfig.price} (Specialized as agreed) — Please complete payment below before submitting.`
+                                : `Registration Fee: ${selectedTypeConfig.price} — Please complete payment below before submitting.`}
                         </div>
                     )}
                 </div>
@@ -308,15 +318,35 @@ const EventRegistrationModal = ({ event, eventId, triggerAttributes, onRegistere
                         </p>
                     )}
 
-                    {/* Vendor: show fixed price */}
+                    {/* Vendor: show fixed price or specialized agreed amount */}
                     {attendeeType === 'vendor' && selectedTypeConfig?.price && (
-                        <div className="mb-2">
+                        <div className="mb-2 space-y-3">
                             <p className="text-2xl font-bold text-amber-800">
                                 {selectedTypeConfig.price}
                             </p>
                             <p className="text-sm text-amber-600">
-                                Unless otherwise negotiated, please enter this exact amount in the donation form below
+                                {isSpecializedAgreed
+                                    ? 'Specialized rate as agreed with the organization. Please enter the agreed amount in the Zeffy form below.'
+                                    : 'Unless otherwise negotiated, please enter this exact amount in the donation form below'}
                             </p>
+
+                            {/* Specialized as agreed checkbox */}
+                            <label className="flex items-start gap-3 cursor-pointer select-none pt-1">
+                                <input
+                                    type="checkbox"
+                                    checked={isSpecializedAgreed}
+                                    onChange={(e) => setIsSpecializedAgreed(e.target.checked)}
+                                    className="mt-0.5 h-5 w-5 rounded border-gray-300 text-primary focus:ring-primary cursor-pointer accent-green-600"
+                                />
+                                <div>
+                                    <p className="font-semibold text-gray-800">
+                                        Specialized as agreed
+                                    </p>
+                                    <p className="text-sm text-gray-500">
+                                        Check this if your registration fee was negotiated with the organization
+                                    </p>
+                                </div>
+                            </label>
                         </div>
                     )}
 
@@ -388,7 +418,7 @@ const EventRegistrationModal = ({ event, eventId, triggerAttributes, onRegistere
     return (
         <Dialog open={isOpen} onOpenChange={(val) => {
             setIsOpen(val);
-            if (!val) setTimeout(() => { setIsSuccess(false); setAttendeeType(''); setFormData({}); setDonationConfirmed(false); }, 300);
+            if (!val) setTimeout(() => { setIsSuccess(false); setAttendeeType(''); setFormData({}); setDonationConfirmed(false); setIsSpecializedAgreed(false); }, 300);
         }}>
             <DialogTrigger asChild>
                 {triggerAttributes ? (
