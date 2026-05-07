@@ -159,8 +159,11 @@ const EventDetail = () => {
                         <Check className="w-5 h-5 mr-2" />
                         You're Registered!
                       </div>
-                    ) : (
-                      event.registrationTypes ? (
+                    ) : event.registrationClosed ? (
+                      <div className="inline-flex items-center px-6 py-3 bg-amber-50 text-amber-800 rounded-lg font-semibold border border-amber-200">
+                        Online registration is now closed. Please register at the door on the day of the event.
+                      </div>
+                    ) : event.registrationTypes ? (
                         <EventRegistrationModal
                           event={event}
                           eventId={eventId}
@@ -183,7 +186,7 @@ const EventDetail = () => {
                           <ArrowRight className="ml-2 w-4 h-4" />
                         </button>
                       )
-                    )}
+                    }
                     {registrationCount > 0 && (
                       <p className="text-sm text-gray-600 mt-2">
                         {registrationCount} {registrationCount === 1 ? 'person' : 'people'} registered
@@ -296,6 +299,15 @@ const EventDetail = () => {
                           </div>
                           <p className="text-sm text-gray-600 mt-2">
                             We'll send you event details via email
+                          </p>
+                        </div>
+                      ) : event.registrationClosed ? (
+                        <div className="text-center">
+                          <div className="inline-flex items-center px-6 py-3 bg-amber-50 text-amber-800 rounded-lg font-semibold w-full justify-center border border-amber-200">
+                            Online registration is now closed
+                          </div>
+                          <p className="text-sm text-gray-600 mt-2">
+                            Please register at the door on the day of the event
                           </p>
                         </div>
                       ) : (

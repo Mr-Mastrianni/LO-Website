@@ -94,6 +94,7 @@ export const events = {
     ],
     image: "/images/01 (151).jpg",
     status: "upcoming",
-    featured: true
+    featured: true,
+    registrationClosed: true
   }
 };

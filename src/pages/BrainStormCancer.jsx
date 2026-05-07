@@ -138,13 +138,9 @@ const BrainStormCancer = () => {
                         <Heart className="w-5 h-5 mr-2" />
                         Donate
                       </Link>
-                      <Link
-                        to={`/brainstorm-cancer/${event.id}`}
-                        className="relative inline-flex items-center justify-center px-8 py-3 font-bold text-white transition-all duration-300 bg-primary rounded-lg hover:bg-primary/90 hover:scale-105 shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:shadow-[0_0_30px_rgba(59,130,246,0.8)]"
-                      >
-                        Register Now
-                        <ArrowRight className="w-5 h-5 ml-2" />
-                      </Link>
+                      <div className="relative inline-flex items-center justify-center px-8 py-3 font-bold text-amber-800 bg-amber-50 rounded-lg border-2 border-amber-200">
+                        Register at Door on Event Day
+                      </div>
                     </div>
                   </div>
                 </div>
