@@ -24,7 +24,7 @@ const BrainStormCancer = () => {
       time: "8:00 AM - 1:00 PM",
       location: "Indianapolis, IN",
       summary: "Our second BrainStorm Cancer symposium of 2026 heads to Indianapolis. Join patients, physicians, nurses, caregivers, scientists, and vendors for a transformative half day of education, networking, and shared insights. Together we advance brain tumor care through community, science, and hope.",
-      image: "/images/2026/brainstorm-2026-001.jpg",
+      image: "/images/2026/brainstorm-2026-254.jpg",
       status: "upcoming",
       featured: true,
       registrationOpens: "June 15, 2026"

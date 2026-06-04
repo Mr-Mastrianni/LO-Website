@@ -124,7 +124,7 @@ export const events = {
       { name: "Diamond", price: "$15,000", benefits: ["3 Vendor Admissions", "Private Physician Luncheon (40 min)", "3 We Are The Storm Awards", "2-Page Ad", "Banner at Stage", "Bag Inserts", "Named Sponsor for Vivere Luncheon"] },
       { name: "Specialized", price: "As Agreed", benefits: ["Custom sponsorship package tailored to your organization"] }
     ],
-    image: "/images/2026/brainstorm-2026-001.jpg",
+    image: "/images/2026/brainstorm-2026-254.jpg",
     status: "upcoming",
     featured: true,
     registrationClosed: true
