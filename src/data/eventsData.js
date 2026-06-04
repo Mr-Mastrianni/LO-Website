@@ -70,7 +70,7 @@ export const events = {
     date: "May 9, 2026",
     time: "8:00 AM - 1:00 PM",
     location: "Marriott Resort Tempe at The Buttes, 2000 W Westcourt Way, Tempe, AZ 85282",
-    description: "Planned as a transformative half day dedicated to advancing brain tumor care through education, networking, and shared insights from experts and survivors alike. This comprehensive educational and networking symposium aims to unite a diverse group of participants, including patients, physicians, nurses, caregivers, scientists, and vendors to share insights, offer support, and explore advancements in the treatment and care of brain tumors. The event structure facilitates in-depth discussions on various aspects of brain tumor management, including alternative medicine, nutrition, and supportive care, aiming to provide a comprehensive perspective on living cancer.",
+    description: "A transformative half day dedicated to advancing brain tumor care through education, networking, and shared insights from experts and survivors alike. This comprehensive educational and networking symposium united a diverse group of participants, including patients, physicians, nurses, caregivers, scientists, and vendors to share insights, offer support, and explore advancements in the treatment and care of brain tumors.",
     mission: "We endeavor to reconnect patients and their caregivers with the science and educational resources that afford optimized living through their oncology journey. We are uniquely positioned to provide ample patient-facing learning spaces for physicians and oncology care experts to intersect for the betterment of the patient. Living Oncology is indispensable to cancer education.",
     agenda: [
       { time: "6:00 AM", activity: "Doors Open for Vendor Set-up" },
@@ -93,6 +93,38 @@ export const events = {
       { name: "Specialized", price: "As Agreed", benefits: ["Custom sponsorship package tailored to your organization"] }
     ],
     image: "/images/01 (151).jpg",
+    status: "past",
+    featured: false,
+    registrationClosed: true
+  },
+  20260905: {
+    title: "BrainStorm Cancer - Arizona Symposium",
+    date: "September 5, 2026",
+    time: "8:00 AM - 1:00 PM",
+    location: "Marriott Resort Tempe at The Buttes, 2000 W Westcourt Way, Tempe, AZ 85282",
+    description: "Our second BrainStorm Cancer symposium of 2026 returns to the Marriott Tempe at The Buttes. This comprehensive educational and networking symposium brings together patients, physicians, nurses, caregivers, scientists, and vendors to share insights, offer support, and explore advancements in brain tumor care. The half-day event facilitates in-depth discussions on treatment, nutrition, supportive care, and living well through the oncology journey.",
+    mission: "We endeavor to reconnect patients and their caregivers with the science and educational resources that afford optimized living through their oncology journey. We are uniquely positioned to provide ample patient-facing learning spaces for physicians and oncology care experts to intersect for the betterment of the patient.",
+    agenda: [
+      { time: "6:00 AM", activity: "Doors Open for Vendor Set-up" },
+      { time: "8:00 AM", activity: "Breakfast & Registration" },
+      { time: "9:00 AM", activity: "Symposium Begins" },
+      { time: "1:00 PM", activity: "Symposium Ends" }
+    ],
+    registrationTypes: [
+      { type: "patient", label: "Patient/Caregiver", price: "Free", fields: ["firstName", "lastName", "email", "ticketCount", "phone"] },
+      { type: "physician", label: "Physician/APP/Provider", price: "Donation", fields: ["firstName", "lastName", "credentials", "institution", "email", "phone"] },
+      { type: "researcher", label: "Researcher", price: "Donation", fields: ["firstName", "lastName", "credentials", "institution", "email", "phone"] },
+      { type: "vendor", label: "Scientist/Vendor", price: "$850", fields: ["firstName", "lastName", "organization", "email", "phone"] },
+      { type: "sponsor", label: "Sponsor", price: "Direct Link", fields: ["firstName", "lastName", "organization", "email", "sponsorshipLevel", "phone"] }
+    ],
+    sponsorshipLevels: [
+      { name: "Other", price: "$3,000", benefits: ["Listed on Syllabus Sponsor Page"] },
+      { name: "Gold", price: "$4,500", benefits: ["1 Vendor Admission", "Honoring-A-Patient Award (Partial)", "Listed on Syllabus Sponsor Page"] },
+      { name: "Platinum", price: "$8,000", benefits: ["2 Vendor Admissions", "Private Luncheon Intro (10 min)", "1 We Are The Storm Award", "Full-Page Ad", "Social Media Promotion"] },
+      { name: "Diamond", price: "$15,000", benefits: ["3 Vendor Admissions", "Private Physician Luncheon (40 min)", "3 We Are The Storm Awards", "2-Page Ad", "Banner at Stage", "Bag Inserts", "Named Sponsor for Vivere Luncheon"] },
+      { name: "Specialized", price: "As Agreed", benefits: ["Custom sponsorship package tailored to your organization"] }
+    ],
+    image: "/images/2026/brainstorm-2026-001.jpg",
     status: "upcoming",
     featured: true,
     registrationClosed: true

@@ -14,8 +14,20 @@ const BrainStormCancer = () => {
       location: "Marriott Resort Tempe at The Buttes, Tempe, AZ",
       summary: "A transformative half day dedicated to advancing brain tumor care through education, networking, and shared insights from experts and survivors alike. This comprehensive educational and networking symposium aims to unite patients, physicians, nurses, caregivers, scientists, and vendors.",
       image: "/images/01 (151).jpg",
+      status: "past",
+      featured: false
+    },
+    {
+      id: 20260905,
+      title: "BrainStorm Cancer - Arizona Symposium",
+      date: "September 5, 2026",
+      time: "8:00 AM - 1:00 PM",
+      location: "Marriott Resort Tempe at The Buttes, 2000 W Westcourt Way, Tempe, AZ 85282",
+      summary: "Our second BrainStorm Cancer symposium of 2026 returns to Tempe. Join patients, physicians, nurses, caregivers, scientists, and vendors for a transformative half day of education, networking, and shared insights. Together we advance brain tumor care through community, science, and hope.",
+      image: "/images/2026/brainstorm-2026-001.jpg",
       status: "upcoming",
-      featured: true
+      featured: true,
+      registrationOpens: "June 15, 2026"
     },
     {
       id: 1,
@@ -138,9 +150,16 @@ const BrainStormCancer = () => {
                         <Heart className="w-5 h-5 mr-2" />
                         Donate
                       </Link>
-                      <div className="relative inline-flex items-center justify-center px-8 py-3 font-bold text-amber-800 bg-amber-50 rounded-lg border-2 border-amber-200">
-                        Register at Door on Event Day
-                      </div>
+                      {event.registrationOpens ? (
+                        <div className="relative inline-flex flex-col items-center justify-center px-8 py-3 font-bold text-amber-800 bg-amber-50 rounded-lg border-2 border-amber-200">
+                          <span>Registration Opens Soon</span>
+                          <span className="text-sm font-normal text-amber-600 mt-1">Opens {event.registrationOpens} — Stay Tuned</span>
+                        </div>
+                      ) : (
+                        <div className="relative inline-flex items-center justify-center px-8 py-3 font-bold text-amber-800 bg-amber-50 rounded-lg border-2 border-amber-200">
+                          Register at Door on Event Day
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
