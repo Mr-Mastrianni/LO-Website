@@ -1,18 +1,56 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { Heart, Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Heart, Star, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
 import TestimonialCard from '@/components/testimonials/TestimonialCard';
 import TestimonialForm from '@/components/testimonials/TestimonialForm';
-import { testimonials } from '@/data/testimonialsData';
+import { testimonials as staticTestimonials } from '@/data/testimonialsData';
+import { supabase } from '@/lib/customSupabaseClient';
 
 const TESTIMONIALS_PER_PAGE = 6;
 
 const Testimonials = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [supabaseTestimonials, setSupabaseTestimonials] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const featuredTestimonials = testimonials.filter(t => t.featured);
-  const regularTestimonials = testimonials.filter(t => !t.featured);
+  // Fetch approved testimonials from Supabase
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      const { data, error } = await supabase
+        .from('testimonials')
+        .select('*')
+        .eq('status', 'approved')
+        .order('created_at', { ascending: false });
+
+      if (!error && data) {
+        // Map Supabase columns to match the static data shape
+        const mapped = data.map(t => ({
+          id: `sb-${t.id}`,
+          name: t.name,
+          role: t.role || 'Community Member',
+          story: t.content,
+          date: new Date(t.created_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }),
+          featured: t.featured || false,
+          fromSupabase: true
+        }));
+        setSupabaseTestimonials(mapped);
+      }
+      setLoading(false);
+    };
+
+    fetchTestimonials();
+  }, []);
+
+  // Merge static + Supabase, deduplicate by name
+  const staticNames = new Set(staticTestimonials.map(t => t.name.toLowerCase()));
+  const newSupabaseTestimonials = supabaseTestimonials.filter(
+    t => !staticNames.has(t.name.toLowerCase())
+  );
+  const allTestimonials = [...staticTestimonials, ...newSupabaseTestimonials];
+
+  const featuredTestimonials = allTestimonials.filter(t => t.featured);
+  const regularTestimonials = allTestimonials.filter(t => !t.featured);
 
   // Pagination for regular testimonials
   const totalPages = Math.ceil(regularTestimonials.length / TESTIMONIALS_PER_PAGE);
@@ -21,7 +59,6 @@ const Testimonials = () => {
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
-    // Scroll to the testimonials section
     document.getElementById('community-voices')?.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -59,7 +96,7 @@ const Testimonials = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-gradient-to-r from-gray-50 to-yellow-50 rounded-2xl p-6 md:p-8 shadow-xl"
+                  className="bg-gradient-to-r from-gray-50 to-yellow-50 rounded-2xl p-6 md:p-8 shadow-xl relative"
                 >
                   <div className="flex justify-start mb-4">
                     {[...Array(5)].map((_, i) => (
@@ -94,7 +131,13 @@ const Testimonials = () => {
             <p className="text-xl text-gray-700 max-w-3xl mx-auto">Read more inspiring stories from our community members</p>
           </motion.div>
 
-          {regularTestimonials.length > 0 ? (
+          {loading && (
+            <div className="flex justify-center py-12">
+              <Loader2 className="w-8 h-8 text-primary animate-spin" />
+            </div>
+          )}
+
+          {!loading && regularTestimonials.length > 0 ? (
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {paginatedTestimonials.map((testimonial, index) => (
@@ -150,7 +193,7 @@ const Testimonials = () => {
               </p>
             </>
           ) : (
-            <p className="text-center text-gray-600">All testimonials are featured above.</p>
+            !loading && <p className="text-center text-gray-600">All testimonials are featured above.</p>
           )}
         </div>
       </section>
