@@ -101,8 +101,8 @@ export const events = {
     title: "BrainStorm Cancer - Arizona Symposium",
     date: "September 5, 2026",
     time: "8:00 AM - 1:00 PM",
-    location: "Marriott Resort Tempe at The Buttes, 2000 W Westcourt Way, Tempe, AZ 85282",
-    description: "Our second BrainStorm Cancer symposium of 2026 returns to the Marriott Tempe at The Buttes. This comprehensive educational and networking symposium brings together patients, physicians, nurses, caregivers, scientists, and vendors to share insights, offer support, and explore advancements in brain tumor care. The half-day event facilitates in-depth discussions on treatment, nutrition, supportive care, and living well through the oncology journey.",
+    location: "Indianapolis, IN",
+    description: "Our second BrainStorm Cancer symposium of 2026 heads to Indianapolis. This comprehensive educational and networking symposium brings together patients, physicians, nurses, caregivers, scientists, and vendors to share insights, offer support, and explore advancements in brain tumor care. The half-day event facilitates in-depth discussions on treatment, nutrition, supportive care, and living well through the oncology journey.",
     mission: "We endeavor to reconnect patients and their caregivers with the science and educational resources that afford optimized living through their oncology journey. We are uniquely positioned to provide ample patient-facing learning spaces for physicians and oncology care experts to intersect for the betterment of the patient.",
     agenda: [
       { time: "6:00 AM", activity: "Doors Open for Vendor Set-up" },
