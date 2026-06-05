@@ -4,74 +4,91 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, ZoomIn, ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react';
 import '../styles/gallery-optimizations.css';
 
-// Event-appropriate title labels for the 2026 gallery
-const titleLabels = [
-  "Opening Ceremony",
-  "Welcome & Registration",
-  "Dr. Gatson's Welcome Address",
-  "Keynote Presentation",
-  "Panel Discussion: Living with Brain Cancer",
-  "Patient Advocate Stories",
-  "Medical Research Updates",
-  "Clinical Trials & Innovation",
-  "Survivor Stories — LIVErs Speak",
-  "Caregiver Panel",
-  "Networking Break",
-  "Community Connections",
-  "Vendor & Sponsor Showcase",
-  "Expert Speakers Panel",
-  "Interactive Q&A Session",
-  "Wellness & Nutrition Workshop",
-  "Mental Health & Support",
-  "Young Adult Support Group",
-  "Family Support & Resources",
-  "Educational Resources Fair",
-  "Treatment Options Discussion",
-  "Alternative Medicine Panel",
-  "Supportive Care Strategies",
-  "Advocacy & Policy Update",
-  "Technology & Innovation Showcase",
-  "Community Awards — Raindrop Honorees",
-  "Volunteer Recognition",
-  "Group Activities",
-  "Attendee Interaction",
-  "Hope & Healing Circle",
-  "Unity & Strength",
-  "Inspiration Wall",
-  "Celebration Moments",
-  "Closing Ceremony",
-  "Final Group Photo",
-  "Thank You Message",
-  "Community Gathering",
-  "Lunch & Networking",
-  "Research Poster Session",
-  "Healthcare Professional Networking",
-  "Patient-Doctor Connection",
-  "Sponsor Recognition",
-  "Evening Celebration",
-  "Future Planning Session",
-  "I AM the STORM — Closing"
+// ── 2026 Gallery ──────────────────────────────────────────────
+const titleLabels2026 = [
+  "Opening Ceremony", "Welcome & Registration", "Dr. Gatson's Welcome Address",
+  "Keynote Presentation", "Panel Discussion: Living with Brain Cancer",
+  "Patient Advocate Stories", "Medical Research Updates", "Clinical Trials & Innovation",
+  "Survivor Stories — LIVErs Speak", "Caregiver Panel", "Networking Break",
+  "Community Connections", "Vendor & Sponsor Showcase", "Expert Speakers Panel",
+  "Interactive Q&A Session", "Wellness & Nutrition Workshop", "Mental Health & Support",
+  "Young Adult Support Group", "Family Support & Resources", "Educational Resources Fair",
+  "Treatment Options Discussion", "Alternative Medicine Panel", "Supportive Care Strategies",
+  "Advocacy & Policy Update", "Technology & Innovation Showcase",
+  "Community Awards — Raindrop Honorees", "Volunteer Recognition", "Group Activities",
+  "Attendee Interaction", "Hope & Healing Circle", "Unity & Strength", "Inspiration Wall",
+  "Celebration Moments", "Closing Ceremony", "Final Group Photo", "Thank You Message",
+  "Community Gathering", "Lunch & Networking", "Research Poster Session",
+  "Healthcare Professional Networking", "Patient-Doctor Connection", "Sponsor Recognition",
+  "Evening Celebration", "Future Planning Session", "I AM the STORM — Closing"
 ];
 
-// Build the image list from the selected spread
-const selectedNums = [1, 12, 23, 34, 45, 56, 67, 78, 89, 100, 111, 122, 133, 144, 155, 166, 177, 188, 199, 210, 221, 232, 243, 254, 265, 276, 287, 298, 309, 320, 331, 342, 353, 364, 375, 386, 397, 408, 419, 430, 441, 452, 463, 474, 485];
+const nums2026 = [1,12,23,34,45,56,67,78,89,100,111,122,133,144,155,166,177,188,199,210,221,232,243,254,265,276,287,298,309,320,331,342,353,364,375,386,397,408,419,430,441,452,463,474,485];
 
-const allImages = selectedNums.map((num, i) => ({
-  id: i + 1,
-  src: `${import.meta.env.BASE_URL}images/2026/brainstorm-2026-${String(num).padStart(3, '0')}.jpg`,
-  alt: `BrainStorm Cancer 2026 — ${titleLabels[i] || `Photo ${i + 1}`}`,
-  title: titleLabels[i] || `BrainStorm Cancer 2026 — Photo ${i + 1}`,
-  event: "BrainStorm Cancer 2026"
+const images2026 = [
+  ...nums2026.map((num, i) => ({
+    id: `2026-${i + 1}`,
+    src: `${import.meta.env.BASE_URL}images/2026/brainstorm-2026-${String(num).padStart(3, '0')}.jpg`,
+    alt: `BrainStorm Cancer 2026 — ${titleLabels2026[i] || `Photo ${i + 1}`}`,
+    title: titleLabels2026[i] || `BrainStorm Cancer 2026 — Photo ${i + 1}`,
+    event: "BrainStorm Cancer 2026"
+  })),
+  {
+    id: "2026-moment",
+    src: `${import.meta.env.BASE_URL}images/2026/brainstorm-2026-moment.jpg`,
+    alt: "BrainStorm Cancer 2026 — A Pause for Gratitude",
+    title: "A Pause for Gratitude",
+    event: "BrainStorm Cancer 2026"
+  }
+];
+
+// ── 2025 Gallery ──────────────────────────────────────────────
+const titleLabels2025 = [
+  "Opening Ceremony", "Welcome & Registration", "Dr. Gatson's Welcome",
+  "Keynote Presentation", "Patient Advocate Stories", "Expert Panel Discussion",
+  "Living with Brain Cancer", "Caregiver Voices", "Research Updates",
+  "Clinical Trials Overview", "Networking & Community", "Vendor Showcase",
+  "Survivor Stories", "Wellness Workshop", "Mental Health & Support",
+  "Family Resources", "Q&A Session", "Treatment Innovations",
+  "Young Adult Support", "Educational Fair", "Community Awards",
+  "Volunteer Recognition", "Group Activities", "Hope & Healing Circle",
+  "Sponsor Recognition", "Lunch & Networking", "Research Posters",
+  "Closing Ceremony", "Final Group Photo", "Thank You"
+];
+
+const images2025 = Array.from({ length: 30 }, (_, i) => ({
+  id: `2025-${i + 1}`,
+  src: `${import.meta.env.BASE_URL}images/2025/brainstorm-2025-${String(i + 1).padStart(3, '0')}.jpg`,
+  alt: `BrainStorm Cancer 2025 — ${titleLabels2025[i] || `Photo ${i + 1}`}`,
+  title: titleLabels2025[i] || `BrainStorm Cancer 2025 — Photo ${i + 1}`,
+  event: "BrainStorm Cancer 2025"
 }));
 
+// ── Year config ───────────────────────────────────────────────
+const YEAR_CONFIG = {
+  "2026": { images: images2026, hero: "BrainStorm Cancer 2026", subtitle: "Capturing moments of hope, learning, and community at our third annual symposium — May 9, 2026" },
+  "2025": { images: images2025, hero: "BrainStorm Cancer 2025", subtitle: "Relive the connections, breakthroughs, and inspiration from our second annual symposium — May 10, 2025" },
+};
+
+// ── Component ─────────────────────────────────────────────────
 const PhotoGallery = () => {
+  const [selectedYear, setSelectedYear] = useState("2026");
   const [lightboxImage, setLightboxImage] = useState(null);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [imageErrors, setImageErrors] = useState(new Set());
   const [imageLoading, setImageLoading] = useState(new Set());
 
-  const memoizedImages = useMemo(() => allImages, []);
+  const config = YEAR_CONFIG[selectedYear];
+  const memoizedImages = useMemo(() => config.images, [config.images]);
+
+  // Reset slide state when year changes
+  const switchYear = useCallback((year) => {
+    setSelectedYear(year);
+    setCurrentSlideIndex(0);
+    setImageErrors(new Set());
+    setImageLoading(new Set());
+  }, []);
 
   useEffect(() => {
     if (isAutoPlaying && memoizedImages.length > 1) {
@@ -90,28 +107,19 @@ const PhotoGallery = () => {
     setCurrentSlideIndex(prev => prev === 0 ? memoizedImages.length - 1 : prev - 1);
   }, [memoizedImages.length]);
 
-  const toggleAutoPlay = useCallback(() => {
-    setIsAutoPlaying(prev => !prev);
-  }, []);
-
-  const goToSlide = useCallback((index) => {
-    setCurrentSlideIndex(index);
-  }, []);
+  const toggleAutoPlay = useCallback(() => setIsAutoPlaying(prev => !prev), []);
+  const goToSlide = useCallback((index) => setCurrentSlideIndex(index), []);
 
   const handleImageError = useCallback((imageId) => {
     setImageErrors(prev => new Set([...prev, imageId]));
     setImageLoading(prev => {
-      const newSet = new Set(prev);
-      newSet.delete(imageId);
-      return newSet;
+      const s = new Set(prev); s.delete(imageId); return s;
     });
   }, []);
 
   const handleImageLoad = useCallback((imageId) => {
     setImageLoading(prev => {
-      const newSet = new Set(prev);
-      newSet.delete(imageId);
-      return newSet;
+      const s = new Set(prev); s.delete(imageId); return s;
     });
   }, []);
 
@@ -123,15 +131,8 @@ const PhotoGallery = () => {
   const [touchEnd, setTouchEnd] = useState(null);
   const minSwipeDistance = 50;
 
-  const onTouchStart = (e) => {
-    setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const onTouchMove = (e) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
+  const onTouchStart = (e) => { setTouchEnd(null); setTouchStart(e.targetTouches[0].clientX); };
+  const onTouchMove = (e) => { setTouchEnd(e.targetTouches[0].clientX); };
   const onTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
     const distance = touchStart - touchEnd;
@@ -139,17 +140,15 @@ const PhotoGallery = () => {
     else if (distance < -minSwipeDistance) prevSlide();
   };
 
+  // Preload adjacent images
   useEffect(() => {
-    const preloadImage = (src) => {
-      const img = new Image();
-      img.src = src;
-    };
-    const currentImage = memoizedImages[currentSlideIndex];
-    const nextImage = memoizedImages[(currentSlideIndex + 1) % memoizedImages.length];
-    const prevImage = memoizedImages[currentSlideIndex === 0 ? memoizedImages.length - 1 : currentSlideIndex - 1];
-    if (currentImage) preloadImage(currentImage.src);
-    if (nextImage) preloadImage(nextImage.src);
-    if (prevImage) preloadImage(prevImage.src);
+    const preload = (src) => { const img = new Image(); img.src = src; };
+    const cur = memoizedImages[currentSlideIndex];
+    const nxt = memoizedImages[(currentSlideIndex + 1) % memoizedImages.length];
+    const prv = memoizedImages[currentSlideIndex === 0 ? memoizedImages.length - 1 : currentSlideIndex - 1];
+    if (cur) preload(cur.src);
+    if (nxt) preload(nxt.src);
+    if (prv) preload(prv.src);
   }, [currentSlideIndex, memoizedImages]);
 
   const openLightbox = (image) => setLightboxImage(image);
@@ -159,34 +158,50 @@ const PhotoGallery = () => {
     <>
       <Helmet>
         <title>Photo Gallery - Living Oncology</title>
-        <meta name="description" content="Explore photos from the BrainStorm Cancer 2026 symposium — patients, physicians, researchers, and families united in hope and education." />
+        <meta name="description" content="Explore photos from BrainStorm Cancer symposiums — patients, physicians, researchers, and families united in hope and education." />
       </Helmet>
 
+      {/* Hero */}
       <section className="bg-gradient-to-br from-gray-50 to-yellow-50 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
+            key={selectedYear}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-6xl font-bold text-primary mb-6">
-              BrainStorm Cancer 2026
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
-              Capturing moments of hope, learning, and community at our third annual symposium — May 9, 2026
-            </p>
+            <h1 className="text-4xl md:text-6xl font-bold text-primary mb-6">{config.hero}</h1>
+            <p className="text-xl md:text-2xl text-gray-700 max-w-4xl mx-auto leading-relaxed">{config.subtitle}</p>
           </motion.div>
+
+          {/* Year tabs */}
+          <div className="flex justify-center mt-8 gap-3">
+            {Object.keys(YEAR_CONFIG).map((year) => (
+              <button
+                key={year}
+                onClick={() => switchYear(year)}
+                className={`px-6 py-3 rounded-lg font-semibold text-lg transition-all duration-300 ${
+                  selectedYear === year
+                    ? 'bg-primary text-white shadow-lg scale-105'
+                    : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
+                }`}
+              >
+                {year}
+              </button>
+            ))}
+          </div>
         </div>
       </section>
 
+      {/* Slideshow */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
+            key={selectedYear}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
           >
             <div className="relative max-w-5xl mx-auto">
               <div
@@ -226,11 +241,7 @@ const PhotoGallery = () => {
                           onLoadStart={() => handleImageLoadStart(memoizedImages[currentSlideIndex]?.id)}
                           onLoad={() => handleImageLoad(memoizedImages[currentSlideIndex]?.id)}
                           onError={() => handleImageError(memoizedImages[currentSlideIndex]?.id)}
-                          style={{
-                            imageRendering: 'auto',
-                            backfaceVisibility: 'hidden',
-                            transform: 'translateZ(0)'
-                          }}
+                          style={{ imageRendering: 'auto', backfaceVisibility: 'hidden', transform: 'translateZ(0)' }}
                         />
                       </>
                     )}
@@ -265,6 +276,7 @@ const PhotoGallery = () => {
                 </div>
               </div>
 
+              {/* Thumbnail strip */}
               {memoizedImages.length > 1 && (
                 <div className="flex justify-center mt-4 md:mt-6 space-x-1 md:space-x-2 overflow-x-auto pb-2 px-4">
                   {memoizedImages.map((image, index) => (
@@ -289,6 +301,7 @@ const PhotoGallery = () => {
         </div>
       </section>
 
+      {/* Lightbox */}
       <AnimatePresence>
         {lightboxImage && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center p-4" onClick={closeLightbox}>
@@ -309,6 +322,7 @@ const PhotoGallery = () => {
         )}
       </AnimatePresence>
 
+      {/* CTA */}
       <section className="py-16 bg-gradient-to-r from-gray-600 to-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }}>

@@ -101,7 +101,7 @@ export const events = {
     title: "BrainStorm Cancer - Arizona Symposium",
     date: "September 5, 2026",
     time: "8:00 AM - 1:00 PM",
-    location: "Indianapolis, IN",
+    location: "Sheraton Indianapolis Hotel at Keystone Crossing, 8787 Keystone Crossing, Indianapolis, IN 46240",
     description: "Our second BrainStorm Cancer symposium of 2026 heads to Indianapolis. This comprehensive educational and networking symposium brings together patients, physicians, nurses, caregivers, scientists, and vendors to share insights, offer support, and explore advancements in brain tumor care. The half-day event facilitates in-depth discussions on treatment, nutrition, supportive care, and living well through the oncology journey.",
     mission: "We endeavor to reconnect patients and their caregivers with the science and educational resources that afford optimized living through their oncology journey. We are uniquely positioned to provide ample patient-facing learning spaces for physicians and oncology care experts to intersect for the betterment of the patient.",
     agenda: [

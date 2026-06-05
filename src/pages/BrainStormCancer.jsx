@@ -22,7 +22,7 @@ const BrainStormCancer = () => {
       title: "BrainStorm Cancer - Arizona Symposium",
       date: "September 5, 2026",
       time: "8:00 AM - 1:00 PM",
-      location: "Indianapolis, IN",
+      location: "Sheraton Indianapolis Hotel at Keystone Crossing, 8787 Keystone Crossing, Indianapolis, IN 46240",
       summary: "Our second BrainStorm Cancer symposium of 2026 heads to Indianapolis. Join patients, physicians, nurses, caregivers, scientists, and vendors for a transformative half day of education, networking, and shared insights. Together we advance brain tumor care through community, science, and hope.",
       image: "/images/2026/brainstorm-2026-254.jpg",
       status: "upcoming",
@@ -77,6 +77,69 @@ const BrainStormCancer = () => {
             <p className="text-xl md:text-2xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
               Connecting the neuro-oncology community through education, research, and support.
             </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Event Flyer — animated floating card */}
+      <section className="py-4 bg-white">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 60, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="relative"
+          >
+            {/* Glow ring */}
+            <motion.div
+              animate={{ 
+                boxShadow: [
+                  "0 0 40px rgba(249,115,22,0.3), 0 0 80px rgba(249,115,22,0.1)",
+                  "0 0 60px rgba(249,115,22,0.5), 0 0 100px rgba(249,115,22,0.2)",
+                  "0 0 40px rgba(249,115,22,0.3), 0 0 80px rgba(249,115,22,0.1)",
+                ]
+              }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              className="rounded-2xl overflow-hidden"
+            >
+              <img
+                src={`${import.meta.env.BASE_URL}images/flyer-sep9th.jpeg`}
+                alt="BrainStorm Cancer — September 5, 2026 at Sheraton Indianapolis"
+                className="w-full h-auto rounded-2xl"
+              />
+            </motion.div>
+
+            {/* Floating badge */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.6, duration: 0.6 }}
+              className="absolute -top-4 -right-4 sm:-right-6"
+            >
+              <motion.div
+                animate={{ y: [0, -6, 0] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                className="bg-accent text-white px-4 py-2 rounded-full font-bold text-sm sm:text-base shadow-lg"
+              >
+                September 5, 2026
+              </motion.div>
+            </motion.div>
+
+            {/* Bottom CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9, duration: 0.5 }}
+              className="flex justify-center mt-6"
+            >
+              <Link
+                to="/brainstorm-cancer/20260905"
+                className="btn-primary inline-flex items-center text-lg px-8 py-3"
+              >
+                View Event Details
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
       </section>

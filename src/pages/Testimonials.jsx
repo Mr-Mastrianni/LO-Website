@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { Heart, Star, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
+import { Heart, Star, ChevronLeft, ChevronRight, Loader2, X, CheckCircle, XCircle, AlertCircle } from 'lucide-react';
 import TestimonialCard from '@/components/testimonials/TestimonialCard';
 import TestimonialForm from '@/components/testimonials/TestimonialForm';
 import { testimonials as staticTestimonials } from '@/data/testimonialsData';
@@ -9,10 +9,74 @@ import { supabase } from '@/lib/customSupabaseClient';
 
 const TESTIMONIALS_PER_PAGE = 6;
 
+// Banner shown when redirected from the testimonial approval Edge Function
+const StatusBanner = ({ status, name, already, error }) => {
+  const [dismissed, setDismissed] = useState(false);
+  if (dismissed) return null;
+
+  let icon, bg, text, heading;
+
+  if (error) {
+    icon = <AlertCircle className="w-6 h-6 text-red-600" />;
+    bg = "bg-red-50 border-red-300";
+    const messages = {
+      missing_params: "The approval link was missing required information.",
+      invalid_action: "The approval link contained an invalid action.",
+      invalid_token: "This approval link is invalid or has expired. It may have already been used.",
+      not_found: "This testimonial could not be found. It may have been deleted.",
+      db_error: "A database error occurred. Please try again.",
+      server_error: "An unexpected error occurred. Please try again later.",
+    };
+    heading = "Something went wrong";
+    text = messages[error] || "An unknown error occurred.";
+  } else {
+    const isApproved = status === "approved";
+    const verb = isApproved ? "approved" : "rejected";
+    icon = isApproved
+      ? <CheckCircle className="w-6 h-6 text-green-600" />
+      : <XCircle className="w-6 h-6 text-red-600" />;
+    bg = isApproved ? "bg-green-50 border-green-300" : "bg-red-50 border-red-300";
+    heading = `Testimonial ${verb}`;
+    text = already
+      ? `${name}'s testimonial was already ${verb}. No changes were made.`
+      : `${name}'s testimonial has been ${verb}. ${isApproved ? "It's now visible below." : "It will not appear on the site."}`;
+  }
+
+  return (
+    <div className={`${bg} border rounded-lg p-4 mb-6 flex items-start gap-3 shadow-sm`}>
+      <div className="flex-shrink-0 mt-0.5">{icon}</div>
+      <div className="flex-1">
+        <p className="font-semibold text-gray-900">{heading}</p>
+        <p className="text-gray-700 text-sm mt-0.5">{text}</p>
+      </div>
+      <button onClick={() => setDismissed(true)} className="flex-shrink-0 text-gray-400 hover:text-gray-600">
+        <X className="w-5 h-5" />
+      </button>
+    </div>
+  );
+};
+
 const Testimonials = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [supabaseTestimonials, setSupabaseTestimonials] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [redirectParams, setRedirectParams] = useState({});
+
+  // Parse query params from Edge Function redirect
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const status = params.get("status");
+    const name = params.get("name");
+    const already = params.get("already");
+    const error = params.get("error");
+
+    if (status || error) {
+      setRedirectParams({ status, name, already: already === "1", error });
+      // Clean the URL without reloading
+      const cleanUrl = window.location.pathname;
+      window.history.replaceState({}, "", cleanUrl);
+    }
+  }, []);
 
   // Fetch approved testimonials from Supabase
   useEffect(() => {
@@ -76,6 +140,32 @@ const Testimonials = () => {
             <p className="text-xl md:text-2xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
               Hear from patients, families, and healthcare professionals whose lives have been touched by our mission
             </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Status banner from Edge Function redirect */}
+      {redirectParams.status || redirectParams.error ? (
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+          <StatusBanner {...redirectParams} />
+        </div>
+      ) : null}
+
+      {/* Share Your Story — front and center */}
+      <section className="py-12 bg-white">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="bg-gradient-to-br from-yellow-50 to-amber-50 rounded-2xl p-6 sm:p-10 shadow-lg border border-amber-200"
+          >
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-primary mb-2">Share Your Story</h2>
+              <p className="text-lg text-gray-600">We'd love to hear about your experience with Living Oncology.</p>
+            </div>
+            <TestimonialForm />
           </motion.div>
         </div>
       </section>
@@ -195,16 +285,6 @@ const Testimonials = () => {
           ) : (
             !loading && <p className="text-center text-gray-600">All testimonials are featured above.</p>
           )}
-        </div>
-      </section>
-
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }} className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-primary mb-4">Share Your Story</h2>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto">We'd love to hear about your experience with Living Oncology.</p>
-          </motion.div>
-          <TestimonialForm />
         </div>
       </section>
 

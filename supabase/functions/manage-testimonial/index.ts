@@ -23,103 +23,40 @@ async function verifyToken(id: string, action: string, token: string): Promise<b
   return token === expected;
 }
 
+// Build redirect URL to the LO testimonials page with status/error params.
+// Supabase overrides Content-Type on Edge Function responses (injecting
+// text/plain + nosniff + CSP sandbox), so we can't return HTML directly.
+function redirect(location: string): Response {
+  return new Response(null, {
+    status: 302,
+    headers: { "Location": location },
+  });
+}
+
 serve(async (req: Request): Promise<Response> => {
   const url = new URL(req.url);
   const id = url.searchParams.get("id");
   const action = url.searchParams.get("action");
   const token = url.searchParams.get("token");
 
-  // Show a styled response page
-  const html = (title: string, message: string, success: boolean) => `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>${title} — Living Oncology</title>
-      <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-          font-family: Georgia, 'Times New Roman', serif;
-          background: linear-gradient(135deg, #fdfaf3 0%, #f0e6d3 100%);
-          min-height: 100vh;
-          display: flex; align-items: center; justify-content: center;
-          padding: 20px;
-        }
-        .card {
-          background: white;
-          border-radius: 16px;
-          padding: 48px;
-          max-width: 480px;
-          text-align: center;
-          box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-        }
-        .icon { font-size: 48px; margin-bottom: 16px; }
-        h1 { color: #1a365d; font-size: 28px; margin-bottom: 12px; }
-        p { color: #555; font-size: 16px; line-height: 1.6; margin-bottom: 24px; }
-        .btn {
-          display: inline-block;
-          background: #1a365d;
-          color: white;
-          text-decoration: none;
-          padding: 12px 28px;
-          border-radius: 8px;
-          font-weight: bold;
-          font-family: 'Georgia', serif;
-        }
-        .status { 
-          display: inline-block;
-          padding: 6px 16px;
-          border-radius: 20px;
-          font-size: 14px;
-          font-weight: bold;
-          margin-bottom: 16px;
-        }
-        .approved { background: #e6f4ea; color: #2f855a; }
-        .rejected { background: #fce8e8; color: #c53030; }
-      </style>
-    </head>
-    <body>
-      <div class="card">
-        <div class="icon">${success ? "✅" : "❌"}</div>
-        <div class="status ${action === 'approve' ? 'approved' : 'rejected'}">
-          ${action === 'approve' ? 'APPROVED' : 'REJECTED'}
-        </div>
-        <h1>${title}</h1>
-        <p>${message}</p>
-        <a href="https://www.livingoncology.org/testimonials" class="btn">
-          View Testimonials
-        </a>
-      </div>
-    </body>
-    </html>
-  `;
+  const base = "https://www.livingoncology.org/testimonials";
 
   if (!id || !action || !token) {
-    return new Response(
-      html("Invalid Request", "Missing required parameters.", false),
-      { status: 400, headers: { "Content-Type": "text/html" } }
-    );
+    return redirect(`${base}?error=missing_params`);
   }
 
   if (action !== "approve" && action !== "reject") {
-    return new Response(
-      html("Invalid Action", "Action must be 'approve' or 'reject'.", false),
-      { status: 400, headers: { "Content-Type": "text/html" } }
-    );
+    return redirect(`${base}?error=invalid_action`);
   }
 
   try {
-    // Verify the token
+    // Verify the HMAC token
     const valid = await verifyToken(id, action, token);
     if (!valid) {
-      return new Response(
-        html("Invalid Token", "This approval link is invalid or has expired.", false),
-        { status: 403, headers: { "Content-Type": "text/html" } }
-      );
+      return redirect(`${base}?error=invalid_token`);
     }
 
-    // Check current status
+    // Look up the testimonial
     const { data: existing } = await supabase
       .from("testimonials")
       .select("id, name, status")
@@ -127,27 +64,19 @@ serve(async (req: Request): Promise<Response> => {
       .single();
 
     if (!existing) {
-      return new Response(
-        html("Not Found", "This testimonial could not be found. It may have been deleted.", false),
-        { status: 404, headers: { "Content-Type": "text/html" } }
-      );
+      return redirect(`${base}?error=not_found`);
     }
 
-    if (existing.status === action + "d") {
-      // Already in this state — "approved" or "rejected"
-      const actionLabel = action === "approve" ? "approved" : "rejected";
-      return new Response(
-        html(
-          `Already ${actionLabel}`,
-          `This testimonial from <strong>${existing.name}</strong> was already ${actionLabel}. No changes were made.`,
-          action === "approve"
-        ),
-        { headers: { "Content-Type": "text/html" } }
+    const newStatus = action === "approve" ? "approved" : "rejected";
+
+    if (existing.status === newStatus) {
+      // Already processed — redirect with "already" state
+      return redirect(
+        `${base}?status=${newStatus}&name=${encodeURIComponent(existing.name)}&already=1`
       );
     }
 
     // Update the status
-    const newStatus = action === "approve" ? "approved" : "rejected";
     const { error } = await supabase
       .from("testimonials")
       .update({ status: newStatus, updated_at: new Date().toISOString() })
@@ -155,37 +84,17 @@ serve(async (req: Request): Promise<Response> => {
 
     if (error) {
       console.error("Update error:", error);
-      return new Response(
-        html("Database Error", "Could not update the testimonial. Please try again.", false),
-        { status: 500, headers: { "Content-Type": "text/html" } }
-      );
+      return redirect(`${base}?error=db_error`);
     }
 
-    if (action === "approve") {
-      return new Response(
-        html(
-          "Testimonial Approved! 🎉",
-          `<strong>${existing.name}'s</strong> story has been published and is now visible on the Living Oncology testimonials page. Thank you for reviewing!`,
-          true
-        ),
-        { headers: { "Content-Type": "text/html" } }
-      );
-    } else {
-      return new Response(
-        html(
-          "Testimonial Rejected",
-          `<strong>${existing.name}'s</strong> testimonial has been rejected and will not appear on the site. It remains in the database for reference.`,
-          false
-        ),
-        { headers: { "Content-Type": "text/html" } }
-      );
-    }
+    // Success — redirect with status + name
+    return redirect(
+      `${base}?status=${newStatus}&name=${encodeURIComponent(existing.name)}`
+    );
+
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : String(error);
     console.error("Manage testimonial error:", message);
-    return new Response(
-      html("Server Error", "An unexpected error occurred. Please try again later.", false),
-      { status: 500, headers: { "Content-Type": "text/html" } }
-    );
+    return redirect(`${base}?error=server_error`);
   }
 });
