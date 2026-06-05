@@ -21,7 +21,7 @@ const BrainStormCancer = () => {
       id: 20260905,
       title: "BrainStorm Cancer - Arizona Symposium",
       date: "September 5, 2026",
-      time: "8:00 AM - 1:00 PM",
+      time: "8:00 AM - 12:00 PM",
       location: "Sheraton Indianapolis Hotel at Keystone Crossing, 8787 Keystone Crossing, Indianapolis, IN 46240",
       summary: "Our second BrainStorm Cancer symposium of 2026 heads to Indianapolis. Join patients, physicians, nurses, caregivers, scientists, and vendors for a transformative half day of education, networking, and shared insights. Together we advance brain tumor care through community, science, and hope.",
       image: "/images/2026/brainstorm-2026-254.jpg",
