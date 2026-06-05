@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { ArrowRight, Heart, BookOpen, Users, Lightbulb, Brain, Shield } from 'lucide-react';
 import HeroLogo from '@/components/ui/HeroLogo';
+import EmailSignup from '@/components/subscribe/EmailSignup';
 
 const Home = () => {
   const impactItems = [
@@ -202,6 +203,13 @@ const Home = () => {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Email Signup */}
+      <section className="py-16 bg-gradient-to-br from-yellow-50 to-gray-50">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+          <EmailSignup source="homepage" />
         </div>
       </section>
 

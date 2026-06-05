@@ -56,6 +56,14 @@ const Contact = () => {
         title: "Message sent successfully!",
         description: "Thank you for reaching out. We'll get back to you shortly."
       });
+
+      // If they opted into the newsletter, subscribe them (fire-and-forget)
+      if (formData.subscribe) {
+        supabase.functions.invoke('subscribe', {
+          body: { email: formData.email, name: formData.name, source: 'contact' },
+        }).catch(err => console.warn('Subscription may not have gone through:', err));
+      }
+
       setFormData({ name: '', email: '', message: '', category: 'General Inquiry', subscribe: false });
     } catch (error) {
       console.error('Error sending contact form:', error);

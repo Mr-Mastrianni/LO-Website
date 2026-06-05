@@ -14,7 +14,8 @@ const TestimonialForm = () => {
     email: '',
     role: '',
     story: '',
-    consent: false
+    consent: false,
+    subscribe: false
   });
   const [submitting, setSubmitting] = useState(false);
   const { toast } = useToast();
@@ -78,13 +79,20 @@ const TestimonialForm = () => {
       }
     }).catch(err => console.warn('Notification email may not have sent:', err));
 
+    // Fire-and-forget: subscribe to newsletter if opted in
+    if (formData.subscribe) {
+      supabase.functions.invoke('subscribe', {
+        body: { email: formData.email, name: formData.name, source: 'testimonial' },
+      }).catch(err => console.warn('Subscription may not have gone through:', err));
+    }
+
     setSubmitting(false);
 
     toast({
       title: "Thank you for sharing your story! 🙏",
       description: "Your testimonial has been submitted and will appear on the site after review.",
     });
-    setFormData({ name: '', email: '', role: '', story: '', consent: false });
+    setFormData({ name: '', email: '', role: '', story: '', consent: false, subscribe: false });
   };
 
   return (
@@ -118,6 +126,17 @@ const TestimonialForm = () => {
           <Checkbox id="consent" checked={formData.consent} onCheckedChange={handleConsentChange} className="mt-1" />
           <Label htmlFor="consent" className="text-sm text-gray-700 leading-relaxed">
             I consent to Living Oncology using my testimonial for promotional and educational purposes.
+          </Label>
+        </div>
+        <div className="flex items-start space-x-3">
+          <Checkbox
+            id="subscribe"
+            checked={formData.subscribe}
+            onCheckedChange={(checked) => setFormData(prev => ({ ...prev, subscribe: checked }))}
+            className="mt-1"
+          />
+          <Label htmlFor="subscribe" className="text-sm text-gray-700 leading-relaxed">
+            Keep me updated with Living Oncology news, events, and resources.
           </Label>
         </div>
         <div className="text-center">
