@@ -125,6 +125,6 @@ export const events = {
     image: "/images/2026/brainstorm-2026-254.jpg",
     status: "upcoming",
     featured: true,
-    registrationClosed: true
+    registrationOpen: true
   }
 };

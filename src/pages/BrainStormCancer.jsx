@@ -27,7 +27,7 @@ const BrainStormCancer = () => {
       image: "/images/2026/brainstorm-2026-254.jpg",
       status: "upcoming",
       featured: true,
-      registrationOpens: "June 15, 2026"
+      registrationOpen: true
     },
     {
       id: 1,
@@ -213,7 +213,15 @@ const BrainStormCancer = () => {
                         <Heart className="w-5 h-5 mr-2" />
                         Donate
                       </Link>
-                      {event.registrationOpens ? (
+                      {event.registrationOpen ? (
+                        <Link
+                          to={`/brainstorm-cancer/${event.id}`}
+                          className="relative inline-flex items-center justify-center px-8 py-3 font-bold text-white transition-all duration-300 bg-accent rounded-lg hover:bg-accent/90 hover:scale-105 shadow-[0_0_20px_rgba(249,115,22,0.5)] hover:shadow-[0_0_30px_rgba(249,115,22,0.8)]"
+                        >
+                          Register Now
+                          <ArrowRight className="ml-2 w-4 h-4" />
+                        </Link>
+                      ) : event.registrationOpens ? (
                         <div className="relative inline-flex flex-col items-center justify-center px-8 py-3 font-bold text-amber-800 bg-amber-50 rounded-lg border-2 border-amber-200">
                           <span>Registration Opens Soon</span>
                           <span className="text-sm font-normal text-amber-600 mt-1">Opens {event.registrationOpens} — Stay Tuned</span>
