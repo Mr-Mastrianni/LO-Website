@@ -103,7 +103,7 @@ const BrainStormCancer = () => {
               className="rounded-2xl overflow-hidden"
             >
               <img
-                src={`${import.meta.env.BASE_URL}images/flyer-sep9th.jpeg`}
+                src={`${import.meta.env.BASE_URL}images/flyer-sep9th.png`}
                 alt="BrainStorm Cancer — September 5, 2026 at Sheraton Indianapolis"
                 className="w-full h-auto rounded-2xl"
               />
