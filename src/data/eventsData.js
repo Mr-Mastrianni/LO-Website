@@ -98,7 +98,7 @@ export const events = {
     registrationClosed: true
   },
   20260905: {
-    title: "BrainStorm Cancer - Arizona Symposium",
+    title: "BrainStorm Cancer - Indianapolis Symposium",
     date: "September 5, 2026",
     time: "8:00 AM - 12:00 PM",
     location: "Sheraton Indianapolis Hotel at Keystone Crossing, 8787 Keystone Crossing, Indianapolis, IN 46240",
