@@ -9,7 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@esbuild/linux-x64": "^0.28.0",
     "@radix-ui/react-alert-dialog": "^1.1.14",
     "@radix-ui/react-avatar": "^1.0.3",
     "@radix-ui/react-checkbox": "^1.0.4",
@@ -40,6 +39,9 @@
     "sonner": "^2.0.7",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7"
+  },
+  "optionalDependencies": {
+    "@esbuild/linux-x64": "^0.28.0"
   },
   "devDependencies": {
     "@babel/generator": "^7.27.0",
