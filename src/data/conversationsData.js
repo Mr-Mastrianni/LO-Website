@@ -1,5 +1,17 @@
 export const conversations = [
   {
+    id: 11,
+    type: 'podcast',
+    url: 'https://podcasts.apple.com/us/podcast/hot-topics-leptomeningeal-disease-and-liquid-biopsy/id1541259930?i=1000779256369',
+    thumbnail: '/images/neuro-oncology-podcast.jpg',
+    title: "Hot Topics: Leptomeningeal Disease and Liquid Biopsy",
+    author: "Neuro-Oncology: The Podcast — feat. Dr. Na Tosha Gatson",
+    date: "July 31, 2026",
+    summary: "Dr. Ramya Tadipatri interviews Dr. Na Tosha Gatson on the evolving landscape of leptomeningeal disease with a focus on liquid biopsy.",
+    category: "Podcast",
+    duration: "19 min"
+  },
+  {
     id: 10,
     type: 'video',
     videoType: 'youtube',
@@ -52,5 +64,6 @@ export const conversations = [
 
 export const categories = [
   "Community Voices",
-  "Expert Insights"
+  "Expert Insights",
+  "Podcast"
 ];

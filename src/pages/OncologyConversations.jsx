@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { MessageCircle, Calendar, User, ArrowRight, Heart, Video, Play } from 'lucide-react';
+import { MessageCircle, Calendar, User, ArrowRight, Heart, Video, Play, Headphones } from 'lucide-react';
 import ReactPlayer from 'react-player';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { conversations } from '@/data/conversationsData';
@@ -19,6 +19,9 @@ const getYouTubeThumbnail = (url) => {
   const videoId = getYouTubeVideoId(url);
   return videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : null;
 };
+
+// Helper function to get the Apple Podcasts embed player URL
+const getAppleEmbedUrl = (url) => url?.replace('podcasts.apple.com', 'embed.podcasts.apple.com');
 
 // Helper function to get thumbnail for a conversation
 const getThumbnail = (conversation) => {
@@ -43,8 +46,18 @@ const OncologyConversations = () => {
 
       <Dialog open={!!selectedVideo} onOpenChange={() => setSelectedVideo(null)}>
         <DialogContent className="max-w-3xl p-0 border-0">
-          <div className="aspect-video">
-            {selectedVideo && (
+          {selectedVideo && (selectedVideo.type === 'podcast' ? (
+            <iframe
+              src={getAppleEmbedUrl(selectedVideo.url)}
+              width="100%"
+              height="175"
+              frameBorder="0"
+              sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
+              allow="autoplay *; encrypted-media *; clipboard-write"
+              title={selectedVideo.title}
+            />
+          ) : (
+            <div className="aspect-video">
               <ReactPlayer
                 url={selectedVideo.url}
                 width="100%"
@@ -52,8 +65,8 @@ const OncologyConversations = () => {
                 playing
                 controls
               />
-            )}
-          </div>
+            </div>
+          ))}
         </DialogContent>
       </Dialog>
 
@@ -134,7 +147,7 @@ const OncologyConversations = () => {
                 onClick={() => setSelectedVideo(conversation)}
               >
                 {/* Video Thumbnail */}
-                {conversation.type === 'video' && conversation.url && (
+                {(conversation.type === 'video' || conversation.type === 'podcast') && conversation.url && (
                   <>
                     <img
                       src={getThumbnail(conversation)}
@@ -146,7 +159,11 @@ const OncologyConversations = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent transition-opacity duration-300 group-hover:opacity-0" />
                     <div className="absolute bottom-4 right-4 z-10">
                       <div className="w-14 h-14 bg-primary/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300">
-                        <Play className="w-6 h-6 text-white ml-1" fill="white" />
+                        {conversation.type === 'podcast' ? (
+                          <Headphones className="w-6 h-6 text-white" />
+                        ) : (
+                          <Play className="w-6 h-6 text-white ml-1" fill="white" />
+                        )}
                       </div>
                     </div>
                     
@@ -156,6 +173,7 @@ const OncologyConversations = () => {
                         <div className="flex items-center space-x-2 mb-2">
                           <span className="bg-white/20 text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center backdrop-blur-sm">
                             {conversation.type === 'video' && <Video className="w-3 h-3 mr-1" />}
+                            {conversation.type === 'podcast' && <Headphones className="w-3 h-3 mr-1" />}
                             {conversation.category}
                           </span>
                           <span className="text-white/80 text-xs">{conversation.duration}</span>
@@ -181,7 +199,7 @@ const OncologyConversations = () => {
                         </p>
                         
                         <span className="text-white font-semibold inline-flex items-center text-sm">
-                          Watch Video
+                          {conversation.type === 'podcast' ? 'Listen to Episode' : 'Watch Video'}
                           <ArrowRight className="ml-2 w-4 h-4" />
                         </span>
                       </div>
