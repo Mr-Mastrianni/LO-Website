@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, Clock, Users, ArrowLeft, ArrowRight, Check } from 'lucide-react';
+import { Calendar, MapPin, Clock, Users, ArrowLeft, ArrowRight, Check, FileText, QrCode } from 'lucide-react';
 import { toast } from 'sonner';
 import { supabase } from '@/lib/customSupabaseClient';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
@@ -255,6 +255,38 @@ const EventDetail = () => {
                           </div>
                         </div>
                       ))}
+                    </div>
+                  </div>
+                )}
+
+                {event.syllabus && (
+                  <div className="mt-8">
+                    <h3 className="text-2xl font-bold text-primary mb-6">Event Syllabus</h3>
+                    <div className="bg-gradient-to-br from-gray-50 to-yellow-50 rounded-xl p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-8">
+                      <div className="flex-1">
+                        <h4 className="text-lg font-semibold text-gray-800 mb-2">{event.syllabus.label}</h4>
+                        <p className="text-gray-700 mb-5">{event.syllabus.description}</p>
+                        <a
+                          href={event.syllabus.pdf}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn-primary inline-flex items-center"
+                        >
+                          <FileText className="w-5 h-5 mr-2" />
+                          Download Syllabus
+                        </a>
+                      </div>
+                      <div className="flex flex-col items-center shrink-0">
+                        <img
+                          src={event.syllabus.qr}
+                          alt="QR code linking to the event syllabus PDF"
+                          className="w-40 h-40 rounded-lg shadow-md bg-white p-1.5"
+                        />
+                        <p className="flex items-center text-xs text-gray-500 mt-2">
+                          <QrCode className="w-3.5 h-3.5 mr-1" />
+                          Scan to download the syllabus
+                        </p>
+                      </div>
                     </div>
                   </div>
                 )}

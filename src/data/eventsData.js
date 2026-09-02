@@ -125,6 +125,12 @@ export const events = {
     image: "/images/2026/brainstorm-2026-254.jpg",
     status: "upcoming",
     featured: true,
-    registrationOpen: true
+    registrationOpen: true,
+    syllabus: {
+      label: "BrainStorm Cancer & Cognition — Indianapolis Syllabus",
+      description: "Download the full program syllabus for the September 5, 2026 BrainStorm Cancer and Cognition symposium, including the agenda, speakers, and sponsor information.",
+      pdf: "/documents/brainstorm-cancer-and-cognition-syllabus-sept-5-2026-indy.pdf",
+      qr: "/images/qr/brainstorm-cancer-and-cognition-syllabus-qr.svg"
+    }
   }
 };
